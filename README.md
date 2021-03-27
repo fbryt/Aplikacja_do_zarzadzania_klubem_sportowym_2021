@@ -2,8 +2,8 @@
 Projekt zaliczeniowy z PPAK 2021
 
 By: 
-    FB
-    KB
-    MB
-    JR
+    FB &
+    KB &
+    MB &
+    JR &
     PD
