@@ -5,9 +5,13 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ main ]
+    paths:
+      - 'SportClub-api/**'
+      - '.github/**'
   pull_request:
-    branches: [ main ]
+    paths:
+      - 'SportClub-api/**'
+      - '.github/**'
 
 jobs:
   build:
