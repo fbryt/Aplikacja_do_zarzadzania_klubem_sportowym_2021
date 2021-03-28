@@ -9,8 +9,8 @@ pipeline {
 
             steps {
                 
-                    sh 'mvn -f ./SportClub-api/pom.xml clean install'
-                    sh 'mvn compile'
+                    sh 'mvn -f ./SportClub-api/pom.xml clean compile'
+                   
                 
             }
         }
@@ -19,8 +19,8 @@ pipeline {
 
             steps {
                
-                    sh 'mvn -f ./SportClub-api/pom.xml clean install'
-                    sh 'mvn test'
+                    sh 'mvn -f ./SportClub-api/pom.xml test'
+                   
                 
             }
         }
@@ -29,8 +29,8 @@ pipeline {
         stage ('deploy') {
             steps {
                
-                    sh 'mvn -f ./SportClub-api/pom.xml clean install'
-                    sh 'mvn deploy'
+                    sh 'mvn -f ./SportClub-api/pom.xml deploy'
+                  
                 
             }
         }
