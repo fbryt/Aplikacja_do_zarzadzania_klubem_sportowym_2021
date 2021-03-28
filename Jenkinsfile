@@ -10,7 +10,7 @@ pipeline {
             steps {
                 
                     sh 'mvn -f ./SportClub-api/pom.xml clean install'
-                    sh 'mvn spring-boot:run'
+                    sh 'mvn compile'
                 
             }
         }
