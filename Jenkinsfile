@@ -25,14 +25,5 @@ pipeline {
             }
         }
 
-
-        stage ('deploy') {
-            steps {
-               
-                    sh 'mvn -f ./SportClub-api/pom.xml deploy'
-                  
-                
-            }
-        }
     }
 }
