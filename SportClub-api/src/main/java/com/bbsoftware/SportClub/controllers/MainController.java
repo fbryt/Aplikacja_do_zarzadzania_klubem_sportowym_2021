@@ -1,5 +1,4 @@
-package com.bbsoftware.SportClub;
-
+package com.bbsoftware.SportClub.controllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -8,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class MainController {
 
     @GetMapping("/")
-    public String hello(){
+    public String hello() {
         return "Witajcie sportowe swiry";
     }
 }

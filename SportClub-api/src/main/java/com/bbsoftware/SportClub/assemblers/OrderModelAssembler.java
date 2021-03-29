@@ -1,4 +1,4 @@
-package com.bbsoftware.SportClub;
+package com.bbsoftware.SportClub.assemblers;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
@@ -6,8 +6,12 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
 
+import com.bbsoftware.SportClub.models.Order;
+import com.bbsoftware.SportClub.models.Status;
+import com.bbsoftware.SportClub.controllers.OrderController;
+
 @Component
-class OrderModelAssembler implements RepresentationModelAssembler<Order, EntityModel<Order>> {
+public class OrderModelAssembler implements RepresentationModelAssembler<Order, EntityModel<Order>> {
 
   @Override
   public EntityModel<Order> toModel(Order order) {

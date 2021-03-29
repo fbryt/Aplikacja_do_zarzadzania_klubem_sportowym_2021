@@ -1,4 +1,4 @@
-package com.bbsoftware.SportClub;
+package com.bbsoftware.SportClub.controllers;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,8 +20,16 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bbsoftware.SportClub.assemblers.OrderModelAssembler;
+import com.bbsoftware.SportClub.repositories.OrderRepository;
+
+import com.bbsoftware.SportClub.exceptions.*;
+
+import com.bbsoftware.SportClub.models.Order;
+import com.bbsoftware.SportClub.models.Status;
+
 @RestController
-class OrderController {
+public class OrderController {
 
     private final OrderRepository orderRepository;
     private final OrderModelAssembler assembler;
@@ -33,7 +41,7 @@ class OrderController {
     }
 
     @GetMapping("/orders")
-    CollectionModel<EntityModel<Order>> all() {
+    public CollectionModel<EntityModel<Order>> all() {
 
         List<EntityModel<Order>> orders = orderRepository.findAll().stream() //
                 .map(assembler::toModel) //
@@ -44,7 +52,7 @@ class OrderController {
     }
 
     @GetMapping("/orders/{id}")
-    EntityModel<Order> one(@PathVariable Long id) {
+    public EntityModel<Order> one(@PathVariable Long id) {
 
         Order order = orderRepository.findById(id) //
                 .orElseThrow(() -> new OrderNotFoundException(id));
@@ -64,7 +72,7 @@ class OrderController {
     }
 
     @DeleteMapping("/orders/{id}/cancel")
-    ResponseEntity<?> cancel(@PathVariable Long id) {
+    public ResponseEntity<?> cancel(@PathVariable Long id) {
 
         Order order = orderRepository.findById(id) //
                 .orElseThrow(() -> new OrderNotFoundException(id));
@@ -83,7 +91,7 @@ class OrderController {
     }
 
     @PutMapping("/orders/{id}/complete")
-    ResponseEntity<?> complete(@PathVariable Long id) {
+    public ResponseEntity<?> complete(@PathVariable Long id) {
 
         Order order = orderRepository.findById(id) //
                 .orElseThrow(() -> new OrderNotFoundException(id));

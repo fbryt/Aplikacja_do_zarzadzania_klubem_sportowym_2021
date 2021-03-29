@@ -1,4 +1,4 @@
-package com.bbsoftware.SportClub;
+package com.bbsoftware.SportClub.models;
 
 import java.util.Objects;
 
@@ -9,16 +9,17 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "CUSTOMER_ORDER")
-class Order {
+public class Order {
 
   private @Id @GeneratedValue Long id;
 
   private String description;
   private Status status;
 
-  Order() {}
+  Order() {
+  }
 
-  Order(String description, Status status) {
+  public Order(String description, Status status) {
 
     this.description = description;
     this.status = status;

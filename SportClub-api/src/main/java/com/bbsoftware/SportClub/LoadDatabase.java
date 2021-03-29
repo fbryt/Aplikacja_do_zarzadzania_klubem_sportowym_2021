@@ -1,5 +1,11 @@
 package com.bbsoftware.SportClub;
 
+import com.bbsoftware.SportClub.models.Employee;
+import com.bbsoftware.SportClub.models.Order;
+import com.bbsoftware.SportClub.models.Status;
+import com.bbsoftware.SportClub.repositories.EmployeeRepository;
+import com.bbsoftware.SportClub.repositories.OrderRepository;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -20,14 +26,13 @@ class LoadDatabase {
 
       employeeRepository.findAll().forEach(employee -> log.info("Preloaded " + employee));
 
-      
       orderRepository.save(new Order("MacBook Pro", Status.COMPLETED));
       orderRepository.save(new Order("iPhone", Status.IN_PROGRESS));
 
       orderRepository.findAll().forEach(order -> {
         log.info("Preloaded " + order);
       });
-      
+
     };
   }
 }
