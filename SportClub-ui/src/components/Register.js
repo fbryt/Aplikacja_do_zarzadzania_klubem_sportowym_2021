@@ -1,40 +1,76 @@
 import React, {Component} from "react";
 import {Form,Button, Col} from 'react-bootstrap';
-
+import axios from 'axios';
 export default class Register extends Component {
+    constructor(props) {
+        super(props);
+        this.state = this.initialState;
+        this.dataChange = this.dataChange.bind(this);
+        this.submitRegister = this.submitRegister.bind(this);
 
+    }
+    initialState = {
+            name:'',surname:'',email:'',password:'',role:''
+        }
+    submitRegister = event =>
+    {
+        alert(this.state.name);
+        event.preventDefault();
+        const user = {
+            name: this.state.name,
+            surname: this.state.surname,
+            email: this.state.email,
+            password: this.state.password,
+            role: this.state.role
+        }
+        axios.post("localhost:8080/register",user)
+            .then(response => {
+                if(response.data !=null)
+                {
+                    this.setState(this.initialState);
+                    alert("Successful");
+                }
+            });
+    }
+    dataChange = event =>
+    {
+        this.setState({
+            [event.target.name]:event.target.value
+        });
+    }
     render() {
+        const {email,password,name,surname,role} = this.state;
         return (
             <div>
                 <h1>Register</h1>
-                <Form>
+                <Form onSubmit={this.submitRegister} id="registerForm">
                     <Form.Row>
                         <Form.Group as={Col} controlId="formEmail">
                             <Form.Label>Email address</Form.Label>
-                            <Form.Control type="email" placeholder="Enter email"/>
+                            <Form.Control required autoComplete="off" type="email"  onChange={this.dataChange} placeholder="Enter email"/>
                             <Form.Text className="text-muted">
                                 We'll never share your email with anyone else.
                             </Form.Text>
                         </Form.Group>
                         <Form.Group as={Col} controlId="formPassword">
                             <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" placeholder="Password"/>
+                            <Form.Control required autoComplete="off" type="password" onChange={this.dataChange} placeholder="Password"/>
                         </Form.Group>
                     </Form.Row>
                     <Form.Row>
                         <Form.Group as={Col} controlId="formName">
                             <Form.Label>Name</Form.Label>
-                            <Form.Control type="text" placeholder="Enter name"/>
+                            <Form.Control required autoComplete="off" type="text" onChange={this.dataChange} placeholder="Enter name"/>
                         </Form.Group>
                         <Form.Group as={Col} controlId="formSurname">
                             <Form.Label>Surname</Form.Label>
-                            <Form.Control type="text" placeholder="Enter surname"/>
+                            <Form.Control required autoComplete="off" type="text"  onChange={this.dataChange} placeholder="Enter surname"/>
                         </Form.Group>
                     </Form.Row>
                     <Form.Row>
                         <Form.Group as={Col} controlId="formRole">
                             <Form.Label>Role</Form.Label>
-                            <Form.Control as="select" defaultValue="Choose...">
+                            <Form.Control required autoComplete="off" as="select" onChange={this.dataChange} defaultValue="Choose...">
                                 <option>Coach</option>
                                 <option>Player</option>
                                 <option>Admin</option>
@@ -42,7 +78,7 @@ export default class Register extends Component {
                         </Form.Group>
                     </Form.Row>
                     <Form.Row>
-                        <Button as={Col} variant="primary" type="submit">
+                        <Button as={Col} variant="success" type="submit">
                             Submit
                         </Button>
                     </Form.Row>
