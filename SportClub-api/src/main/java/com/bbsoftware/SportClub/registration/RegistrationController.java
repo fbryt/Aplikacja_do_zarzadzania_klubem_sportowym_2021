@@ -2,18 +2,16 @@ package com.bbsoftware.SportClub.registration;
 
 
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/register")
 @AllArgsConstructor
 public class RegistrationController {
 
-    private RegistrationService registrationService;
+    private final RegistrationService registrationService;
 
-    @PostMapping("/register")
+    @PostMapping
     public String register(@RequestBody RegistrationRequest request)
     {
         return registrationService.register(request);

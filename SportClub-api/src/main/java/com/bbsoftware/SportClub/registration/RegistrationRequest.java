@@ -1,19 +1,26 @@
 package com.bbsoftware.SportClub.registration;
 
 import com.bbsoftware.SportClub.appuser.AppUserRole;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
-@AllArgsConstructor
 @EqualsAndHashCode
 @ToString
 public class RegistrationRequest {
-    private final String firstName;
-    private final String lastName;
-    private final String password;
-    private final String email;
-    private final AppUserRole role;
+    private  String firstName;
+    private  String lastName;
+    private  String email;
+    private  String password;
+    private  AppUserRole role;
+
+    public RegistrationRequest() {
+    }
+
+    public RegistrationRequest(String firstName, String lastName, String email, String password, AppUserRole role) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
 }

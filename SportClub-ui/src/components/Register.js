@@ -10,15 +10,15 @@ export default class Register extends Component {
 
     }
     initialState = {
-            name:'',surname:'',email:'',password:'',role:''
+            fistName:'',lastName:'',email:'',password:'',role:''
         }
     submitRegister = event =>
     {
         alert(this.state.name);
         event.preventDefault();
         const user = {
-            name: this.state.name,
-            surname: this.state.surname,
+            fistName: this.state.name,
+            lastName: this.state.surname,
             email: this.state.email,
             password: this.state.password,
             role: this.state.role

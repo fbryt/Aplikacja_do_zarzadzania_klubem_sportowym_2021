@@ -21,13 +21,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+//        http
+//                .authorizeRequests().antMatchers("/h2-console/**").permitAll();
+//
+//        http.csrf().disable();
+//        http.headers().frameOptions().disable();
+//
+//        http.authorizeRequests().antMatchers("/register/**").permitAll();
         http
-                .authorizeRequests().antMatchers("/h2-console/**").permitAll();
-
-        http.csrf().disable();
-        http.headers().frameOptions().disable();
-
-        http.csrf().disable().authorizeRequests().antMatchers("/wywalic/**").permitAll().anyRequest().authenticated().and().formLogin();
+                .csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/register/**")
+                .permitAll()
+                .anyRequest()
+                .authenticated().and()
+                .formLogin();
     }
 
     @Override

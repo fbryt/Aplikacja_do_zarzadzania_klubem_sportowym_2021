@@ -1,5 +1,8 @@
 package com.bbsoftware.SportClub;
 
+import com.bbsoftware.SportClub.appuser.AppUser;
+import com.bbsoftware.SportClub.appuser.AppUserRepository;
+import com.bbsoftware.SportClub.appuser.AppUserRole;
 import com.bbsoftware.SportClub.models.Employee;
 import com.bbsoftware.SportClub.models.Order;
 import com.bbsoftware.SportClub.models.Status;
@@ -23,6 +26,7 @@ class LoadDatabase {
     return args -> {
       employeeRepository.save(new Employee("Bilbo", "Baggins", "burglar"));
       employeeRepository.save(new Employee("Frodo", "Baggins", "thief"));
+
 
       employeeRepository.findAll().forEach(employee -> log.info("Preloaded " + employee));
 

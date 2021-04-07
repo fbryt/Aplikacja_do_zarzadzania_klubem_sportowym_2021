@@ -1,6 +1,7 @@
 package com.bbsoftware.SportClub.registration;
 
 import com.bbsoftware.SportClub.appuser.AppUser;
+import com.bbsoftware.SportClub.appuser.AppUserRole;
 import com.bbsoftware.SportClub.appuser.AppUserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,6 @@ public class RegistrationService {
             throw new IllegalStateException("Email is not valid");
         }
 
-        return appUserService.signUpUser(new AppUser(request.getFirstName(),request.getLastName(),request.getEmail(),request.getPassword(),request.getRole()));
+        return appUserService.signUpUser(new AppUser(request.getFirstName(),request.getLastName(),request.getEmail(),request.getPassword(), AppUserRole.USER));
     }
 }
