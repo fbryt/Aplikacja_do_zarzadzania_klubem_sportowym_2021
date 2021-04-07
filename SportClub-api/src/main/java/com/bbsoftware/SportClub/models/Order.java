@@ -11,15 +11,15 @@ import javax.persistence.Table;
 @Table(name = "Orders")
 public class Order {
 
-  private @Id @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY) Long id;
+  private @Id @GeneratedValue Long id;
 
   private String description;
-  private int status;
+  private Status status;
 
   Order() {
   }
 
-  public Order(String description, int status) {
+  public Order(String description, Status status) {
 
     this.description = description;
     this.status = status;
@@ -33,7 +33,7 @@ public class Order {
     return this.description;
   }
 
-  public int getStatus() {
+  public Status getStatus() {
     return this.status;
   }
 
@@ -45,7 +45,7 @@ public class Order {
     this.description = description;
   }
 
-  public void setStatus(int status) {
+  public void setStatus(Status status) {
     this.status = status;
   }
 

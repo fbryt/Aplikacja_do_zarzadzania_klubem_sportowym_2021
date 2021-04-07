@@ -7,6 +7,7 @@ import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
 
 import com.bbsoftware.SportClub.models.Order;
+import com.bbsoftware.SportClub.models.Status;
 import com.bbsoftware.SportClub.controllers.OrderController;
 
 @Component
@@ -23,7 +24,7 @@ public class OrderModelAssembler implements RepresentationModelAssembler<Order, 
 
     // Conditional links based on state of the order
 
-    if (order.getStatus() == 0) {
+    if (order.getStatus() == Status.IN_PROGRESS) {
       orderModel.add(linkTo(methodOn(OrderController.class).cancel(order.getId())).withRel("cancel"));
       orderModel.add(linkTo(methodOn(OrderController.class).complete(order.getId())).withRel("complete"));
     }
