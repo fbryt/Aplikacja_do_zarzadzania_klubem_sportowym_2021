@@ -11,7 +11,7 @@ import javax.persistence.Table;
 @Table(name = "Employees")
 public class Employee {
 
-  private @Id @GeneratedValue Long id;
+  private @Id @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY) Long id;
   private String firstName;
   private String lastName;
   private String role;

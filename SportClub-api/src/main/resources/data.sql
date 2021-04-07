@@ -1,8 +1,8 @@
-INSERT INTO Employees VALUES
-  (1, 'Lokesh', 'Gupta', 'abc@gmail.com'),
-  (2, 'Deja', 'Vu', 'xyz@email.com'),
-  (3, 'Caption', 'America', 'cap@marvel.com');
+INSERT INTO Employees (FIRST_NAME, LAST_NAME, ROLE) VALUES
+  ('Lokesh', 'Gupta', 'abc@gmail.com'),
+  ('Deja', 'Vu', 'xyz@email.com'),
+  ('Caption', 'America', 'cap@marvel.com');
 
-INSERT INTO Orders VALUES
-    (1, 'MacBook PRO', 0),
-    (2, 'Some Other Thing', 1);
+INSERT INTO Orders (description, status) VALUES
+    ('MacBook PRO', 0),
+    ('Some Other Thing', 1);
