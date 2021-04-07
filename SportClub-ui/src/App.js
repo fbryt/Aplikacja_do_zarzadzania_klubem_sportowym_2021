@@ -1,23 +1,25 @@
 import React, { useState, useEffect } from "react";
-import Orders from "./components/Orders";
-
-import ordersService from "./services/orders";
+import { BrowserRouter as Router, Route, Switch, Link, useRouteMatch, useParams} from "react-router-dom";
+import Register from "./components/Register";
 
 function App() {
-  const [orders, setOrders] = useState([]);
-
-  const mockOrders = {
-    orderList: [{ id: -1, description: "Mock", status: "Mocked" }],
-  };
-
-  useEffect(() => {
-    ordersService
-      .getAllOrders()
-      .then((orders) => setOrders(orders.orderList))
-      .catch((err) => setOrders(mockOrders.orderList));
-  }, []);
-
-  return <Orders orders={orders} />;
+    return (
+        <Router>
+            <div>
+          <h1>Strona</h1>
+                  <Switch>
+                    <Route exact path="/register">
+                      <Register/>
+                    </Route>
+                      <Route exact path="/">
+                          <h1>
+                              Glowna
+                          </h1>
+                      </Route>
+                  </Switch>
+          </div>
+        </Router>
+    );
 }
 
 export default App;
