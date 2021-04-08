@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from "react";
-import Orders from "./components/Orders";
+import React/* , { useState, useEffect }*/ from "react";
+import {Route} from "react-router-dom";
+import HomePage from "./components/pages/HomePage";
+import LoginPage from "./components/pages/LoginPage"
 
-import ordersService from "./services/orders";
+//import Orders from "./components/Orders";
 
-function App() {
+//import ordersService from "./services/orders";
+
+/*function App() {
   const [orders, setOrders] = useState([]);
 
   const mockOrders = {
@@ -18,6 +22,13 @@ function App() {
   }, []);
 
   return <Orders orders={orders} />;
-}
+}*/
+
+const App = () => (
+    <div>
+        <Route path="/" exact component={HomePage}/>
+        <Route path="/login" exact component={LoginPage}/>
+    </div>
+);
 
 export default App;
