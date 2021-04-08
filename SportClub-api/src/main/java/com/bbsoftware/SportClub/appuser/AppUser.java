@@ -20,7 +20,7 @@ import java.util.Collections;
 public class AppUser implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
     private Long id;
     private String firstName;
     private String lastName;
