@@ -1,6 +1,7 @@
 package com.bbsoftware.SportClub.appuser;
 
 public enum AppUserRole {
-    ADMIN,
-    USER
+    COACH,
+    PLAYER,
+    ADMIN
 }
