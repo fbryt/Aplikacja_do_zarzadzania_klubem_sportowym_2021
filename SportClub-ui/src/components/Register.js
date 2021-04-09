@@ -71,9 +71,9 @@ export default class Register extends Component {
                         <Form.Group as={Col} controlId="formRole">
                             <Form.Label>Role</Form.Label>
                             <Form.Control required autoComplete="off" as="select" name="role" onChange={this.dataChange}>
-                                <option value="Coach">Coach</option>
-                                <option value="Player">Player</option>
-                                <option value="Admin">Admin</option>
+                                <option value="COACH">Coach</option>
+                                <option value="PLAYER">Player</option>
+                                <option value="ADMIN">Admin</option>
                             </Form.Control>
                         </Form.Group>
                     </Form.Row>
