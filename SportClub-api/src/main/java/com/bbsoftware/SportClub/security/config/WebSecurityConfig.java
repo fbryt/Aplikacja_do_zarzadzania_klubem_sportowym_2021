@@ -21,20 +21,32 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        // http
-        // .authorizeRequests().antMatchers("/h2-console/**").permitAll();
-        //
-        // http.csrf().disable();
-        http.headers().frameOptions().disable();
-        //
-        // http.authorizeRequests().antMatchers("/register/**").permitAll();
-        http.csrf().disable().authorizeRequests().antMatchers("/register/**").permitAll().anyRequest().authenticated()
-                .and().formLogin();
+
+        http
+                .headers()
+                .frameOptions()
+                .disable();
+
+        http
+                .csrf()
+                .disable()
+                .authorizeRequests()
+                .antMatchers("/register/**")
+                .permitAll()
+                .anyRequest()
+                .authenticated()
+                .and()
+                .formLogin()
+                .defaultSuccessUrl("/dashboard",true);
+
+
     }
 
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(daoAuthenticationProvider());
     }
+
+
 
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {

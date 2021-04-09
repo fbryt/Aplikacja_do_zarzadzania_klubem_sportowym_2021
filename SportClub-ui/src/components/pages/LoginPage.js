@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Form, Col, Card, Button} from "react-bootstrap"
+import {Form, Col,  Button} from "react-bootstrap"
 import axios from 'axios';
 
 
@@ -14,24 +14,26 @@ export default class LoginPage extends Component{
 
     }
     initialState = {
-        login:'',password:''
+        email:'',password:''
     }
     submitLogin = event =>
     {
-        alert(this.state.name);
+
         event.preventDefault();
         const user = {
-            login: this.state.login,
+            email: this.state.email,
             password: this.state.password,
         }
+        console.log(user);
         axios.post("localhost:8080/login",user)
             .then(response => {
                 if(response.data !=null) {
 
                     this.setState(this.initialState);
-                    alert("ok");
+                    alert("works");
                 }
-            });
+            })
+            .catch(err => { if(err.request){ console.log(err.request) } if(err.response){ console.log(err.response) } });
     }
     dataChange = event =>
     {
@@ -39,17 +41,19 @@ export default class LoginPage extends Component{
             [event.target.name]:event.target.value
         });
     }
+
+
     render() {
-        const {login,password} = this.state;
+        const {email,password} = this.state;
         return (
             <div>
                 <h1>Logowanie</h1>
 
                 <Form onSubmit={this.submitLogin} id="LoginForm">
                     <Form.Row>
-                        <Form.Group as={Col} controlId="formLogin">
+                        <Form.Group as={Col} controlId="formEmail">
                             <Form.Label>Login</Form.Label>
-                            <Form.Control required autoComplete="off" type="login" name="login"  onChange={this.dataChange} />
+                            <Form.Control required autoComplete="off" type="email" name="email"  onChange={this.dataChange} />
                             <Form.Text className="text-muted">
                                 We'll never share your email with anyone else.
                             </Form.Text>
@@ -60,7 +64,7 @@ export default class LoginPage extends Component{
                         </Form.Group>
                     </Form.Row>
                     <Form.Row>
-                        <Button as={Col} variant="success" type="submit">
+                        <Button variant="success" type="submit">
                             Zaloguj
                         </Button>
                     </Form.Row>
