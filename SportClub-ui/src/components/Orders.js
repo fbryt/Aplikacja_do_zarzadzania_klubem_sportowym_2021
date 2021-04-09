@@ -6,7 +6,7 @@ const Orders = ({ orders }) => {
   return (
     <div>
       <center>
-        <h1>Order List</h1>
+        <h1>Order List: </h1>
       </center>
 
       {orders.map((order) => (
