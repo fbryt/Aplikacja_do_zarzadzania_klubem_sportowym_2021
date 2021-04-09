@@ -12,16 +12,23 @@ public class RegistrationService {
 
     private final AppUserService appUserService;
     private final EmailValidator emailValidator;
-
+    private final EmptyValidator emptyValidator;
     public String register(RegistrationRequest request) {
         boolean isValidEmail = emailValidator.test(request.getEmail());
 
         if (!isValidEmail)
-
         {
             throw new IllegalStateException("Email is not valid");
         }
+        if(!emptyValidator.test(request.getFirstName())||
+                !emptyValidator.test(request.getLastName())||
+                !emptyValidator.test(request.getPassword())||
+                !emptyValidator.test(request.getRole().toString()))
+        {
+            throw new IllegalStateException("Any form field is empty");
+        }
 
-        return appUserService.signUpUser(new AppUser(request.getFirstName(),request.getLastName(),request.getEmail(),request.getPassword(), AppUserRole.COACH));
+
+        return appUserService.signUpUser(new AppUser(request.getFirstName(),request.getLastName(),request.getEmail(),request.getPassword(), request.getRole()));
     }
 }

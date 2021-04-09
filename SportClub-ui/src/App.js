@@ -3,7 +3,6 @@ import {Route} from "react-router-dom";
 import HomePage from "./components/pages/HomePage";
 import LoginPage from "./components/pages/LoginPage"
 import Register from "./components/Register"
-
 //import Orders from "./components/Orders";
 
 //import ordersService from "./services/orders";
