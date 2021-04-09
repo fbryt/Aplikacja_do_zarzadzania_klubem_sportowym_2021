@@ -5,11 +5,13 @@ import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "Employees")
 public class Employee {
 
-  private @Id @GeneratedValue Long id;
+  private @Id @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY) Long id;
   private String firstName;
   private String lastName;
   private String role;
