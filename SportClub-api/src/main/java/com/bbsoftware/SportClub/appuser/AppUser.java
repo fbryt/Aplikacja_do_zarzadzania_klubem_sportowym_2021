@@ -20,7 +20,7 @@ import java.util.Collections;
 public class AppUser implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
     private Long id;
     private String firstName;
     private String lastName;
@@ -31,11 +31,7 @@ public class AppUser implements UserDetails {
     private Boolean locked = false;
     private Boolean enabled = true;
 
-    public AppUser(String firstName,
-                   String lastName,
-                   String email,
-                   String password,
-                   AppUserRole appUserRole) {
+    public AppUser(String firstName, String lastName, String email, String password, AppUserRole appUserRole) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -45,7 +41,7 @@ public class AppUser implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        SimpleGrantedAuthority authority=new SimpleGrantedAuthority(appUserRole.name());
+        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(appUserRole.name());
 
         return Collections.singletonList(authority);
     }

@@ -16,11 +16,12 @@ public class RegistrationService {
     public String register(RegistrationRequest request) {
         boolean isValidEmail = emailValidator.test(request.getEmail());
 
-        if(!isValidEmail)
+        if (!isValidEmail)
+
         {
             throw new IllegalStateException("Email is not valid");
         }
 
-        return appUserService.signUpUser(new AppUser(request.getFirstName(),request.getLastName(),request.getEmail(),request.getPassword(), AppUserRole.USER));
+        return appUserService.signUpUser(new AppUser(request.getFirstName(),request.getLastName(),request.getEmail(),request.getPassword(), AppUserRole.COACH));
     }
 }

@@ -4,14 +4,14 @@ import com.bbsoftware.SportClub.appuser.AppUserRole;
 import lombok.*;
 
 @Getter
-@EqualsAndHashCode
 @ToString
+@EqualsAndHashCode
 public class RegistrationRequest {
-    private  String firstName;
-    private  String lastName;
-    private  String email;
-    private  String password;
-    private  AppUserRole role;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String password;
+    private AppUserRole role;
 
     public RegistrationRequest() {
     }

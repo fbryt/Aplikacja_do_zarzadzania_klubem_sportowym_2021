@@ -8,18 +8,18 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "CUSTOMER_ORDER")
+@Table(name = "Orders")
 public class Order {
 
-  private @Id @GeneratedValue Long id;
+  private @Id @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY) Long id;
 
   private String description;
-  private Status status;
+  private int status;
 
   Order() {
   }
 
-  public Order(String description, Status status) {
+  public Order(String description, int status) {
 
     this.description = description;
     this.status = status;
@@ -33,7 +33,7 @@ public class Order {
     return this.description;
   }
 
-  public Status getStatus() {
+  public int getStatus() {
     return this.status;
   }
 
@@ -45,7 +45,7 @@ public class Order {
     this.description = description;
   }
 
-  public void setStatus(Status status) {
+  public void setStatus(int status) {
     this.status = status;
   }
 
