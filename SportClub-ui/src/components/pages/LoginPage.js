@@ -14,7 +14,8 @@ export default class LoginPage extends Component{
 
     }
     initialState = {
-        email:'',password:''
+        email:'',
+        password:''
     }
     submitLogin = event =>
     {
@@ -32,8 +33,8 @@ export default class LoginPage extends Component{
                     this.setState(this.initialState);
                     alert("works");
                 }
-            })
-            .catch(err => { if(err.request){ console.log(err.request) } if(err.response){ console.log(err.response) } });
+            });
+            //.catch(err => { if(err.request){ console.log(err.request) } if(err.response){ console.log(err.response) } });
     }
     dataChange = event =>
     {

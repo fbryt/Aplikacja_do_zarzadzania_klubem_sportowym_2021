@@ -31,12 +31,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf()
                 .disable()
                 .authorizeRequests()
-                .antMatchers("/register/**")
-                .permitAll()
+                .antMatchers("/register/**").permitAll()
+                .antMatchers("/login*").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
                 .formLogin()
+                .usernameParameter("email")
                 .defaultSuccessUrl("/dashboard",true);
 
 

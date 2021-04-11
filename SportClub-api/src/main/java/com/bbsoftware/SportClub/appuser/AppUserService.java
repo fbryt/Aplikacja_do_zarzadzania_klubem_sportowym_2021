@@ -36,4 +36,25 @@ public class AppUserService implements UserDetailsService {
 
         return "";
     }
+
+    public String signInUser(String email, String password){
+
+
+        boolean present = appUserRepository.findByEmail(email).isPresent();
+
+        if(present){
+
+            AppUser usr = appUserRepository.findByEmail(email).get();
+
+            String encodedPassword = bCryptPasswordEncoder.encode(password);
+
+            if(encodedPassword == usr.getPassword()){
+
+                return email;
+            }
+            return "";
+        }
+        return "";
+
+    }
 }
