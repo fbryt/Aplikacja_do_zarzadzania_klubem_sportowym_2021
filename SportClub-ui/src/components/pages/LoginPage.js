@@ -26,15 +26,15 @@ export default class LoginPage extends Component{
             password: this.state.password,
         }
         console.log(user);
-        axios.post("localhost:8080/login",user)
+        axios.post("http://localhost:8080/login",user)
             .then(response => {
                 if(response.data !=null) {
 
                     this.setState(this.initialState);
                     alert("works");
                 }
-            });
-            //.catch(err => { if(err.request){ console.log(err.request) } if(err.response){ console.log(err.response) } });
+            })
+            .catch(err => { if(err.request){ console.log(err.request) } if(err.response){ console.log(err.response) } });
     }
     dataChange = event =>
     {
