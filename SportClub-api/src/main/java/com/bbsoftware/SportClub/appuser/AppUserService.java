@@ -1,7 +1,6 @@
 package com.bbsoftware.SportClub.appuser;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -37,18 +36,17 @@ public class AppUserService implements UserDetailsService {
         return "";
     }
 
-    public String signInUser(String email, String password){
-
+    public String signInUser(String email, String password) {
 
         boolean present = appUserRepository.findByEmail(email).isPresent();
 
-        if(present){
+        if (present) {
 
             AppUser usr = appUserRepository.findByEmail(email).get();
 
             String encodedPassword = bCryptPasswordEncoder.encode(password);
 
-            if(encodedPassword == usr.getPassword()){
+            if (encodedPassword == usr.getPassword()) {
 
                 return email;
             }
