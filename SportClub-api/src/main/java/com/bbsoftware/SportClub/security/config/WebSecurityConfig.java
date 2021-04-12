@@ -25,34 +25,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http
-                .cors()
-                .and()
-                .headers()
-                .frameOptions()
-                .disable();
+        http.cors().and().headers().frameOptions().disable();
 
-        http
-                .csrf()
-                .disable()
-                .authorizeRequests()
-                .antMatchers("/register/**").permitAll()
-                .antMatchers("/login*").permitAll()
-                .anyRequest()
-                .authenticated()
-                .and()
-                .formLogin()
-                .usernameParameter("email")
-                .defaultSuccessUrl("/dashboard",true);
+        http.csrf().disable();
 
+        /*
+         * http.authorizeRequests() .antMatchers("/register/**").permitAll()
+         * .antMatchers("/login*").permitAll() .anyRequest() .authenticated() .and()
+         * .formLogin() .usernameParameter("email")
+         * .defaultSuccessUrl("/dashboard",true);
+         */
 
     }
 
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(daoAuthenticationProvider());
     }
-
-
 
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {
@@ -65,7 +53,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
+        CorsConfiguration cc = new CorsConfiguration().applyPermitDefaultValues();
+        cc.addAllowedMethod("PATCH");
+        cc.addAllowedMethod("DELETE");
+        source.registerCorsConfiguration("/**", cc);
         return source;
     }
 }
