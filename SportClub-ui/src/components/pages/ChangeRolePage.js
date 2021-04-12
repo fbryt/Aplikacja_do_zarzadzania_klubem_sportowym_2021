@@ -18,10 +18,10 @@ export default class ChangeRole extends Component {
         const update = {
             appUserRole: this.state.role
         }
-        console.log(update);
         event.preventDefault();
         try {
-            const response = await axios.patch('http://localhost:8080/appUsers/'+this.state.id, update );
+            const url = "http://localhost:8080/appUsers/" + this.state.id;
+            const response = await axios.patch(url, update );
             console.log('👉 Returned data:', response);
         } catch (e) {
             console.log(`😱 Axios request failed: ${e}`);
