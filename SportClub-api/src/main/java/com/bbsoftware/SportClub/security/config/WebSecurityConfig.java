@@ -29,13 +29,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable();
 
-        /*
-         * http.authorizeRequests() .antMatchers("/register/**").permitAll()
-         * .antMatchers("/login*").permitAll() .anyRequest() .authenticated() .and()
-         * .formLogin() .usernameParameter("email")
-         * .defaultSuccessUrl("/dashboard",true);
-         */
+        // http.authorizeRequests().antMatchers("/register/**").permitAll().antMatchers("/login*").permitAll().anyRequest()
+        // .authenticated().and().formLogin().usernameParameter("email").defaultSuccessUrl("/dashboard",
+        // true);
 
+        http.csrf().disable().authorizeRequests().antMatchers("/authenticate").permitAll().anyRequest().authenticated()
+                .and().exceptionHandling().and().sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+    }
+
+    @Override
+    @Bean
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
 
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
