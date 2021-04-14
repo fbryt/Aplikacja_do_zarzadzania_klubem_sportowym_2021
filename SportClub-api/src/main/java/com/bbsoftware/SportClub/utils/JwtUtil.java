@@ -1,9 +1,12 @@
-package com.bbsoftware;
+package com.bbsoftware.SportClub.utils;
 
+import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
+
+import javax.crypto.spec.SecretKeySpec;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -14,7 +17,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 @Service
 public class JwtUtil {
-    private String SECRET_KEY = "secret";
+    private byte[] SECRET_KEY = "SabalMetinczykGitZiomalAlkoholik".getBytes();
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -44,9 +47,11 @@ public class JwtUtil {
 
     private String createToken(Map<String, Object> claims, String subject) {
 
+        Key signingKey = new SecretKeySpec(SECRET_KEY, SignatureAlgorithm.HS256.getJcaName());
+
         return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))
-                .signWith(SECRET_KEY, SignatureAlgorithm.HS256).compact();
+                .signWith(signingKey, SignatureAlgorithm.HS256).compact();
     }
 
     public Boolean validateToken(String token, UserDetails userDetails) {
