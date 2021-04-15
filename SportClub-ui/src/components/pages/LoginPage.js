@@ -2,6 +2,8 @@ import React, {Component} from "react";
 import {Form, Col,  Button} from "react-bootstrap"
 import axios from 'axios';
 
+import AuthService from '../../services/AuthService';
+
 
 export default class LoginPage extends Component{
 
@@ -13,25 +15,27 @@ export default class LoginPage extends Component{
         this.submitLogin = this.submitLogin.bind(this);
 
     }
+
     initialState = {
         username:'',
         password:''
     }
-    submitLogin = event =>
-    {
+
+    submitLogin = event =>{
+
         event.preventDefault();
         const user = {
             username: this.state.username,
             password: this.state.password,
         }
-        //console.log(user);
-        axios.post("http://localhost:8080/authenticate",user)
-            .then(res => {
-                localStorage.setItem('jwt', res.data);
-                this.props.history.push('/dashboard')
-            }).catch(err => { if(err.request){ console.log(err.request) } if(err.response){ console.log(err.response) } });
-    }
 
+        axios.post("http://localhost:8080/authenticate",user)
+             .then((response) => {
+                 AuthService.registerSuccessfulLoginForJwt(this.state.username, response.data.token);
+                 this.props.history.push(`/dashboard`)
+             }).catch(err => { if(err.request){ console.log(err.request) } if(err.response){ console.log(err.response) } });
+
+    }
     dataChange = event =>
     {
         this.setState({
