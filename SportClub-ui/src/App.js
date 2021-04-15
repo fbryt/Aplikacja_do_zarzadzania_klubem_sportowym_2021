@@ -3,9 +3,9 @@ import {Route} from "react-router-dom";
 import HomePage from "./components/pages/HomePage";
 import LoginPage from "./components/pages/LoginPage"
 import Register from "./components/Register"
-import Dashboard from "./components/pages/DashboardPage"
 import DashboardPage from "./components/pages/DashboardPage";
 import ChangeRole from "./components/pages/ChangeRolePage";
+import AuthComponent from "./components/AuthComponent";
 
 //import Orders from "./components/Orders";
 
@@ -33,9 +33,13 @@ const App = () => (
         <Route path="/" exact component={HomePage}/>
         <Route path="/login" exact component={LoginPage}/>
         <Route path="/register" exact component={Register}/>
+        <AuthComponent>
         <Route path="/dashboard" exact component={DashboardPage}/>
         <Route path="/appUsers/:id" render={(props) => <ChangeRole {...props} />} />
+        </AuthComponent>
     </div>
 );
 
 export default App;
+
+//
