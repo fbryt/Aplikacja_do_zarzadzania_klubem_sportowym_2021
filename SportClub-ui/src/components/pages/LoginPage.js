@@ -14,28 +14,24 @@ export default class LoginPage extends Component{
 
     }
     initialState = {
-        email:'',
+        username:'',
         password:''
     }
     submitLogin = event =>
     {
-
         event.preventDefault();
         const user = {
-            email: this.state.email,
+            username: this.state.username,
             password: this.state.password,
         }
-        console.log(user);
-        axios.post("http://localhost:8080/login",user)
-            .then(response => {
-                if(response.data !=null) {
-
-                    this.setState(this.initialState);
-                    alert("works");
-                }
-            })
-            .catch(err => { if(err.request){ console.log(err.request) } if(err.response){ console.log(err.response) } });
+        //console.log(user);
+        axios.post("http://localhost:8080/authenticate",user)
+            .then(res => {
+                localStorage.setItem('jwt', res.data);
+                this.props.history.push('/dashboard')
+            }).catch(err => { if(err.request){ console.log(err.request) } if(err.response){ console.log(err.response) } });
     }
+
     dataChange = event =>
     {
         this.setState({
@@ -45,16 +41,16 @@ export default class LoginPage extends Component{
 
 
     render() {
-        const {email,password} = this.state;
+        const {username,password} = this.state;
         return (
             <div>
                 <h1>Logowanie</h1>
 
                 <Form onSubmit={this.submitLogin} id="LoginForm">
                     <Form.Row>
-                        <Form.Group as={Col} controlId="formEmail">
+                        <Form.Group as={Col} controlId="formUsername">
                             <Form.Label>Login</Form.Label>
-                            <Form.Control required autoComplete="off" type="email" name="email"  onChange={this.dataChange} />
+                            <Form.Control required autoComplete="off" type="username" name="username"  onChange={this.dataChange} />
                             <Form.Text className="text-muted">
                                 We'll never share your email with anyone else.
                             </Form.Text>
@@ -77,23 +73,4 @@ export default class LoginPage extends Component{
 }
 
 
-/*<div>
-<h1>Logowanie</h1>
-
-<div className="LoginForm">
-
-<label htmlFor="userName">Login</label>
-<br/>
-<input type="text" placeholder="Enter Username" name="uname" required/>
-<br/>
-<label htmlFor="password">Hasło</label>
-<br/>
-<input type="password" placeholder="Enter Password" name="psw" required/>
-<br/>
-<button type="submit">Zaloguj</button>
-
-</div>
-
-</div>
-*/
 
