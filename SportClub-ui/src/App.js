@@ -1,45 +1,37 @@
-import React/* , { useState, useEffect }*/ from "react";
-import {Route} from "react-router-dom";
+import React from "react";
+import {BrowserRouter, Route, Switch} from "react-router-dom";
 import HomePage from "./components/pages/HomePage";
 import LoginPage from "./components/pages/LoginPage"
 import Register from "./components/Register"
 import DashboardPage from "./components/pages/DashboardPage";
 import ChangeRole from "./components/pages/ChangeRolePage";
-import AuthComponent from "./components/AuthComponent";
+import AuthRoute from "./components/AuthComponent";
 
-//import Orders from "./components/Orders";
 
-//import ordersService from "./services/orders";
 
-/*function App() {
-  const [orders, setOrders] = useState([]);
 
-  const mockOrders = {
-    orderList: [{ id: -1, description: "Mock", status: "Mocked" }],
-  };
 
-  useEffect(() => {
-    ordersService
-      .getAllOrders()
-      .then((orders) => setOrders(orders.orderList))
-      .catch((err) => setOrders(mockOrders.orderList));
-  }, []);
+class App extends React.Component {
 
-  return <Orders orders={orders} />;
-}*/
+    render(){
+        return (
 
-const App = () => (
-    <div>
-        <Route path="/" exact component={HomePage}/>
-        <Route path="/login" exact component={LoginPage}/>
-        <Route path="/register" exact component={Register}/>
-        <AuthComponent>
-        <Route path="/dashboard" exact component={DashboardPage}/>
-        <Route path="/appUsers/:id" render={(props) => <ChangeRole {...props} />} />
-        </AuthComponent>
-    </div>
-);
+            <BrowserRouter>
+                <Switch>
+                    <Route path="/" exact component={HomePage}/>
+                    <Route path="/login" exact component={LoginPage}/>
+                    <Route path="/register" exact component={Register}/>
+
+                    <AuthRoute path="/dashboard" exact component={DashboardPage}/>
+                    <AuthRoute path="/appUsers/:id" render={(props) => <ChangeRole {...props} />} />
+                </Switch>
+            </BrowserRouter>
+        );
+
+    }
+
+
+};
 
 export default App;
 
-//

@@ -1,11 +1,20 @@
-import React from "react";
+import React, {Component} from "react";
 
 
-const DashboardPage = () => (
-    <div>
-        <h1>Dashboard</h1>
+export default class LoginPage extends Component{
 
-    </div>
-);
+    render(){
+        return(
 
-export default DashboardPage;
+            <div>
+                <h1>Dashboard</h1>
+
+            </div>
+
+            )
+    }
+
+};
+
+
+
