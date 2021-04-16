@@ -1,10 +1,9 @@
 import React from "react";
-
+import MenuPlayer from '../MenuPlayer'
 
 const DashboardPage = () => (
     <div>
-        <h1>Dashboard</h1>
-
+        <MenuPlayer />
     </div>
 );
 
