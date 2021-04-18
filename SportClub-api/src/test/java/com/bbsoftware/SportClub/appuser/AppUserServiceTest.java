@@ -9,8 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 @TestInstance(Lifecycle.PER_CLASS)
@@ -32,22 +31,23 @@ public class AppUserServiceTest{
         assertEquals(details.getUsername(),"example@example.com");
     }
 
-   /* @Test
+    @Test
     void testsignUpUser(){
 
         AppUser user = new AppUser("xyz","yzx","example12@example.com","password",AppUserRole.PLAYER);
-        when(repository.findByEmail("example12@example.com")).thenCallRealMethod();
-        service.signUpUser(user);
-        UserDetails details = service.loadUserByUsername("example12@example.com");
-        assertEquals("example12@example.com",details.getUsername());
-    }*/
+        when(repository.findByEmail("example12@example.com")).thenReturn(Optional.of(user));
+        Exception exception = assertThrows(IllegalStateException.class,() ->{service.signUpUser(user);});
+        String expectedMsg = "Email already taken";
+        String actualMsg = exception.getMessage();
+        assertTrue(actualMsg.contains(expectedMsg));
+    }
 
     /*@Test
     void testSignInUser(){
+
         AppUser user = new AppUser("xyz","zyx","email","password",AppUserRole.PLAYER);
+
         when(repository.findByEmail("email")).thenReturn(Optional.of(user));
-        //when(repository.findByEmail("email").isPresent()).thenReturn(true);
-        //when(repository.findByEmail("email").get()).thenReturn(user);
         String expectedValue = "email";
         String actualValue = service.signInUser("email","password");
         assertTrue(actualValue.contains(expectedValue));
