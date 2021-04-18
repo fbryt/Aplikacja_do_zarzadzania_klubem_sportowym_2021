@@ -1,10 +1,18 @@
-import React from "react";
+import React, {Component} from "react";
 import MenuPlayer from '../MenuPlayer'
 
-const DashboardPage = () => (
-    <div>
-        <MenuPlayer />
-    </div>
-);
 
-export default DashboardPage;
+
+export default class DashboardPage extends Component{
+
+    constructor(para) {
+        super(para);
+    }
+    render() {
+        return(
+            <div>
+                <MenuPlayer/>
+            </div>
+        )
+    }
+}

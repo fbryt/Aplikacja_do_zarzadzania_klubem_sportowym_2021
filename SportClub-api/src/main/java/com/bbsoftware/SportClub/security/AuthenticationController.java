@@ -1,5 +1,6 @@
 package com.bbsoftware.SportClub.security;
 
+import com.bbsoftware.SportClub.appuser.AppUser;
 import com.bbsoftware.SportClub.utils.JwtUtil;
 import com.bbsoftware.SportClub.appuser.AppUserService;
 
@@ -40,7 +41,7 @@ public class AuthenticationController {
             throw new Exception("Incorrect username or password", e);
         }
 
-        final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
+        final AppUser userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
 
         final String jwt = jwtTokenUtil.generateToken(userDetails);
 
