@@ -13,6 +13,10 @@ on:
       - 'SportClub-api/**'
       - '.github/**'
 
+defaults:
+  run:
+    working-directory: ./SportClub-api
+
 jobs:
   build:
 
@@ -25,5 +29,6 @@ jobs:
       with:
         java-version: 11
     - name: Build with Maven
-      working-directory: SportClub-api
-      run: mvn -B package --file pom.xml
+      run: mvn compile
+    - name: Test with Maven
+      run: mvn test
