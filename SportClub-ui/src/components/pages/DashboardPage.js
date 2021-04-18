@@ -1,21 +1,12 @@
-import React, {Component} from "react";
-import MenuPlayer from '../MenuPlayer'
+import React from "react";
+import MenuAdmin from "../MenuAdmin";
+import MenuPlayer from "../MenuPlayer";
 
-export default class LoginPage extends Component{
+const DashboardPage = () => (
+  <div>
+    <MenuPlayer />
+    <MenuAdmin />
+  </div>
+);
 
-
-    render(){
-        return(
-
-            <div>
-                <MenuPlayer />
-
-            </div>
-
-            )
-    }
-
-};
-
-
-
+export default DashboardPage;
