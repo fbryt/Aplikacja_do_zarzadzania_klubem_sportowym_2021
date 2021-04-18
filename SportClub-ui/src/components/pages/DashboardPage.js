@@ -1,10 +1,14 @@
 import React from "react";
-import MenuPlayer from '../MenuPlayer'
+import MenuAdmin from "../MenuAdmin";
+import MenuCoach from "../MenuCoach";
+import MenuPlayer from "../MenuPlayer";
 
 const DashboardPage = () => (
-    <div>
-        <MenuPlayer />
-    </div>
+  <div>
+    <MenuPlayer />
+    <MenuCoach />
+    <MenuAdmin />
+  </div>
 );
 
 export default DashboardPage;
