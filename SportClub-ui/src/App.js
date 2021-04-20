@@ -18,12 +18,12 @@ class App extends React.Component {
 
             <BrowserRouter>
                 <Switch>
-                    <Route path="/" exact component={HomePage}/>
-                    <Route path="/login" exact component={LoginPage}/>
-                    <Route path="/register" exact component={Register}/>
+                    <Route exact path="/" exact component={HomePage}/>
+                    <Route exact path="/login" exact component={LoginPage}/>
+                    <Route exact path="/register" exact component={Register}/>
 
-                    <AuthRoute path="/dashboard" exact component={DashboardPage}/>
-                    <AuthRoute path="/appUsers/:id" render={(props) => <ChangeRole {...props} />} />
+                    <AuthRoute exact path="/dashboard" exact component={DashboardPage}/>
+                    <AuthRoute exact path="/appUsers/:id" render={(props) => <ChangeRole {...props} />} />
                 </Switch>
             </BrowserRouter>
         );
