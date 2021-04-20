@@ -36,7 +36,7 @@ export default class ChangeRole extends Component {
         const {email,firstName,lastName,appUserRole, id} = this.state;
         return (
             <div>
-                <h1>Change role</h1>
+                <h1 data-testid="required-h1">Change role</h1>
                 <Form onSubmit={e => this.changeRole(e)} id="changeRoleForm">
                     <Form.Row>
                         <Form.Group as={Col} controlId="formRole">
