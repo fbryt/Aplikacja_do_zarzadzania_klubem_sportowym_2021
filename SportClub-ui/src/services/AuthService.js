@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-
+import jwt_decode from "jwt-decode";
 
 
 class AuthService {
@@ -9,6 +9,7 @@ class AuthService {
 
     registerSuccessfulLoginForJwt(username, token) {
         sessionStorage.setItem('jwt', username)
+        localStorage.setItem('role',jwt_decode(token).UserRole)
         this.setupAxiosInterceptors(this.createJWTToken(token))
     }
 
