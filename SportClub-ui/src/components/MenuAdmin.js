@@ -1,12 +1,6 @@
-import {
-  Navbar,
-  Nav,
-  Form,
-  FormControl,
-  Button,
-  Dropdown,
-  DropdownButton,
-} from "react-bootstrap";
+import {  Navbar,  Nav,  Form,  FormControl,  Button,  Dropdown,  DropdownButton,} from "react-bootstrap";
+import UtilityService from "../services/UtilityService";
+
 const MenuAdmin = () => {
   return (
     <>
@@ -21,7 +15,7 @@ const MenuAdmin = () => {
         <DropdownButton id="dropdown-basic-button" drop="left" title="Account">
           <Dropdown.Item href="#/action-1">Info</Dropdown.Item>
           <Dropdown.Item href="#/action-2">Change password</Dropdown.Item>
-          <Dropdown.Item href="#/action-3">Logout</Dropdown.Item>
+          <Dropdown.Item href="#/logout" onClick={UtilityService.logout}> Logout </Dropdown.Item>
         </DropdownButton>
       </Navbar>
     </>
