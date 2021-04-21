@@ -48,25 +48,25 @@ export default class LoginPage extends Component{
         const {username,password} = this.state;
         return (
             <div>
-                <h1>Logowanie</h1>
+                <h1>Login Page</h1>
 
                 <Form onSubmit={this.submitLogin} id="LoginForm">
                     <Form.Row>
                         <Form.Group as={Col} controlId="formUsername">
-                            <Form.Label>Login</Form.Label>
+                            <Form.Label>Email</Form.Label>
                             <Form.Control required autoComplete="off" type="username" name="username"  onChange={this.dataChange} />
                             <Form.Text className="text-muted">
-                                We'll never share your email with anyone else.
+
                             </Form.Text>
                         </Form.Group>
                         <Form.Group as={Col} controlId="formPassword">
-                            <Form.Label>Hasło</Form.Label>
+                            <Form.Label>Password</Form.Label>
                             <Form.Control required autoComplete="off" type="password" name="password" onChange={this.dataChange} />
                         </Form.Group>
                     </Form.Row>
                     <Form.Row>
                         <Button variant="success" type="submit">
-                            Zaloguj
+                            Sign in
                         </Button>
                     </Form.Row>
                 </Form>

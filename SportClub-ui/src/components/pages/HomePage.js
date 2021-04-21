@@ -1,10 +1,17 @@
 import React from "react";
 import {Link} from "react-router-dom";
+import {Button} from "react-bootstrap";
+import style from '../../cssFiles/mystyle.module.css';
+
 
 const HomePage = () => (
     <div>
-        <h1>Strona główna</h1>
-        <Link to="/login">Logowanie</Link>
+        <h1>Home page</h1>
+        <Link className={style.blueButton} to="/login">
+            <Button>
+                Login
+            </Button>
+        </Link>
     </div>
 );
 
