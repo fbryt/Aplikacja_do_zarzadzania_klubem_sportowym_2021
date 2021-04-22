@@ -47,27 +47,30 @@ export default class LoginPage extends Component{
     render() {
         const {username,password} = this.state;
         return (
-            <div>
+            <div  id="loginform">
                 <h1>Login Page</h1>
 
                 <Form onSubmit={this.submitLogin} id="LoginForm">
                     <Form.Row>
                         <Form.Group as={Col} controlId="formUsername">
-                            <Form.Label>Email</Form.Label>
-                            <Form.Control required autoComplete="off" type="username" name="username"  onChange={this.dataChange} />
-                            <Form.Text className="text-muted">
+                            <div className="row">
+                                <Form.Label>Email</Form.Label>
+                                <Form.Control required autoComplete="off" type="username" name="username"  onChange={this.dataChange} />
+                            </div>
 
-                            </Form.Text>
                         </Form.Group>
                         <Form.Group as={Col} controlId="formPassword">
-                            <Form.Label>Password</Form.Label>
-                            <Form.Control required autoComplete="off" type="password" name="password" onChange={this.dataChange} />
+                            <div className="row">
+                                <Form.Label>Password</Form.Label>
+                                <Form.Control required autoComplete="off" type="password" name="password" onChange={this.dataChange} />
+                            </div>
+
                         </Form.Group>
                     </Form.Row>
                     <Form.Row>
-                        <Button variant="success" type="submit">
-                            Sign in
-                        </Button>
+                        <div id="button" className="row">
+                            <button>Log in</button>
+                        </div>
                     </Form.Row>
                 </Form>
             </div>
