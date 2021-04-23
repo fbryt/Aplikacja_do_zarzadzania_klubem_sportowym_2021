@@ -9,7 +9,7 @@ import Dashboard from '../pages/DashboardPage';
 
 
 
-describe('Testing menu admin', () => {
+describe('Testing menu coach', () => {
     let Cryptr;
     let cryptr;
     let encrypted;
@@ -20,7 +20,7 @@ describe('Testing menu admin', () => {
     Cryptr=require('cryptr');
     cryptr=new Cryptr('Secret');
 
-    encrypted=cryptr.encrypt("ADMIN");
+    encrypted=cryptr.encrypt("COACH");
     document.cookie=`role=${encrypted}`;
 
     it('renders without crashing', async () => {
@@ -32,7 +32,7 @@ describe('Testing menu admin', () => {
                 <Dashboard required={true} location={{hash:"",pathname:"/dashboard",search:"",state:undefined}} match={{isExact: true, path: "/dashboard", url: "/dashboard"}}/>
             </BrowserRouter>,root
         );
-        expect(document.body.textContent).toContain('B&B SportHomeScheduleContractAdmin toolsAccount');
+        expect(document.body.textContent).toContain('B&B SportHomeScheduleContractCoach toolsAccount');
     })
 
 })
