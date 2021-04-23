@@ -47,11 +47,14 @@ export default class LoginPage extends Component{
     render() {
         const {username,password} = this.state;
         return (
-            <div  id="loginform">
-                <h1>Login Page</h1>
+            <div  id="logform">
+                <div id="mainInscript">
+                    <h1>Login Page</h1>
+                </div>
+
 
                 <Form onSubmit={this.submitLogin} id="LoginForm">
-                    <Form.Row>
+
                         <Form.Group as={Col} controlId="formUsername">
                             <div className="row">
                                 <Form.Label>Email</Form.Label>
@@ -66,12 +69,12 @@ export default class LoginPage extends Component{
                             </div>
 
                         </Form.Group>
-                    </Form.Row>
-                    <Form.Row>
+
+
                         <div id="button" className="row">
                             <button>Log in</button>
                         </div>
-                    </Form.Row>
+
                 </Form>
             </div>
         );

@@ -23,20 +23,21 @@ code {
   min-width: 300px;
   width: 800px;
   height: 200px;
-  margin: 100px auto;
+  margin: 50px auto;
   background-color: #FFFFFF;
   border-radius: 25px;
 }
 
-#loginform{
-  max-width: 500px;
+#logform{
   min-width: 300px;
-  max-height: 700px;
-  width: 30%;
-  height: 60%;
-  margin: 100px auto;
+  width: 400px;
+  height: 450px;
+  margin: 50px auto;
   background-color: #FFFFFF;
   border-radius: 25px;
+}
+#mainInscript{
+ padding-top: 15px;
 }
 
 
@@ -89,11 +90,8 @@ code {
 .row button{
 
   border-radius: 25px;
-  width: 120px;
+  width: 160px;
 
-  /*width: 100%;*/
-
-  margin-top: 30%;
   height: 40px;
   font-size: 1.3rem;
   color: white;
@@ -109,5 +107,10 @@ code {
 }
 
 #button{
-  padding-bottom: 1.5rem;
+  padding-bottom: 1rem;
+}
+
+#buttonHome{
+  width:  300px;
+  /*to tu nic nie daje lol*/
 }
