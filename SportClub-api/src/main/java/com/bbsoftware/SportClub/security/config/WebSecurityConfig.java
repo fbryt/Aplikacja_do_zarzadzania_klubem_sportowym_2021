@@ -41,8 +41,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // .authenticated().and().formLogin().usernameParameter("email").defaultSuccessUrl("/dashboard",
         // true);
 
-        http.csrf().disable().authorizeRequests().antMatchers("/authenticate").permitAll().anyRequest().authenticated()
-                .and().exceptionHandling().and().sessionManagement()
+        http.csrf().disable().authorizeRequests().antMatchers("/authenticate", "/register").permitAll().anyRequest()
+                .authenticated().and().exceptionHandling().and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }

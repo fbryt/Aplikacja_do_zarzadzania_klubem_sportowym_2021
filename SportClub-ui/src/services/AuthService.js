@@ -43,7 +43,9 @@ class AuthService {
         axios.interceptors.request.use(
             (config) => {
                 if (this.isUserLoggedIn()) {
-                    config.headers.authorization = token
+                    config.headers.authorization = token;
+                    config.headers.crossdomain = true;
+                    config.headers.withCredentials = true;
                 }
                 return config
             }

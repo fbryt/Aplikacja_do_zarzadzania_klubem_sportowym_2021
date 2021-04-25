@@ -10,7 +10,7 @@ export default class Register extends Component {
 
     }
     initialState = {
-            firstName:'',lastName:'',email:'',password:'',role:''
+            firstName:'',lastName:'',email:'',password:'',role:'COACH' //role MUST be the first option from a drop-down menu
         }
     submitRegister = event => {
         event.preventDefault();
