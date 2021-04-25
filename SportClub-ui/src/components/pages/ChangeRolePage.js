@@ -6,14 +6,21 @@ import axios from 'axios';
 export default class ChangeRole extends Component {
     constructor(props) {
         super(props);
-        this.state = this.initialState;
+        this.state = {
+            firstName:'',lastName:'',email:'',role:'COACH', id:'',err:false //role must be set by default
+        }
         this.state.id = this.props.match.params.id;
         this.dataChange = this.dataChange.bind(this);
         this.changeRole = this.changeRole.bind(this);
-
+        this.componentWillMount=this.componentWillMount.bind(this);
     }
-    initialState = {
-        firstName:'',lastName:'',email:'',role:'COACH', id:'' //role must be set by default
+
+    componentWillMount() {
+        axios.get("http://localhost:8080/appUsers/"+this.state.id).then(response=>{
+            console.log(response)
+        }).catch(function (error){
+            this.setState({err:true});
+        });
     }
 
 
@@ -36,18 +43,11 @@ export default class ChangeRole extends Component {
         });
     }
     render() {
-        const {email,firstName,lastName,appUserRole, id} = this.state;
-        let errorek=false;
+        const {email,firstName,lastName,appUserRole, id,err} = this.state;
         let content;
 
-        axios.get("http://localhost:8080/appUsers/"+this.state.id).then(response=>{
-            console.log(response)
-        }).catch(function (error){
-           errorek=true;
-           console.log(errorek);
-        });
 
-        if(!errorek)
+        if(!this.state.err)
         {
             content=<div id="logform">
                 <div id="mainInscript">
