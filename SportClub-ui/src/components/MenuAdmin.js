@@ -1,13 +1,16 @@
-import {
-  Navbar,
-  Nav,
-  Form,
-  FormControl,
-  Button,
-  Dropdown,
-  DropdownButton,
-} from "react-bootstrap";
+import {  Navbar,  Nav,  Form,  FormControl,  Button,  Dropdown,  DropdownButton,} from "react-bootstrap";
+import { useHistory } from "react-router";
+import AuthService from "../services/AuthService";
+
 const MenuAdmin = () => {
+
+  const history = useHistory();
+
+  function Logout(){
+    AuthService.logout(); 
+    history.push('/');
+  }
+
   return (
     <>
       <Navbar bg="dark" variant="dark">
@@ -21,7 +24,7 @@ const MenuAdmin = () => {
         <DropdownButton id="dropdown-basic-button" drop="left" title="Account">
           <Dropdown.Item href="#">Info</Dropdown.Item>
           <Dropdown.Item href="#">Change password</Dropdown.Item>
-          <Dropdown.Item href="#">Logout</Dropdown.Item>
+          <Dropdown.Item href="#" onClick={Logout}> Logout </Dropdown.Item>
         </DropdownButton>
       </Navbar>
     </>
