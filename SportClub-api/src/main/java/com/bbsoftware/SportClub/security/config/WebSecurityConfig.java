@@ -1,5 +1,7 @@
 package com.bbsoftware.SportClub.security.config;
 
+import java.util.Arrays;
+
 import com.bbsoftware.SportClub.appuser.AppUserService;
 import com.bbsoftware.SportClub.filters.JwtRequestFilter;
 
@@ -11,6 +13,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -24,6 +27,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @Configuration
 @AllArgsConstructor
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, proxyTargetClass = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final AppUserService appUserService;
@@ -35,14 +39,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.cors().and().headers().frameOptions().disable();
 
-        http.csrf().disable();
-
         // http.authorizeRequests().antMatchers("/register/**").permitAll().antMatchers("/login*").permitAll().anyRequest()
         // .authenticated().and().formLogin().usernameParameter("email").defaultSuccessUrl("/dashboard",
         // true);
 
-        http.csrf().disable().authorizeRequests().antMatchers("/authenticate").permitAll().anyRequest().authenticated()
-                .and().exceptionHandling().and().sessionManagement()
+        http.csrf().disable().authorizeRequests().antMatchers("/appUsers/**", "/register").hasAuthority("ADMIN").antMatchers("/authenticate").permitAll().anyRequest()
+                .authenticated().and().exceptionHandling().and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
@@ -73,9 +75,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        CorsConfiguration cc = new CorsConfiguration().applyPermitDefaultValues();
-        cc.addAllowedMethod("PATCH");
-        cc.addAllowedMethod("DELETE");
+        CorsConfiguration cc = new CorsConfiguration();
+        cc.addAllowedOriginPattern("*");
+        cc.setAllowedMethods(Arrays.asList("*"));
+        cc.setAllowedHeaders(Arrays.asList("*"));
+        cc.setAllowCredentials(true);
         source.registerCorsConfiguration("/**", cc);
         return source;
     }
