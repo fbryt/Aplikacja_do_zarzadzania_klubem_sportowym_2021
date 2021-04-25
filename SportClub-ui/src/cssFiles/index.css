@@ -36,6 +36,16 @@ code {
   background-color: #FFFFFF;
   border-radius: 25px;
 }
+
+#regform{
+  min-width: 300px;
+  width: 400px;
+  height: 850px;
+  margin: 50px auto;
+  background-color: #FFFFFF;
+  border-radius: 25px;
+}
+
 #mainInscript{
  padding-top: 15px;
 }
