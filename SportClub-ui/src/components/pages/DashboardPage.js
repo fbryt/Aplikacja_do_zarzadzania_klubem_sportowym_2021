@@ -1,6 +1,7 @@
 import React, {Component} from "react";
-import Menu from "../Menu";
-import Footer from "../Footer";
+
+import Menu from "../menu/Menu";
+import Footer from "../menu/Footer";
 
 export default class DashboardPage extends Component{
 

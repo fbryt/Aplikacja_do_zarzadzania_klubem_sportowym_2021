@@ -9,16 +9,23 @@ const Menu = () => {
         const Cryptr=require('cryptr');
         const cryptr=new Cryptr('Secret');
         const role=cryptr.decrypt(cookie.get('role'));
-        let n = 0;
         if(role==='COACH')
-            n=<MenuCoach />;
+            return (
+                <div>
+                    <MenuCoach />
+                </div>
+            );
         else if(role==='PLAYER')
-         n=<MenuPlayer />;
-        else if(role==='ADMIN') n=<MenuAdmin />;
-          return (
+            return (
+                <div>
+                    <MenuPlayer />
+                </div>
+            );
+        else if(role==='ADMIN')
+        return (
             <div>
-                {n}
+                <MenuAdmin />
             </div>
-  );
+        );
 };
 export default Menu;
