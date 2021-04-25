@@ -10,10 +10,13 @@ export default class ChangeRole extends Component {
         this.state.id = this.props.match.params.id;
         this.dataChange = this.dataChange.bind(this);
         this.changeRole = this.changeRole.bind(this);
+
     }
     initialState = {
         firstName:'',lastName:'',email:'',role:'COACH', id:'' //role must be set by default
     }
+
+
     changeRole = async(event) => {
         const update = {
             appUserRole: this.state.role
@@ -34,32 +37,47 @@ export default class ChangeRole extends Component {
     }
     render() {
         const {email,firstName,lastName,appUserRole, id} = this.state;
-        return (
-            <div id="logform">
+        let errorek=false;
+        let content;
+
+        axios.get("http://localhost:8080/appUsers/"+this.state.id).then(response=>{
+            console.log(response)
+        }).catch(function (error){
+           errorek=true;
+           console.log(errorek);
+        });
+
+        if(!errorek)
+        {
+            content=<div id="logform">
                 <div id="mainInscript">
                     <h1 data-testid="required-h1">Change role</h1>
                 </div>
 
                 <Form onSubmit={e => this.changeRole(e)} id="changeRoleForm">
 
-                        <Form.Group as={Col} controlId="formRole">
-                            <div className="row">
-                                <Form.Label>Role</Form.Label>
-                            </div>
-                                <Form.Control required autoComplete="off" as="select" name="role" onChange={this.dataChange}>
-                                    <option value="COACH">Coach</option>
-                                    <option value="PLAYER">Player</option>
-                                    <option value="ADMIN">Admin</option>
-                                </Form.Control>
+                    <Form.Group as={Col} controlId="formRole">
+                        <div className="row">
+                            <Form.Label>Role</Form.Label>
+                        </div>
+                        <Form.Control required autoComplete="off" as="select" name="role" onChange={this.dataChange}>
+                            <option value="COACH">Coach</option>
+                            <option value="PLAYER">Player</option>
+                            <option value="ADMIN">Admin</option>
+                        </Form.Control>
 
-                        </Form.Group>
+                    </Form.Group>
 
                     <div id="button" className="row">
                         <button>Submit</button>
                     </div>
 
                 </Form>
-            </div>
-        );
+            </div>;
+        } else { content = <div>Error</div>;}
+       return(
+           <div>{content}</div>
+       );
+
     }
 };
