@@ -6,6 +6,11 @@ const MenuPlayer = () => {
 
   const history = useHistory();
 
+  function Logout(){
+    AuthService.logout(); 
+    history.push('/');
+  }
+
   return (
     <>
       <Navbar bg="dark" variant="dark">
@@ -16,9 +21,9 @@ const MenuPlayer = () => {
           <Nav.Link href="#pricing">Contract</Nav.Link>
         </Nav>
         <DropdownButton id="dropdown-basic-button" drop="left" title="Account">
-          <Dropdown.Item href="#/action-1">Info</Dropdown.Item>
-          <Dropdown.Item href="#/action-2">Change password</Dropdown.Item>
-          <Dropdown.Item href="#/logout" onClick={()=>{AuthService.logout(); history.push('/');}}> Logout </Dropdown.Item>
+          <Dropdown.Item href="#">Info</Dropdown.Item>
+          <Dropdown.Item href="#">Change password</Dropdown.Item>
+          <Dropdown.Item href="#" onClick={Logout}> Logout </Dropdown.Item>
         </DropdownButton>
       </Navbar>
     </>
