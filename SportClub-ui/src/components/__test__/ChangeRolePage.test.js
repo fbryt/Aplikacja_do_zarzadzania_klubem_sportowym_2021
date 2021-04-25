@@ -3,14 +3,24 @@ import { render, unmountComponentAtNode, ReactDOM  }  from 'react-dom';
 import { Router ,BrowserRouter } from "react-router-dom";
 import { cleanup } from "@testing-library/react";
 import { act } from "react-dom/test-utils";
+import {Cryptr} from 'cryptr';
 import ChangeRole from '../pages/ChangeRolePage';
 
 describe('Testing role', () => {
     let wrapper = null
+    let Cryptr;
+    let cryptr;
+    let encrypted;
     const spyNavigate = jest.fn()
     const params = {
         id: '1'
     }
+    Cryptr=require('cryptr');
+    cryptr=new Cryptr('Secret');
+
+    encrypted=cryptr.encrypt("ADMIN");
+    document.cookie=`role=${encrypted}`;
+
     it('renders without crashing', async () => {
         const root = document.createElement('div');
         document.body.appendChild(root);
