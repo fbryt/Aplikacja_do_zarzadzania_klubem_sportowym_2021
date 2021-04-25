@@ -2,7 +2,7 @@ import React from "react";
 import {Link} from "react-router-dom";
 import {Button} from "react-bootstrap";
 import style from '../../cssFiles/mystyle.module.css';
-import Footer from "../Footer";
+import Footer from "../menu/Footer";
 
 
 const HomePage = () => (

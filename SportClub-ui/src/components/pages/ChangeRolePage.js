@@ -3,7 +3,10 @@ import {Form,Button, Col} from 'react-bootstrap';
 import { useHistory, useParams } from 'react-router-dom';
 import { withRouter } from "react-router";
 import axios from 'axios';
-import Footer from "../Footer";
+
+import Menu from "../menu/Menu";
+import Footer from "../menu/Footer";
+
 export default class ChangeRole extends Component {
     constructor(props) {
         super(props);
@@ -37,6 +40,7 @@ export default class ChangeRole extends Component {
         const {email,firstName,lastName,appUserRole, id} = this.state;
         return (
             <div id="logform">
+                <Menu />
                 <div id="mainInscript">
                     <h1 data-testid="required-h1">Change role</h1>
                 </div>

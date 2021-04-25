@@ -1,6 +1,6 @@
 import React from 'react';
 import { render }  from 'react-dom';
-import MenuAdmin from '../MenuAdmin';
+import MenuAdmin from '../menu/MenuAdmin';
 import { fireEvent, screen, spyOn } from '@testing-library/react';
 import { BrowserRouter, MemoryRouter } from 'react-router-dom';
 import {jest} from '@jest/globals'
