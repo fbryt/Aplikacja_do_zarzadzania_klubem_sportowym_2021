@@ -3,6 +3,7 @@ import {Form, Col,  Button} from "react-bootstrap"
 import axios from 'axios';
 
 import AuthService from '../../services/AuthService';
+import Footer from "../Footer";
 
 
 export default class LoginPage extends Component{
@@ -76,6 +77,7 @@ export default class LoginPage extends Component{
                         </div>
 
                 </Form>
+                <Footer />
             </div>
         );
     }

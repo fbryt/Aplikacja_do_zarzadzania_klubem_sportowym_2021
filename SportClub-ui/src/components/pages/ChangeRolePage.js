@@ -3,6 +3,7 @@ import {Form,Button, Col} from 'react-bootstrap';
 import { useHistory, useParams } from 'react-router-dom';
 import { withRouter } from "react-router";
 import axios from 'axios';
+import Footer from "../Footer";
 export default class ChangeRole extends Component {
     constructor(props) {
         super(props);
@@ -59,6 +60,7 @@ export default class ChangeRole extends Component {
                     </div>
 
                 </Form>
+                <Footer />
             </div>
         );
     }
