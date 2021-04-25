@@ -7,19 +7,18 @@ export default class ChangeRole extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            firstName:'',lastName:'',email:'',role:'COACH', id:'',err:false //role must be set by default
+            firstName:'',lastName:'',email:'',role:'COACH', id:'',err:true //role must be set by default
         }
         this.state.id = this.props.match.params.id;
         this.dataChange = this.dataChange.bind(this);
         this.changeRole = this.changeRole.bind(this);
-        this.componentWillMount=this.componentWillMount.bind(this);
     }
 
     componentWillMount() {
         axios.get("http://localhost:8080/appUsers/"+this.state.id).then(response=>{
             console.log(response)
+            this.setState({err:false});
         }).catch(function (error){
-            this.setState({err:true});
         });
     }
 
@@ -74,7 +73,7 @@ export default class ChangeRole extends Component {
 
                 </Form>
             </div>;
-        } else { content = <div>Error</div>;}
+        } else { content = <div></div>;}
        return(
            <div>{content}</div>
        );
