@@ -28,7 +28,7 @@ public class AdminToolsTest {
     private MockMvc mockMvc;
 
     @Test
-    @WithMockUser(roles="ADMIN")
+    @WithMockUser(authorities="ADMIN")
     public void roleADM() throws Exception
     {
         RequestBuilder requestBuilder= MockMvcRequestBuilders.get("/appUsers/1");
@@ -38,7 +38,7 @@ public class AdminToolsTest {
     }
 
     @Test
-    @WithMockUser(roles="COACH")
+    @WithMockUser(authorities="COACH")
     public void roleCOACH() throws Exception
     {
         RequestBuilder requestBuilder= MockMvcRequestBuilders.get("/appUsers/1");
@@ -48,7 +48,7 @@ public class AdminToolsTest {
     }
 
     @Test
-    @WithMockUser(roles="PLAYER")
+    @WithMockUser(authorities="PLAYER")
     public void rolePLAYER() throws Exception
     {
         RequestBuilder requestBuilder= MockMvcRequestBuilders.get("/appUsers/1");
