@@ -21,14 +21,13 @@ export default class Register extends Component {
             password: this.state.password,
             role: this.state.role
         }
-        alert(user.firstName);
-        console.log(user);
+        
         axios.post("http://localhost:8080/register",user)
             .then(response => {
                 if(response.data !=null)
                 {
                     this.setState(this.initialState);
-                    alert("Successful");
+                    this.props.history.push(`/dashboard`)
                 }
             })
             .catch(err => { if(err.request){ console.log(err.request) } if(err.response){ console.log(err.response) } });
