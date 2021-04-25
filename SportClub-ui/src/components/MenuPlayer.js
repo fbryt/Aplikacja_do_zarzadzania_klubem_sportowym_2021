@@ -14,7 +14,7 @@ const MenuPlayer = () => {
   return (
     <>
       <Navbar bg="dark" variant="dark">
-        <Navbar.Brand href="#home">B&B Sport</Navbar.Brand>
+        <Navbar.Brand href="#">B&B Sport</Navbar.Brand>
         <Nav className="mr-auto">
           <Nav.Link href="#">Home</Nav.Link>
           <Nav.Link href="#">Schedule</Nav.Link>
