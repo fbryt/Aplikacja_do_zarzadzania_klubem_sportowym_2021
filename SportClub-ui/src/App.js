@@ -6,16 +6,16 @@ import Register from "./components/Register"
 import DashboardPage from "./components/pages/DashboardPage";
 import ChangeRole from "./components/pages/ChangeRolePage";
 import AuthRoute from "./components/AuthComponent";
-
-
-
+import AuthService from './services/AuthService';
 
 
 class App extends React.Component {
 
     render(){
-        return (
+        AuthService.refreshAxiosInterceptors();
 
+        return (
+            
             <BrowserRouter>
                 <Switch>
                     <Route exact path="/" exact component={HomePage}/>

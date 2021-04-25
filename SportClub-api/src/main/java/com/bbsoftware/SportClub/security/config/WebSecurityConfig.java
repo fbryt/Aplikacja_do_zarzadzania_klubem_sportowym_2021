@@ -1,5 +1,7 @@
 package com.bbsoftware.SportClub.security.config;
 
+import java.util.Arrays;
+
 import com.bbsoftware.SportClub.appuser.AppUserService;
 import com.bbsoftware.SportClub.filters.JwtRequestFilter;
 
@@ -34,8 +36,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.cors().and().headers().frameOptions().disable();
-
-        http.csrf().disable();
 
         // http.authorizeRequests().antMatchers("/register/**").permitAll().antMatchers("/login*").permitAll().anyRequest()
         // .authenticated().and().formLogin().usernameParameter("email").defaultSuccessUrl("/dashboard",
@@ -73,9 +73,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        CorsConfiguration cc = new CorsConfiguration().applyPermitDefaultValues();
-        cc.addAllowedMethod("PATCH");
-        cc.addAllowedMethod("DELETE");
+        CorsConfiguration cc = new CorsConfiguration();
+        cc.addAllowedOriginPattern("*");
+        cc.setAllowedMethods(Arrays.asList("*"));
+        cc.setAllowedHeaders(Arrays.asList("*"));
+        cc.setAllowCredentials(true);
         source.registerCorsConfiguration("/**", cc);
         return source;
     }

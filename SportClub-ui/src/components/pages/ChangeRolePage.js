@@ -12,7 +12,7 @@ export default class ChangeRole extends Component {
         this.changeRole = this.changeRole.bind(this);
     }
     initialState = {
-        firstName:'',lastName:'',email:'',role:'', id:''
+        firstName:'',lastName:'',email:'',role:'COACH', id:'' //role must be set by default
     }
     changeRole = async(event) => {
         const update = {

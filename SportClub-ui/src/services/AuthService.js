@@ -13,9 +13,16 @@ class AuthService {
         const cryptr=new Cryptr('Secret');
         const encrypted=cryptr.encrypt(jwt_decode(token).UserRole);
 
-        sessionStorage.setItem('jwt', username);
+        sessionStorage.setItem('jwt', token);
+        sessionStorage.setItem('username', username);
         cookie.set("role",encrypted,{path:'/',secure: true});
-        this.setupAxiosInterceptors(this.createJWTToken(token));
+        //this.setupAxiosInterceptors(this.createJWTToken(token));
+    }
+
+    refreshAxiosInterceptors(){
+        const token = sessionStorage.getItem('jwt');
+        if(token != null)
+            this.setupAxiosInterceptors(this.createJWTToken(token));
     }
 
     createJWTToken(token) {
@@ -25,21 +32,23 @@ class AuthService {
 
     logout() {
         sessionStorage.removeItem('jwt');
+        sessionStorage.removeItem('username');
     }
 
     isUserLoggedIn() {
-        let user = sessionStorage.getItem('jwt');
+        let user = sessionStorage.getItem('username');
         return user !== null;
 
     }
 
     getLoggedInUserName() {
-        let user = sessionStorage.getItem('jwt');
+        let user = sessionStorage.getItem('username');
         if (user === null) return ''
         return user
     }
 
     setupAxiosInterceptors(token) {
+        console.log("INTERCEPTING!");
         axios.interceptors.request.use(
             (config) => {
                 if (this.isUserLoggedIn()) {
