@@ -5,11 +5,11 @@ import style from '../../cssFiles/mystyle.module.css';
 import Footer from "../menu/Footer";
 
 
-const RemindPassword = () => (
+const ResetPassword = () => (
     <div id="homeform" className="row">
-        <h1>Remind pass</h1>
+        <h1>Reset password</h1>
         <Footer />
     </div>
 );
 
-export default RemindPassword;
+export default ResetPassword;
