@@ -31,7 +31,7 @@ code {
 #logform{
   min-width: 300px;
   width: 400px;
-  height: 450px;
+  height: 500px;
   margin: 50px auto;
   background-color: #FFFFFF;
   border-radius: 25px;
@@ -100,7 +100,7 @@ code {
 .row button{
 
   border-radius: 25px;
-  width: 160px;
+  width: 220px;
 
   height: 40px;
   font-size: 1.3rem;

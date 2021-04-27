@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import AuthService from '../../services/AuthService';
 import Footer from "../menu/Footer";
+import {Link} from "react-router-dom";
 
 
 export default class LoginPage extends Component{
@@ -48,6 +49,7 @@ export default class LoginPage extends Component{
     }
 
 
+
     render() {
         const {username,password,err} = this.state;
         let message;
@@ -86,6 +88,13 @@ export default class LoginPage extends Component{
                         </div>
 
                 </Form>
+
+                <div id="button" className="row">
+                    <Link  to="/remindpassword">
+                    <button>Forget password</button>
+                    </Link>
+                </div>
+
                 <Footer />
             </div>
         );

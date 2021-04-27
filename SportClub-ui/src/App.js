@@ -7,6 +7,7 @@ import DashboardPage from "./components/pages/DashboardPage";
 import ChangeRole from "./components/pages/ChangeRolePage";
 import AuthRoute from "./components/AuthComponent";
 import AuthService from './services/AuthService';
+import RemindPassword from './components/pages/RemindPasswordPage';
 
 
 class App extends React.Component {
@@ -22,6 +23,7 @@ class App extends React.Component {
                     <Route exact path="/" exact component={HomePage}/>
                     <Route exact path="/login" exact component={LoginPage}/>
                     <Route exact path="/register" exact component={Register}/>
+                    <Route exact path="/remindpassword" exact component={RemindPassword}/>
 
                     <AuthRoute exact path="/dashboard" exact component={DashboardPage}/>
                     <AuthRoute exact path="/appUsers/:id" render={(props) => <ChangeRole {...props} />} />
