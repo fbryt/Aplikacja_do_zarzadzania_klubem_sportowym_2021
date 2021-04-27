@@ -2,20 +2,19 @@ import React from 'react';
 import axios from 'axios';
 import jwt_decode from "jwt-decode";
 import {Cookies} from 'react-cookie';
-import {Cryptr} from 'cryptr';
+
 
 class AuthService {
 
 
     registerSuccessfulLoginForJwt(username, token) {
         const cookie=new Cookies();
-        const Cryptr=require('cryptr');
-        const cryptr=new Cryptr('Secret');
-        const encrypted=cryptr.encrypt(jwt_decode(token).UserRole);
+        var CryptoJS=require("crypto-js");
 
+        const encrypted=CryptoJS.AES.encrypt(jwt_decode(token).UserRole,"Secret");
         sessionStorage.setItem('jwt', token);
         sessionStorage.setItem('username', username);
-        cookie.set("role",encrypted,{path:'/',secure: true});
+        cookie.set("role",encrypted.toString(),{path:'/',secure: true});
         //this.setupAxiosInterceptors(this.createJWTToken(token));
     }
 
