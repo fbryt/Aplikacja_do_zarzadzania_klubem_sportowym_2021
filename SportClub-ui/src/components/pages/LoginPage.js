@@ -19,7 +19,8 @@ export default class LoginPage extends Component{
 
     initialState = {
         username:'',
-        password:''
+        password:'',
+        err:false
     }
 
     submitLogin = event =>{
@@ -34,7 +35,9 @@ export default class LoginPage extends Component{
              .then((response) => {
                  AuthService.registerSuccessfulLoginForJwt(this.state.username, response.data.jwt);
                  this.props.history.push(`/dashboard`)
-             }).catch(err => { if(err.request){ console.log(err.request) } if(err.response){ console.log(err.response) } });
+             }).catch(err => { if(err.request){ console.log(err.request) } if(err.response){ console.log(err.response) }
+            this.setState({err:true});
+             });
 
     }
     dataChange = event =>
@@ -46,7 +49,10 @@ export default class LoginPage extends Component{
 
 
     render() {
-        const {username,password} = this.state;
+        const {username,password,err} = this.state;
+        let message;
+        if(this.state.err)
+        { message=<h6 style={{color:"red"}} >Invalid Username or Password!</h6>}
         return (
             <div  id="logform">
                 <div id="mainInscript">
@@ -67,6 +73,9 @@ export default class LoginPage extends Component{
                             <div className="row">
                                 <Form.Label>Password</Form.Label>
                                 <Form.Control required autoComplete="off" type="password" name="password" onChange={this.dataChange} />
+                            </div>
+                            <div>
+                                {message}
                             </div>
 
                         </Form.Group>
