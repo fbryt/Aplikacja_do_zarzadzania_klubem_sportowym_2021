@@ -14,4 +14,9 @@ public class RegistrationController {
     public String register(@RequestBody RegistrationRequest request) {
         return registrationService.register(request);
     }
+    @GetMapping
+    public String reg()
+    {
+        return "Ok";
+    }
 }

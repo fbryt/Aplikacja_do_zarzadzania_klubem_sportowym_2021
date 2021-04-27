@@ -10,8 +10,16 @@ export default class Register extends Component {
 
     }
     initialState = {
-            firstName:'',lastName:'',email:'',password:'',role:'COACH' //role MUST be the first option from a drop-down menu
+            firstName:'',lastName:'',email:'',password:'',role:'COACH',err:true //role MUST be the first option from a drop-down menu
         }
+
+    componentWillMount() {
+        axios.get("http://localhost:8080/register").then(response=>{
+            console.log(response)
+            this.setState({err:false});
+        }).catch(function (error){
+        });
+    }
     submitRegister = event => {
         event.preventDefault();
         const user = {
@@ -38,57 +46,59 @@ export default class Register extends Component {
         });
     }
     render() {
-        const {email,password,firstName,lastName,role} = this.state;
-        return (
-            <div id="regform">
+        const {email,password,firstName,lastName,role,err} = this.state;
+        let content;
+        if(!this.state.err)
+        {
+            content= <div id="regform">
                 <div id="mainInscript">
                     <h1>Register</h1>
                 </div>
                 <Form onSubmit={this.submitRegister} id="registerForm">
 
-                        <Form.Group as={Col} controlId="formEmail">
-                            <div className="row">
-                                <Form.Label>Email address</Form.Label>
-                                <Form.Control required autoComplete="off" type="email" name="email"  onChange={this.dataChange} />
+                    <Form.Group as={Col} controlId="formEmail">
+                        <div className="row">
+                            <Form.Label>Email address</Form.Label>
+                            <Form.Control required autoComplete="off" type="email" name="email"  onChange={this.dataChange} />
 
-                            </div>
+                        </div>
 
-                        </Form.Group>
-                        <Form.Group as={Col} controlId="formPassword">
-                            <div className="row">
-                                <Form.Label>Password</Form.Label>
+                    </Form.Group>
+                    <Form.Group as={Col} controlId="formPassword">
+                        <div className="row">
+                            <Form.Label>Password</Form.Label>
                             <Form.Control required autoComplete="off" type="password" name="password" onChange={this.dataChange} />
-                            </div>
+                        </div>
 
-                        </Form.Group>
-
-
-                        <Form.Group as={Col} controlId="formName">
-                            <div className="row">
-                                <Form.Label>Name</Form.Label>
-                                <Form.Control required autoComplete="off" type="text" name="firstName" onChange={this.dataChange} />
-                            </div>
-                        </Form.Group>
-
-                        <Form.Group as={Col} controlId="formSurname">
-                            <div className="row">
-                                <Form.Label>Surname</Form.Label>
-                                <Form.Control required autoComplete="off" type="text" name="lastName"  onChange={this.dataChange} />
-                            </div>
-                        </Form.Group>
+                    </Form.Group>
 
 
-                        <Form.Group as={Col} controlId="formRole">
-                            <div className="row">
-                                <Form.Label>Role</Form.Label>
-                            </div>
+                    <Form.Group as={Col} controlId="formName">
+                        <div className="row">
+                            <Form.Label>Name</Form.Label>
+                            <Form.Control required autoComplete="off" type="text" name="firstName" onChange={this.dataChange} />
+                        </div>
+                    </Form.Group>
 
-                            <Form.Control required autoComplete="off" as="select" name="role" onChange={this.dataChange}>
-                                <option value="COACH">Coach</option>
-                                <option value="PLAYER">Player</option>
-                                <option value="ADMIN">Admin</option>
-                            </Form.Control>
-                        </Form.Group>
+                    <Form.Group as={Col} controlId="formSurname">
+                        <div className="row">
+                            <Form.Label>Surname</Form.Label>
+                            <Form.Control required autoComplete="off" type="text" name="lastName"  onChange={this.dataChange} />
+                        </div>
+                    </Form.Group>
+
+
+                    <Form.Group as={Col} controlId="formRole">
+                        <div className="row">
+                            <Form.Label>Role</Form.Label>
+                        </div>
+
+                        <Form.Control required autoComplete="off" as="select" name="role" onChange={this.dataChange}>
+                            <option value="COACH">Coach</option>
+                            <option value="PLAYER">Player</option>
+                            <option value="ADMIN">Admin</option>
+                        </Form.Control>
+                    </Form.Group>
 
 
                     <div id="button" className="row">
@@ -96,7 +106,10 @@ export default class Register extends Component {
                     </div>
 
                 </Form>
-            </div>
+            </div>;
+        } else{ content=<div></div>;}
+        return (
+           <div>{content}</div>
         );
     }
 };
