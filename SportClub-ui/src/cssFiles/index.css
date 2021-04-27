@@ -36,7 +36,10 @@ code {
   background-color: #FFFFFF;
   border-radius: 25px;
 }
-
+.br-25
+{
+  border-radius: 25px;
+}
 #regform{
   min-width: 300px;
   width: 400px;
@@ -49,7 +52,11 @@ code {
 #mainInscript{
  padding-top: 15px;
 }
+.fs-mine
+{
+  font-size: 1.3rem;
 
+}
 
 .row{
   display: flex;

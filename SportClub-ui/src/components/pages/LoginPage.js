@@ -90,7 +90,7 @@ export default class LoginPage extends Component{
                 </Form>
 
                 <div id="button" className="row">
-                    <Link  to="/remindpassword">
+                    <Link  to="/forgotpassword">
                     <button>Forget password</button>
                     </Link>
                 </div>
