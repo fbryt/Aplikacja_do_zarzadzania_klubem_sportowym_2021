@@ -7,7 +7,7 @@ import DashboardPage from "./components/pages/DashboardPage";
 import ChangeRole from "./components/pages/ChangeRolePage";
 import AuthRoute from "./components/AuthComponent";
 import AuthService from './services/AuthService';
-
+import NotFound from "./components/pages/NotFound";
 
 class App extends React.Component {
 
@@ -25,6 +25,7 @@ class App extends React.Component {
 
                     <AuthRoute exact path="/dashboard" exact component={DashboardPage}/>
                     <AuthRoute exact path="/appUsers/:id" render={(props) => <ChangeRole {...props} />} />
+                    <Route component={NotFound}/>
                 </Switch>
             </BrowserRouter>
         );

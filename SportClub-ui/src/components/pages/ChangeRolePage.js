@@ -6,6 +6,7 @@ import axios from 'axios';
 
 import Menu from "../menu/Menu";
 import Footer from "../menu/Footer";
+import NotFound from "./NotFound";
 
 export default class ChangeRole extends Component {
     constructor(props) {
@@ -77,7 +78,7 @@ export default class ChangeRole extends Component {
                 </Form>
                 <Footer />
             </div>;
-        } else { content = <div></div>;}
+        } else { content = <NotFound/>;}
        return(
            <div>{content}</div>
        );
