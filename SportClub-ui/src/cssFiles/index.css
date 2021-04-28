@@ -19,6 +19,10 @@ code {
   background: linear-gradient(to right, rgba(72, 198, 239, 0.5), rgba(111, 134, 214, 0.5))
 }
 
+.my-gradient2 {
+  background: linear-gradient(to right, rgba(236, 178, 52, 0.5), rgba(224, 61, 129, 0.5))
+}
+
 #homeform{
   min-width: 300px;
   width: 800px;
