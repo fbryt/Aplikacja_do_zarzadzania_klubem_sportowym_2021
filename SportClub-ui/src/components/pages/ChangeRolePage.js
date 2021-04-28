@@ -13,6 +13,9 @@ export default class ChangeRole extends Component {
         this.state = {
             firstName:'',lastName:'',email:'',role:'COACH', id:'',err:true //role must be set by default
         }
+        //console.log(this.props.err);
+        if(this.props.err!==undefined)
+           this.state.err=false;
         this.state.id = this.props.match.params.id;
         this.dataChange = this.dataChange.bind(this);
         this.changeRole = this.changeRole.bind(this);
