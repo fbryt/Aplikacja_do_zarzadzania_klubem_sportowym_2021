@@ -8,6 +8,7 @@ import ChangeRole from "./components/pages/ChangeRolePage";
 import AuthRoute from "./components/AuthComponent";
 import AuthService from './services/AuthService';
 import ResetPassword from './components/pages/ResetPasswordPage';
+import AppUsersPage from "./components/pages/AppUsersPage";
 
 
 class App extends React.Component {
@@ -26,6 +27,7 @@ class App extends React.Component {
                     <Route exact path="/forgotpassword" exact component={ResetPassword}/>
 
                     <AuthRoute exact path="/dashboard" exact component={DashboardPage}/>
+                    <AuthRoute exact path="/appUsers"  exact component={AppUsersPage} />
                     <AuthRoute exact path="/appUsers/:id" render={(props) => <ChangeRole {...props} />} />
                 </Switch>
             </BrowserRouter>
