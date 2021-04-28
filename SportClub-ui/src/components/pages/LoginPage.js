@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import AuthService from '../../services/AuthService';
 import Footer from "../menu/Footer";
-import {BrowserRouter, Link} from "react-router-dom";
+import {BrowserRouter, Link, Router} from "react-router-dom";
 
 
 export default class LoginPage extends Component{
@@ -90,11 +90,9 @@ export default class LoginPage extends Component{
                 </Form>
 
                 <div id="button" className="row">
-                   <BrowserRouter>
-                    <Link  to="/forgotpassword">
-                    <button>Forget password</button>
-                    </Link>
-                   </BrowserRouter>
+                    <a href="/forgotpassword" className="btn-mine">
+                        Forgot password
+                    </a>
                 </div>
 
                 <Footer />
