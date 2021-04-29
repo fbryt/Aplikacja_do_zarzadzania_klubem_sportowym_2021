@@ -20,7 +20,7 @@ export const AppUserPage = () => {
         });
 
     }, []);
-    console.log(data);
+
     return (
         <div>
             <Menu />
