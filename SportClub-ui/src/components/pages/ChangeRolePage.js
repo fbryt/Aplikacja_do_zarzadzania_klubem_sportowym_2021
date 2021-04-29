@@ -26,7 +26,7 @@ export const ChangeRole = () => {
             email: data.email,
             appUserRole: data.appUserRole
         }
-        console.log(data);
+        console.log(update);
         event.preventDefault();
         try {
             const url = "http://localhost:8080/appUsers/" + id;
@@ -39,7 +39,6 @@ export const ChangeRole = () => {
 
     const changeHandler = (e) => {
         setData({ ...data, [e.target.name]: e.target.value })
-        console.log(data);
     }
 
     return <>
@@ -70,7 +69,7 @@ export const ChangeRole = () => {
                         <option value="ADMIN">Admin</option>
                     </Form.Control>
                 </Form.Group>
-                <Button>Submit</Button>
+                <button>Submit</button>
             </Form>
         </Container>
         <Footer />
