@@ -1,12 +1,12 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Menu from "../menu/Menu";
 import Footer from "../menu/Footer";
 import axios from "axios";
-import { Container, Row, Table } from "react-bootstrap";
+import { Container, Table, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
-const array = [{ name: "John", sex: "Male" }, { name: "Johnny", sex: "Maleee" }];
-const url = "http://localhost:8080/appUsers";
+const url = "http://localhost:8080/appUsers/";
 
 export const AppUserPage = () => {
 
@@ -38,7 +38,7 @@ export const AppUserPage = () => {
                         {
                             data.map((user) => {
                                 return <tr>
-                                    <th>{user?.firstName}</th>
+                                    <th><Link to={"/appUsers/" + user.id}>{user?.firstName}</Link></th>
                                     <th>{user?.lastName}</th>
                                     <th>{user?.appUserRole}</th>
                                 </tr>
