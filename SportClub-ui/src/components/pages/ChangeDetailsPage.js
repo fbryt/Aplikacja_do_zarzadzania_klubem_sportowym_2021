@@ -6,7 +6,7 @@ import axios from 'axios';
 import Menu from "../menu/Menu";
 import Footer from "../menu/Footer";
 
-export const ChangeRole = () => {
+export const ChangeDetails = () => {
 
     const { id } = useParams();
     const [data, setData] = useState([]);
@@ -46,7 +46,7 @@ export const ChangeRole = () => {
         <Menu />
         <Container id="logform">
             <div id="mainInscript">
-                <h1 data-testid="required-h1">Change role</h1>
+                <h1 data-testid="required-h1">Change details</h1>
             </div>
 
             <Form className="row" onChange={e => changeHandler(e)} onSubmit={e => changeRole(e)} id="changeRoleForm">
@@ -77,4 +77,4 @@ export const ChangeRole = () => {
     </>
 };
 
-export default ChangeRole;
+export default ChangeDetails;
