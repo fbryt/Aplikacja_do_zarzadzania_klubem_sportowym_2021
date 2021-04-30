@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Form, Col, Container, Button } from 'react-bootstrap';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import axios from 'axios';
 
 import Menu from "../menu/Menu";
@@ -10,6 +10,7 @@ export const ChangeRole = () => {
 
     const { id } = useParams();
     const [data, setData] = useState([]);
+    const history = useHistory();
 
     useEffect(async () => {
         await axios.get("http://localhost:8080/appUsers/" + id).then(response => {
@@ -30,8 +31,8 @@ export const ChangeRole = () => {
         event.preventDefault();
         try {
             const url = "http://localhost:8080/appUsers/" + id;
-            const response = await axios.patch(url, update);
-            console.log('👉 Returned data:', response);
+            await axios.patch(url, update);
+            history.push(`/appUsers`)
         } catch (e) {
             console.log(`😱 Axios request failed: ${e}`);
         }
