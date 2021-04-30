@@ -3,24 +3,24 @@ import { render, unmountComponentAtNode, ReactDOM  }  from 'react-dom';
 import { Router ,BrowserRouter } from "react-router-dom";
 import { cleanup } from "@testing-library/react";
 import { act } from "react-dom/test-utils";
-import {Cryptr} from 'cryptr';
+
 import Dashboard from '../pages/DashboardPage';
+import {Cookies} from "react-cookie";
+import jwt_decode from "jwt-decode";
 
 
 
 
 describe('Testing menu admin', () => {
-    let Cryptr;
-    let cryptr;
+    const cookie=new Cookies();
+
     let encrypted;
 
     let wrapper = null
     const spyNavigate = jest.fn()
 
-    Cryptr=require('cryptr');
-    cryptr=new Cryptr('Secret');
-
-    encrypted=cryptr.encrypt("ADMIN");
+    var CryptoJS=require("crypto-js");
+    encrypted=CryptoJS.AES.encrypt("ADMIN","Secret");
     document.cookie=`role=${encrypted}`;
 
     it('renders without crashing', async () => {

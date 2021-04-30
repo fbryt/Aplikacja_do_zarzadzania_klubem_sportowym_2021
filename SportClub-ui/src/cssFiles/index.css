@@ -122,7 +122,27 @@ code {
   cursor: pointer;
   transition: opacity 0.25s ease-out;
 }
+a:link {
+  text-decoration: none;
+}
 
+.btn-mine{
+  border-radius: 25px;
+  width: 220px;
+
+  height: 40px;
+  font-size: 1.3rem;
+  color: white;
+  font-weight: 700;
+  background: linear-gradient(to right, rgba(72, 198, 239, 0.5), rgba(111, 134, 214, 0.5));
+  border: 0px;
+  cursor: pointer;
+  transition: opacity 0.25s ease-out;
+}
+.btn-mine:hover{
+  opacity: 0.8;
+  color:white;
+}
 .row button:hover{
   opacity: 0.8;
 }
