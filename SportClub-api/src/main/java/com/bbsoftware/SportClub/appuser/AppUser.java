@@ -33,12 +33,23 @@ public class AppUser implements UserDetails {
     private Boolean enabled = true;
     private String token;
 
+
+    public String getResetToken() {
+        return resetToken;
+    }
+
+    public void setResetToken(String resetToken) {
+        this.resetToken = resetToken;
+    }
+
+    private String resetToken;
     public AppUser(String firstName, String lastName, String email, String password, AppUserRole appUserRole) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.appUserRole = appUserRole;
+        this.resetToken = "";
     }
 
     @Override
@@ -65,7 +76,6 @@ public class AppUser implements UserDetails {
     public String getLastName() {
         return lastName;
     }
-
 
     @Override
     public boolean isAccountNonExpired() {
