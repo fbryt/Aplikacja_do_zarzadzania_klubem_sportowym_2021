@@ -16,6 +16,7 @@ import javax.mail.internet.MimeMessage;
 public class EmailService implements EmailSender{
 
     private final static Logger LOGGER= LoggerFactory.getLogger(EmailService.class);
+
     private final JavaMailSender mailSender;
 
     @Override
@@ -27,7 +28,8 @@ public class EmailService implements EmailSender{
             helper.setText(email,true);
             helper.setTo(to);
             helper.setSubject(subject);
-            helper.setFrom("bbsport@metin2.pl");
+            helper.setFrom("sabal@metin2.pl");
+            mailSender.send(mimeMessage);
 
         }catch(MessagingException e)
         {
