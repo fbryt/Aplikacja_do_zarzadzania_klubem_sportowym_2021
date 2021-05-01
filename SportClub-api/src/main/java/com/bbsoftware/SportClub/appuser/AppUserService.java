@@ -1,5 +1,6 @@
 package com.bbsoftware.SportClub.appuser;
 
+import com.bbsoftware.SportClub.exceptions.AppUserEmailNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -55,4 +56,23 @@ public class AppUserService implements UserDetailsService {
         return "";
 
     }
+    public void updateResetToken(String token, String email) throws AppUserEmailNotFoundException {
+
+        boolean present = appUserRepository.findByEmail(email).isPresent();
+        if(present)
+        {
+            AppUser user = appUserRepository.findByEmail(email).get();
+            user.setResetToken(token);
+            appUserRepository.save(user);
+        }
+        else
+        {
+            throw new AppUserEmailNotFoundException(email);
+        }
+    }
+    public AppUser get(String resetToken)
+    {
+        return appUserRepository.findByResetToken(resetToken);
+    }
+
 }
