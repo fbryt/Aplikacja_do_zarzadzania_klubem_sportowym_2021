@@ -74,7 +74,7 @@ export const AppUserPage = () => {
         const update = {
             firstName: row.firstName,
             lastName: row.lastName,
-            email: data.email,
+            email: row.email,
             appUserRole: row.appUserRole
         }
         console.log(update);
