@@ -29,6 +29,12 @@ public class AppUser implements UserDetails {
     @Enumerated(EnumType.STRING)
     private AppUserRole appUserRole;
 
+    //tutaj to trzeba sprawdzic
+    @ManyToOne
+    private AppUser coach;
+    @OneToMany(mappedBy="coach")
+    private Collection<AppUser> player;
+
     private Boolean locked = false;
     private Boolean enabled = true;
     private String token;
