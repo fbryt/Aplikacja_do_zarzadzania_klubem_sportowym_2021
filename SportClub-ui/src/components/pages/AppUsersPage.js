@@ -3,8 +3,7 @@ import React, { useEffect, useState } from "react";
 import Menu from "../menu/Menu";
 import Footer from "../menu/Footer";
 import axios from "axios";
-import { Container, Table, Button } from "react-bootstrap";
-import { Link, useHistory } from "react-router-dom";
+import { Container } from "react-bootstrap";
 import BootstrapTable from 'react-bootstrap-table-next';
 import cellEditFactory, { Type } from 'react-bootstrap-table2-editor';
 import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
@@ -14,11 +13,8 @@ const url = "http://localhost:8080/appUsers/";
 
 export const AppUserPage = () => {
 
-    const history = useHistory();
-
     const [data, setData] = useState([]);
     useEffect(async () => {
-
         await axios.get(url).then(response => {
             setData(response.data._embedded.appUserList);
         }).catch(error => {
@@ -77,11 +73,9 @@ export const AppUserPage = () => {
             email: row.email,
             appUserRole: row.appUserRole
         }
-        console.log(update);
         try {
             const url = "http://localhost:8080/appUsers/" + row.id;
             await axios.patch(url, update);
-            history.push(`/appUsers`)
         } catch (e) {
             console.log(`😱 Axios request failed: ${e}`);
         }
@@ -91,6 +85,9 @@ export const AppUserPage = () => {
         <div>
             <Menu />
             <Container text style={{ marginTop: '7em' }}>
+                <div id="mainInscript">
+                    <h1 data-testid="required-h1">Change details</h1>
+                </div>
                 <BootstrapTable
                     bootstrap4
                     keyField="id"
@@ -106,31 +103,6 @@ export const AppUserPage = () => {
                         afterSaveCell: onCellSave
                     })}
                 />
-
-                {
-
-
-                /* <h1>App Users</h1>
-                <Table className="my-gradient2" responsive striped borderless hover style={{ borderRadius: '10px' }}>
-                    <thead className="my-gradient">
-                        <tr>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Role</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            data.map((user) => {
-                                return <tr>
-                                    <th><Link to={"/appUsers/" + user.id}>{user?.firstName}</Link></th>
-                                    <th>{user?.lastName}</th>
-                                    <th>{user?.appUserRole}</th>
-                                </tr>
-                            })
-                        }
-                    </tbody>
-                </Table> */}
             </Container>
             <Footer />
         </div >

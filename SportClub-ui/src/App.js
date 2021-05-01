@@ -4,7 +4,6 @@ import HomePage from "./components/pages/HomePage";
 import LoginPage from "./components/pages/LoginPage"
 import Register from "./components/Register"
 import DashboardPage from "./components/pages/DashboardPage";
-import ChangeDetails from "./components/pages/ChangeDetailsPage";
 import AuthRoute from "./components/AuthComponent";
 import AuthService from './services/AuthService';
 import ResetPassword from './components/pages/ResetPasswordPage';
@@ -28,7 +27,6 @@ class App extends React.Component {
 
                     <AuthRoute exact path="/dashboard" exact component={DashboardPage} />
                     <AuthRoute exact path="/appUsers" exact component={AppUsersPage} />
-                    <AuthRoute exact path="/appUsers/:id" render={(props) => <ChangeDetails {...props} />} />
                 </Switch>
             </BrowserRouter>
         );
