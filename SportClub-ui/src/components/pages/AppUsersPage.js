@@ -84,7 +84,7 @@ export const AppUserPage = () => {
     return (
         <div>
             <Menu />
-            <Container text style={{ marginTop: '7em' }}>
+            <Container style={{ marginTop: '7em' }}>
                 <div id="mainInscript">
                     <h1 data-testid="required-h1">Change details</h1>
                 </div>

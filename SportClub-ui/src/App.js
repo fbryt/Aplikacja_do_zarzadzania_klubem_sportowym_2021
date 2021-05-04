@@ -8,6 +8,7 @@ import AuthRoute from "./components/AuthComponent";
 import AuthService from './services/AuthService';
 import ResetPassword from './components/pages/ResetPasswordPage';
 import AppUsersPage from "./components/pages/AppUsersPage";
+import ResetPasswordToken from "./components/pages/ResetPasswordTokenPage";
 
 
 class App extends React.Component {
@@ -24,6 +25,7 @@ class App extends React.Component {
                     <Route exact path="/login" exact component={LoginPage} />
                     <Route exact path="/register" exact component={Register} />
                     <Route exact path="/forgotpassword" exact component={ResetPassword} />
+                    <Route exact path="/resetpassword/:token" exact component={ResetPasswordToken} ></Route>
 
                     <AuthRoute exact path="/dashboard" exact component={DashboardPage} />
                     <AuthRoute exact path="/appUsers" exact component={AppUsersPage} />
