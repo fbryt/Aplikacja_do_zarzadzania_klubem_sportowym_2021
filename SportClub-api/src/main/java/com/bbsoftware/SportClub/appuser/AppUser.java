@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 @Getter
 @Setter
@@ -26,6 +27,7 @@ public class AppUser implements UserDetails {
     private String lastName;
     private String email;
     private String password;
+    private int coach_id;
     @Enumerated(EnumType.STRING)
     private AppUserRole appUserRole;
 
@@ -33,7 +35,7 @@ public class AppUser implements UserDetails {
     @ManyToOne
     private AppUser coach;
     @OneToMany(mappedBy="coach")
-    private Collection<AppUser> player;
+    private List<AppUser> player;
 
     private Boolean locked = false;
     private Boolean enabled = true;
