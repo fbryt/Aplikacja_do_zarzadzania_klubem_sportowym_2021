@@ -8,7 +8,7 @@ import ChangeRole from "./components/pages/ChangeRolePage";
 import AuthRoute from "./components/AuthComponent";
 import AuthService from './services/AuthService';
 import ResetPassword from './components/pages/ResetPasswordPage';
-
+import ChangePassword from './components/pages/ChangePasswordPage';
 
 class App extends React.Component {
 
@@ -17,18 +17,19 @@ class App extends React.Component {
         AuthService.refreshAxiosInterceptors();
 
         return (
-            
             <BrowserRouter>
                 <Switch>
                     <Route exact path="/" exact component={HomePage}/>
                     <Route exact path="/login" exact component={LoginPage}/>
                     <Route exact path="/register" exact component={Register}/>
                     <Route exact path="/forgotpassword" exact component={ResetPassword}/>
+                    <Route exact path="/settings/password" exact component={ChangePassword}/>
 
                     <AuthRoute exact path="/dashboard" exact component={DashboardPage}/>
                     <AuthRoute exact path="/appUsers/:id" render={(props) => <ChangeRole {...props} />} />
                 </Switch>
             </BrowserRouter>
+
         );
 
     }

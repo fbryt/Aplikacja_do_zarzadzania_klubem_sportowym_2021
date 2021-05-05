@@ -49,6 +49,41 @@ code {
   border-radius: 25px;
 }
 
+#changepasswordform{
+  min-width: 300px;
+  width: 400px;
+  height: 550px;
+  margin: 50px auto;
+  background-color: #FFFFFF;
+  border-radius: 25px;
+}
+.password{
+  display: block;
+  position:relative;
+  font-weight: 700;
+  padding-top: 2rem;
+  max-width: 100%;
+}
+
+.password input{
+  width: 80%;
+  box-sizing: border-box;
+  border: none;
+  font-size: 1.3rem;
+  padding-left: 1.5rem;
+  padding-bottom: 1rem;
+  background-color: #E9E9E9;
+  box-shadow: inset 0px -3px 0px 0px rgba(187,187,187,0.2);
+  transition: box-shadow 0.2s ease-in;
+}
+.password label{
+  color: rgba(187,187,187,0.9);
+}
+
+.passwordShow{
+  cursor:pointer;
+  padding: 4px 8px;
+}
 #mainInscript{
  padding-top: 15px;
 }
