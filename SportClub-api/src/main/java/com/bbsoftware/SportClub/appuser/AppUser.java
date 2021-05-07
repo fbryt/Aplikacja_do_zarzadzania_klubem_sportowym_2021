@@ -94,6 +94,11 @@ public class AppUser implements UserDetails {
         players.add(user);
     }
 
+    public void addCoach(AppUser user){
+
+        coach =user;
+    }
+
 
 
 

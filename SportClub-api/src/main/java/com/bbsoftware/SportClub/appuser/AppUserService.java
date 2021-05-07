@@ -81,7 +81,8 @@ public class AppUserService implements UserDetailsService {
         AppUser player =  appUserRepository.findById(id) //
                 .orElseThrow(() -> new AppUserNotFoundException(id));
 
-        player.addToList(coach);
+        coach.addToList(player);
+        player.addCoach(coach);
 
     }
     public AppUser get(String resetToken)

@@ -60,6 +60,7 @@ public class AppUserController {
             if(k == "coach"){
                 appUserService.setCoachId(Integer.parseInt((String)v), id);
 
+                return;
             }
             Field field = ReflectionUtils.findField(AppUser.class, (String) k);
             field.setAccessible(true);
