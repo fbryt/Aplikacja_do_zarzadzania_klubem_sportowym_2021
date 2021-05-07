@@ -94,15 +94,7 @@ public class AppUser implements UserDetails {
         players.add(user);
     }
 
-    public <T> void setCoachId(long coachid ){
 
-        SimpleJpaRepository<T, Long> appUserRepository = null;
-        coach = (AppUser) appUserRepository.findById(coachid) //
-                .orElseThrow(() -> new AppUserNotFoundException(coachid));
-
-        coach.addToList(this);
-
-    }
 
 
     @Override

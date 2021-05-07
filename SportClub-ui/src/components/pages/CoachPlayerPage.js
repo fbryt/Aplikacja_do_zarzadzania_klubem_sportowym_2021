@@ -135,7 +135,7 @@ export const CoachPlayerPage = () => {
 
     const onCellSave = async (oldValue, newValue, row, column) => {
         const update = {
-            coach_Id: row.coach_Id
+            coach: row.coach
         }
         try {
             const url = "http://localhost:8080/appUsers/" + row.id;
