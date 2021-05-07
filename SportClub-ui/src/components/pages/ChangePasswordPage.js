@@ -58,8 +58,11 @@ export default class ChangePassword extends Component{
       const oldpassword = this.state.input.oldpassword;
       const confirmpassword = this.state.input.confirmpassword;
       event.preventDefault();
-      alert(password + " stare: " + oldpassword + " potwierdzenie: " + confirmpassword);
-
+      if( this.validate()) {
+          const url ="http://localhost:8080/settings/password";
+          alert(password + " stare: " + oldpassword + " potwierdzenie: " + confirmpassword);
+          await axios.post(url,{oldpassword:oldpassword, password:password});
+      }
     }
 
     validate(){
