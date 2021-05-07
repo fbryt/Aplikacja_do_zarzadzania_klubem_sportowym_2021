@@ -13,10 +13,22 @@ const url = "http://localhost:8080/appUsers/";
 
 export const CoachPlayerPage = () => {
 
+    const [dataPlayer, setDataPlayer] = useState([]);
+    useEffect(async () => {
+        await axios.get(url).then(response => {
+          const players = response.data._embedded.appUserList.filter(user => user.appUserRole == "PLAYER");
+          setDataPlayer(players);
+        }).catch(error => {
+            console.log(error);
+        });
+
+    }, []);
+
     const [data, setData] = useState([]);
     useEffect(async () => {
         await axios.get(url).then(response => {
-            setData(response.data._embedded.appUserList);
+            const coaches = response.data._embedded.appUserList.filter(user => user.appUserRole == "COACH");
+            setData(coaches);
         }).catch(error => {
             console.log(error);
         });
@@ -65,7 +77,7 @@ export const CoachPlayerPage = () => {
             }]
         }
     },{
-            dataField: 'coach_Id',
+            dataField: 'coach',
             text: 'Coach Id'
         }];
 
@@ -123,10 +135,6 @@ export const CoachPlayerPage = () => {
 
     const onCellSave = async (oldValue, newValue, row, column) => {
         const update = {
-            firstName: row.firstName,
-            lastName: row.lastName,
-            email: row.email,
-            appUserRole: row.appUserRole,
             coach_Id: row.coach_Id
         }
         try {
@@ -146,8 +154,8 @@ export const CoachPlayerPage = () => {
                 </div>
                 <BootstrapTable
                     bootstrap4
-                    keyField="appUserRole"
-                    data={data}
+                    keyField="id"
+                    data={dataPlayer}
                     columns={columns}
                     defaultSorted={defaultSorted}
                     noDataIndication="Table is Empty"
@@ -168,7 +176,7 @@ export const CoachPlayerPage = () => {
                 </div>
                 <BootstrapTable
                     bootstrap4
-                    keyField="appUserRole"
+                    keyField="id"
                     data={data}
                     columns={columnsCoach}
                     defaultSorted={defaultSorted}

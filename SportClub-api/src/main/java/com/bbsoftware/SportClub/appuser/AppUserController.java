@@ -56,6 +56,9 @@ public class AppUserController {
 
         updates.forEach((k, v) -> {
             // use reflection to get field k on manager and set it to value v
+            if(k == "coach_Id"){
+                appUser.setCoachId((int)v);
+            }
             Field field = ReflectionUtils.findField(AppUser.class, (String) k);
             field.setAccessible(true);
             if (field.getType().isEnum()) {
@@ -70,4 +73,8 @@ public class AppUserController {
                 .created(linkTo(methodOn(AppUserController.class).one(updatedAppUser.getId())).toUri()) //
                 .body(appUserModelAssembler.toModel(updatedAppUser));
     }
+
+
+
+
 }
