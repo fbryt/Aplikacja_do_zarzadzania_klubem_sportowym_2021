@@ -26,13 +26,13 @@ class PasswordField extends Component
     }
 
     render(){
-        const { label, name } = this.props;
+        const { label, name, inClass } = this.props;
         return(
             <Form.Group as={Col}>
                 <div className="password">
                     <Form.Label>{label}</Form.Label>
                     <InputGroup>
-                        <Form.Control required autoComplete="off" type={this.state.type} name={name} onChange={this.onDataChange} />
+                        <Form.Control className={inClass} required autoComplete="off" type={this.state.type} name={name} onChange={this.onDataChange} />
                         <span className="passwordShow" onClick={this.toggleShow}>{this.state.type === 'password' ? 'Show' : 'Hide'}</span>
                     </InputGroup>
                 </div>
@@ -46,9 +46,8 @@ export default class ChangePassword extends Component{
 
     constructor(para) {
         super(para);
-        this.state = { input:{oldpassword:'', password:'',confirmpassword:''}, errors:{}, type:'password'};
+        this.state = { input:{oldpassword:'', password:'',confirmpassword:''},errors: {confirmpassword: '', oldpassword: ''}};
 
-        this.validate = this.validate.bind(this);
         this.handleCallback = this.handleCallback.bind(this);
     }
 
@@ -57,17 +56,25 @@ export default class ChangePassword extends Component{
       const password = this.state.input.password;
       const oldpassword = this.state.input.oldpassword;
       const confirmpassword = this.state.input.confirmpassword;
+      let errors = this.state.errors;
       event.preventDefault();
-      if( this.validate()) {
-          const url ="http://localhost:8080/settings/password";
-          alert(password + " stare: " + oldpassword + " potwierdzenie: " + confirmpassword);
-          await axios.post(url,{oldpassword:oldpassword, password:password});
+      if( this.state.input.password === this.state.input.confirmpassword) {
+          try{
+              const url ="http://localhost:8080/settings/password";
+              const response = await axios.post(url,{oldpassword:oldpassword, password:password}).then(() => {
+                  this.props.history.push(`/dashboard`);
+                  });
+          } catch(e){
+              errors.oldpassword = "Invalid password!";
+              console.log(`Axios request failed: ${e}`);
+          }
       }
+      else{
+          errors.confirmpassword = "Passwords do not match!";
+      }
+        this.setState(errors);
     }
 
-    validate(){
-        return true;
-    }
 
     handleCallback(pass,data){
         let input = this.state.input;
@@ -77,6 +84,8 @@ export default class ChangePassword extends Component{
 
 
     render(){
+        let errors = this.state.errors;
+        this.state.errors = {};
         return (
             <div id="change-password-form">
                 <Menu/>
@@ -87,15 +96,21 @@ export default class ChangePassword extends Component{
                         </div>
                         <Form onSubmit={this.changePassword} id="changePasswordForm">
 
-                            <PasswordField label="Current Password" name="oldpassword" parentCallback={this.handleCallback}/>
-                            <PasswordField label="New Password" name="password" parentCallback={this.handleCallback}/>
-                            <PasswordField label="Confirm Password" name="confirmpassword" parentCallback={this.handleCallback}/>
+                            <PasswordField label="Current Password" name="oldpassword" inClass={errors.oldpassword ? 'invalid' : ''} parentCallback={this.handleCallback}/>
+                            <div>
+                                <h6 style={{color:"red"}} >{errors.oldpassword}</h6>
+                            </div>
+                            <PasswordField label="New Password" name="password"  inClass={errors.confirmpassword ? 'invalid' : ''} parentCallback={this.handleCallback}/>
+                            <PasswordField label="Confirm Password" name="confirmpassword" inClass={errors.confirmpassword ? 'invalid' : ''} parentCallback={this.handleCallback}/>
+                            <div>
+                                <h6 style={{color:"red"}} >{errors.confirmpassword}</h6>
+                            </div>
                             <div id="button" className="row">
-                                <button>Submit</button>
+                                <button>Change Password</button>
                             </div>
 
                         </Form>
-                    </div>;
+                    </div>
                 </Container>
                 <Footer/>
             </div>
