@@ -8,12 +8,11 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-
 @Repository
-@Transactional(readOnly=true)
-public interface AppUserRepository extends JpaRepository<AppUser,Long> {
+@Transactional(readOnly = true)
+public interface AppUserRepository extends JpaRepository<AppUser, Long> {
     Optional<AppUser> findByEmail(String email);
 
-    public AppUser findByResetToken(String token);
+    public Optional<AppUser> findByResetToken(String token);
 
 }

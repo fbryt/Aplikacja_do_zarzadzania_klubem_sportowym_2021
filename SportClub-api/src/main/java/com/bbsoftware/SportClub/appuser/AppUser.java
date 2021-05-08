@@ -31,19 +31,18 @@ public class AppUser implements UserDetails {
     private String email;
     private String password;
 
+    private String resetToken;
+
     @Enumerated(EnumType.STRING)
     private AppUserRole appUserRole;
 
-
     @ManyToOne
     private AppUser coach;
-    @OneToMany(mappedBy="coach")
+    @OneToMany(mappedBy = "coach")
     private List<AppUser> players;
 
     private Boolean locked = false;
     private Boolean enabled = true;
-    private String token;
-
 
     public String getResetToken() {
         return resetToken;
@@ -53,7 +52,6 @@ public class AppUser implements UserDetails {
         this.resetToken = resetToken;
     }
 
-    private String resetToken;
     public AppUser(String firstName, String lastName, String email, String password, AppUserRole appUserRole) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -88,19 +86,15 @@ public class AppUser implements UserDetails {
         return lastName;
     }
 
-
-    public void addToList(AppUser user){
+    public void addToList(AppUser user) {
 
         players.add(user);
     }
 
-    public void addCoach(AppUser user){
+    public void addCoach(AppUser user) {
 
-        coach =user;
+        coach = user;
     }
-
-
-
 
     @Override
     public boolean isAccountNonExpired() {
@@ -121,6 +115,5 @@ public class AppUser implements UserDetails {
     public boolean isEnabled() {
         return enabled;
     }
-
 
 }

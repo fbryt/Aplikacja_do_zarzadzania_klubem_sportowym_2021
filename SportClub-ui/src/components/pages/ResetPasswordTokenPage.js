@@ -6,7 +6,7 @@ import axios from "axios";
 import { Col, Container, Form } from "react-bootstrap";
 import { useHistory, useParams } from "react-router";
 
-const url = "http://localhost:8080/reset/";
+const url = "http://localhost:8080/forgotpassword/";
 
 export const ResetPasswordTokenPage = () => {
 
@@ -21,7 +21,6 @@ export const ResetPasswordTokenPage = () => {
         event.preventDefault();
 
         const update = {
-            token: token,
             password: data.password
         }
         try {
@@ -31,7 +30,7 @@ export const ResetPasswordTokenPage = () => {
                 throw new Error("Passwords don't match");
             }
 
-            //await axios.patch(url, update);
+            await axios.post(url + token, update);
             console.log(update);
             history.push("/login");
         } catch (e) {
