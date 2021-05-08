@@ -1,6 +1,7 @@
 package com.bbsoftware.SportClub.appuser;
 
 import com.bbsoftware.SportClub.exceptions.AppUserEmailNotFoundException;
+import com.bbsoftware.SportClub.exceptions.AppUserNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -69,6 +70,20 @@ public class AppUserService implements UserDetailsService {
         {
             throw new AppUserEmailNotFoundException(email);
         }
+    }
+
+    public void setCoachId(long coachid,  long id ){
+
+
+        AppUser coach =  appUserRepository.findById(coachid) //
+                .orElseThrow(() -> new AppUserNotFoundException(coachid));
+
+        AppUser player =  appUserRepository.findById(id) //
+                .orElseThrow(() -> new AppUserNotFoundException(id));
+
+        coach.addToList(player);
+        player.addCoach(coach);
+
     }
     public AppUser get(String resetToken)
     {

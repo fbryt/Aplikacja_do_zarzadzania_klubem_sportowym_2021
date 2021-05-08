@@ -27,6 +27,7 @@ public class AppUserController {
 
     private final AppUserRepository appUserRepository;
     private final AppUserModelAssembler appUserModelAssembler;
+    private final AppUserService appUserService;
 
     @GetMapping("/appUsers")
     public CollectionModel<EntityModel<AppUser>> all() {
@@ -56,6 +57,11 @@ public class AppUserController {
 
         updates.forEach((k, v) -> {
             // use reflection to get field k on manager and set it to value v
+            if(k == "coach"){
+                appUserService.setCoachId(Integer.parseInt((String)v), id);
+
+                return;
+            }
             Field field = ReflectionUtils.findField(AppUser.class, (String) k);
             field.setAccessible(true);
             if (field.getType().isEnum()) {
@@ -70,4 +76,8 @@ public class AppUserController {
                 .created(linkTo(methodOn(AppUserController.class).one(updatedAppUser.getId())).toUri()) //
                 .body(appUserModelAssembler.toModel(updatedAppUser));
     }
+
+
+
+
 }

@@ -1,9 +1,11 @@
 package com.bbsoftware.SportClub.appuser;
 
+import com.bbsoftware.SportClub.exceptions.AppUserNotFoundException;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,6 +13,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
+import java.util.stream.DoubleStream;
 
 @Getter
 @Setter
@@ -26,8 +30,15 @@ public class AppUser implements UserDetails {
     private String lastName;
     private String email;
     private String password;
+
     @Enumerated(EnumType.STRING)
     private AppUserRole appUserRole;
+
+
+    @ManyToOne
+    private AppUser coach;
+    @OneToMany(mappedBy="coach")
+    private List<AppUser> players;
 
     private Boolean locked = false;
     private Boolean enabled = true;
@@ -77,6 +88,20 @@ public class AppUser implements UserDetails {
         return lastName;
     }
 
+
+    public void addToList(AppUser user){
+
+        players.add(user);
+    }
+
+    public void addCoach(AppUser user){
+
+        coach =user;
+    }
+
+
+
+
     @Override
     public boolean isAccountNonExpired() {
         return true;
@@ -96,4 +121,6 @@ public class AppUser implements UserDetails {
     public boolean isEnabled() {
         return enabled;
     }
+
+
 }

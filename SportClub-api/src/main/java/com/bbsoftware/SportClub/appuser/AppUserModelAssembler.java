@@ -20,4 +20,6 @@ public class AppUserModelAssembler implements RepresentationModelAssembler<AppUs
 
         return appUserModel;
     }
+
+
 }

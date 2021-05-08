@@ -23,6 +23,7 @@ const MenuAdmin = () => {
               <Nav.Link href="#">Schedule</Nav.Link>
               <Nav.Link href="#">Contract</Nav.Link>
               <Nav.Link href="/appUsers">Admin tools</Nav.Link>
+              <Nav.Link href="/playersWithCoach">Connect players with Coach</Nav.Link>
             </Nav>
             <DropdownButton id="dropdown-basic-button" drop="left" title="Account">
               <Dropdown.Item href="#">Info</Dropdown.Item>
