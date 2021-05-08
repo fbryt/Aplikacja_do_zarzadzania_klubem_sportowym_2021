@@ -27,6 +27,5 @@ describe('Testing role', () => {
 
         expect(screen.getByText("Change details")).toBeInTheDocument();
 
-
     }, 300000)
 })
