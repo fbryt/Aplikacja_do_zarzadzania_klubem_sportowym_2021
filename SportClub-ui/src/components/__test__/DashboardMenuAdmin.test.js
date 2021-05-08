@@ -32,7 +32,7 @@ describe('Testing menu admin', () => {
                 <Dashboard required={true} location={{hash:"",pathname:"/dashboard",search:"",state:undefined}} match={{isExact: true, path: "/dashboard", url: "/dashboard"}}/>
             </BrowserRouter>,root
         );
-        expect(document.body.textContent).toContain('B&B SportHomeScheduleContractAdmin toolsAccount');
+        expect(document.body.textContent).toContain('B&B SportHomeScheduleContractAdmin toolsConnect players with CoachAccount');
     })
 
 })
