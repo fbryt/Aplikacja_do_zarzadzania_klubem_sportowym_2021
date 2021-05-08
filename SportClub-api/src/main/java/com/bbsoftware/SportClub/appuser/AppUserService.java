@@ -9,6 +9,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javassist.NotFoundException;
+
 @Service
 @AllArgsConstructor
 public class AppUserService implements UserDetailsService {
@@ -21,6 +23,11 @@ public class AppUserService implements UserDetailsService {
     public AppUser loadUserByUsername(String email) throws UsernameNotFoundException {
         return appUserRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException(String.format(USER_NOT_FOUND, email)));
+    }
+
+    public AppUser loadUserByResetToken(String token) throws NotFoundException {
+        return appUserRepository.findByResetToken(token)
+                .orElseThrow(() -> new NotFoundException(String.format("Token %s not found!", token)));
     }
 
     public String signUpUser(AppUser appUser) {
@@ -47,8 +54,9 @@ public class AppUserService implements UserDetailsService {
             AppUser usr = appUserRepository.findByEmail(email).get();
 
             String encodedPassword = bCryptPasswordEncoder.encode(password);
+            boolean result = bCryptPasswordEncoder.matches(password, usr.getPassword());
 
-            if (encodedPassword == usr.getPassword()) {
+            if (result) {
 
                 return email;
             }
@@ -57,37 +65,30 @@ public class AppUserService implements UserDetailsService {
         return "";
 
     }
+
     public void updateResetToken(String token, String email) throws AppUserEmailNotFoundException {
 
         boolean present = appUserRepository.findByEmail(email).isPresent();
-        if(present)
-        {
+        if (present) {
             AppUser user = appUserRepository.findByEmail(email).get();
             user.setResetToken(token);
             appUserRepository.save(user);
-        }
-        else
-        {
+        } else {
             throw new AppUserEmailNotFoundException(email);
         }
     }
 
-    public void setCoachId(long coachid,  long id ){
+    public void setCoachId(long coachid, long id) {
 
-
-        AppUser coach =  appUserRepository.findById(coachid) //
+        AppUser coach = appUserRepository.findById(coachid) //
                 .orElseThrow(() -> new AppUserNotFoundException(coachid));
 
-        AppUser player =  appUserRepository.findById(id) //
+        AppUser player = appUserRepository.findById(id) //
                 .orElseThrow(() -> new AppUserNotFoundException(id));
 
         coach.addToList(player);
         player.addCoach(coach);
 
-    }
-    public AppUser get(String resetToken)
-    {
-        return appUserRepository.findByResetToken(resetToken);
     }
 
 }

@@ -1,6 +1,6 @@
-import React, {Component} from "react";
-import {Link} from "react-router-dom";
-import {Form, Col, Button} from "react-bootstrap";
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import { Form, Col, Button } from "react-bootstrap";
 import style from '../../cssFiles/mystyle.module.css';
 import Footer from "../menu/Footer";
 import axios from "axios";
@@ -21,7 +21,7 @@ export default class ResetPassword extends Component {
         const user = {
             email: this.state.email,
         }
-        axios.post("http://localhost:8080/reset", user)
+        axios.post("http://localhost:8080/forgotpassword", user)
             .then(response => {
                 if (response.data != null) {
                     this.setState(this.initialState);
@@ -44,7 +44,7 @@ export default class ResetPassword extends Component {
     }
 
     render() {
-        const {email} = this.state;
+        const { email } = this.state;
         return (
             <div class="row">
                 <div class="col-4">
@@ -57,7 +57,7 @@ export default class ResetPassword extends Component {
                             <div className="row">
                                 <Form.Label class="text-dark fs-mine ">Email</Form.Label>
                                 <Form.Control required autoComplete="off" type="email" name="email"
-                                              onChange={this.dataChange}/>
+                                    onChange={this.dataChange} />
                             </div>
                         </Form.Group>
                         <div id="button" className="row">
@@ -70,6 +70,6 @@ export default class ResetPassword extends Component {
                 </div>
                 <Footer />
             </div>
-    );
+        );
     };
 }
