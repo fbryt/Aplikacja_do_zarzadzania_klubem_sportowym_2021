@@ -90,6 +90,11 @@ export const AppUserPage = () => {
                 </div>
                 <BootstrapTable
                     bootstrap4
+                    striped
+                    hover
+                    bordered
+                    headerWrapperClasses="bg-dark text-white"
+                    bodyClasses="bg-light text-dark"
                     keyField="id"
                     data={data}
                     columns={columns}
