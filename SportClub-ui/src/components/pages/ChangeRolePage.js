@@ -12,7 +12,7 @@ export default class ChangeRole extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            firstName:'',lastName:'',email:'',role:'COACH', id:'',err:true //role must be set by default
+            firstName:'',lastName:'',email:'',role:'COACH', id:'',err:true, status: 0 //role must be set by default
         }
         this.state.id = this.props.match.params.id;
         this.dataChange = this.dataChange.bind(this);
@@ -23,7 +23,8 @@ export default class ChangeRole extends Component {
         axios.get("http://localhost:8080/appUsers/"+this.state.id).then(response=>{
             console.log(response)
             this.setState({err:false});
-        }).catch(function (error){
+        }).catch(error =>{
+            this.setState({status:error.request.status})
         });
     }
 
@@ -47,7 +48,9 @@ export default class ChangeRole extends Component {
         });
     }
     render() {
-        const {email,firstName,lastName,appUserRole, id,err} = this.state;
+        const {email,firstName,lastName,appUserRole, id,err,status} = this.state;
+        if( status === 403 )
+            return <NotFound/>;
         let content;
 
         if(!this.state.err)
@@ -78,7 +81,7 @@ export default class ChangeRole extends Component {
                 </Form>
                 <Footer />
             </div>;
-        } else { content = <NotFound/>;}
+        } else { content = <div></div>;}
        return(
            <div>{content}</div>
        );
