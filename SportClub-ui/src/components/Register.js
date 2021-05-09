@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import {Form,Button, Col} from 'react-bootstrap';
 import axios from 'axios';
+import NotFound from "./pages/NotFound";
 export default class Register extends Component {
     constructor(props) {
         super(props);
@@ -10,14 +11,15 @@ export default class Register extends Component {
 
     }
     initialState = {
-            firstName:'',lastName:'',email:'',password:'',role:'COACH',err:true //role MUST be the first option from a drop-down menu
+            firstName:'',lastName:'',email:'',password:'',role:'COACH',err:true,status: 0 //role MUST be the first option from a drop-down menu
         }
 
     componentWillMount() {
         axios.get("http://localhost:8080/register").then(response=>{
             console.log(response)
             this.setState({err:false});
-        }).catch(function (error){
+        }).catch(error =>{
+            this.setState({status:error.request.status})
         });
     }
     submitRegister = event => {
@@ -46,8 +48,13 @@ export default class Register extends Component {
         });
     }
     render() {
-        const {email,password,firstName,lastName,role,err} = this.state;
+        const {email,password,firstName,lastName,role,err,status} = this.state;
         let content;
+
+        if( status === 403){
+            return <NotFound/>;
+        }
+
         if(!this.state.err)
         {
             content= <div id="regform">
