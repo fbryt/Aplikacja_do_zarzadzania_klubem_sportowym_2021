@@ -155,6 +155,11 @@ export const CoachPlayerPage = () => {
                 <BootstrapTable
                     bootstrap4
                     keyField="id"
+                    striped
+                    hover
+                    bordered
+                    headerWrapperClasses="bg-dark text-white"
+                    bodyClasses="bg-light text-dark"
                     data={dataPlayer}
                     columns={columns}
                     defaultSorted={defaultSorted}
@@ -176,6 +181,11 @@ export const CoachPlayerPage = () => {
                 </div>
                 <BootstrapTable
                     bootstrap4
+                    striped
+                    hover
+                    bordered
+                    headerWrapperClasses="bg-dark text-white"
+                    bodyClasses="bg-light text-dark"
                     keyField="id"
                     data={data}
                     columns={columnsCoach}
