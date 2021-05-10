@@ -45,7 +45,6 @@ public class AppUser implements UserDetails {
     private Boolean locked = false;
     private Boolean enabled = true;
 
-
     @OneToOne(mappedBy = "user")
     private Contract contract;
 
@@ -99,6 +98,14 @@ public class AppUser implements UserDetails {
     public void addCoach(AppUser user) {
 
         coach = user;
+    }
+
+    public Contract getContract() {
+        return contract;
+    }
+
+    public void setContract(Contract contract) {
+        this.contract = contract;
     }
 
     @Override
