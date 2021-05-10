@@ -14,3 +14,7 @@ INSERT INTO APP_USER (FIRST_NAME, LAST_NAME, EMAIL, PASSWORD, APP_USER_ROLE, ENA
     ('Pablo' , 'Magenta', 'pablo@magenta.com', '$2y$10$UUvItzMEVcLVVTc.viabDu0NFpV5BuPVqqDuluqQc2gIL/R/JLlpW', 'PLAYER',  TRUE, FALSE), --haslo: pablomagenta
     ('Pablo' , 'Xanadu', 'pablo@xanadu.com', '$2y$10$UqerPiuzZW6CywBNxn/bpuRrm1W2mBcpTnTXu/0kA9IyhFbMPbAa.', 'PLAYER',  TRUE, FALSE), --haslo: pabloxanadu
     ('Pablo' , 'Aquamarine', 'pablo@aquamarine.com', '$2y$10$H9CxFw2O6VKWj6j0SJQ0juUP0OFQx6rfFnPC.5sKlDuDGJrylX/6i', 'PLAYER',  TRUE, FALSE); --haslo: pabloaquamarine
+
+INSERT INTO CONTRACT (END_DATE, MONEY, START_DATE, USER_ID) VALUES
+    ('2022-02-15' , '2000', '2020-04-04', '4');
+
