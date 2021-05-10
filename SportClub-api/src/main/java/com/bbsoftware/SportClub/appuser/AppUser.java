@@ -1,5 +1,6 @@
 package com.bbsoftware.SportClub.appuser;
 
+import com.bbsoftware.SportClub.announcement.Announcement;
 import com.bbsoftware.SportClub.exceptions.AppUserNotFoundException;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -40,9 +41,10 @@ public class AppUser implements UserDetails {
     private AppUser coach;
     @OneToMany(mappedBy = "coach")
     private List<AppUser> players;
-
     private Boolean locked = false;
     private Boolean enabled = true;
+    @OneToMany(cascade=CascadeType.ALL,mappedBy="user")
+    private List<Announcement> announcements;
 
     public String getResetToken() {
         return resetToken;
