@@ -1,6 +1,7 @@
 package com.bbsoftware.SportClub.appuser;
 
 import com.bbsoftware.SportClub.contract.Contract;
+import com.bbsoftware.SportClub.announcement.Announcement;
 import com.bbsoftware.SportClub.exceptions.AppUserNotFoundException;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -44,6 +45,8 @@ public class AppUser implements UserDetails {
 
     private Boolean locked = false;
     private Boolean enabled = true;
+    @OneToMany(cascade=CascadeType.ALL,mappedBy="user")
+    private List<Announcement> announcements;
 
     @OneToOne(mappedBy = "user")
     private Contract contract;
@@ -98,14 +101,6 @@ public class AppUser implements UserDetails {
     public void addCoach(AppUser user) {
 
         coach = user;
-    }
-
-    public Contract getContract() {
-        return contract;
-    }
-
-    public void setContract(Contract contract) {
-        this.contract = contract;
     }
 
     @Override
