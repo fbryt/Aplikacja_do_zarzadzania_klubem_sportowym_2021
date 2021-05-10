@@ -1,5 +1,6 @@
 package com.bbsoftware.SportClub.appuser;
 
+import com.bbsoftware.SportClub.contract.Contract;
 import com.bbsoftware.SportClub.exceptions.AppUserNotFoundException;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -43,6 +44,10 @@ public class AppUser implements UserDetails {
 
     private Boolean locked = false;
     private Boolean enabled = true;
+
+
+    @OneToOne(mappedBy = "user")
+    private Contract contract;
 
     public String getResetToken() {
         return resetToken;
