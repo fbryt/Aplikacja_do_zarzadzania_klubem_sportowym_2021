@@ -25,7 +25,7 @@ describe('Testing table with players', () => {
 
         render(<CoachPlayerPage />, root);
 
-        expect(screen.getByText("Players")).toBeInTheDocument();
+        expect(screen.getByText("Connect player with coach")).toBeInTheDocument();
 
 
     }, 300000)
