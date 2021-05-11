@@ -3,11 +3,12 @@ package com.bbsoftware.SportClub.appuser;
 import com.bbsoftware.SportClub.contract.Contract;
 import com.bbsoftware.SportClub.announcement.Announcement;
 import com.bbsoftware.SportClub.exceptions.AppUserNotFoundException;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import net.minidev.json.annotate.JsonIgnore;
+
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -42,11 +43,13 @@ public class AppUser implements UserDetails {
     @ManyToOne
     private AppUser coach;
     @OneToMany(mappedBy = "coach")
+
     private List<AppUser> players;
 
     private Boolean locked = false;
     private Boolean enabled = true;
     @OneToMany(mappedBy="user")
+    @JsonIgnore
     private List<Announcement> announcements;
 
     @OneToOne(mappedBy = "user")
