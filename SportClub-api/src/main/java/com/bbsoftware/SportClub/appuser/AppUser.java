@@ -7,6 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import net.minidev.json.annotate.JsonIgnore;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -45,7 +46,7 @@ public class AppUser implements UserDetails {
 
     private Boolean locked = false;
     private Boolean enabled = true;
-    @OneToMany(cascade=CascadeType.ALL,mappedBy="user")
+    @OneToMany(mappedBy="user")
     private List<Announcement> announcements;
 
     @OneToOne(mappedBy = "user")

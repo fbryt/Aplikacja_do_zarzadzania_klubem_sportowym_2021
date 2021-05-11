@@ -22,7 +22,6 @@ public class Announcement {
     private String text;
 
     @ManyToOne
-    @JoinColumn(name="USER_ID")
     private AppUser user;
 
 }
