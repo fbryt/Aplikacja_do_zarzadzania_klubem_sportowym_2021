@@ -58,8 +58,7 @@ public class AppUserController {
         updates.forEach((k, v) -> {
             // use reflection to get field k on manager and set it to value v
             if(k == "coach"){
-                appUserService.setCoachId(Integer.parseInt((String)v), id);
-
+                appUserService.setCoachId(Long.parseLong((String)v), id);
                 return;
             }
             Field field = ReflectionUtils.findField(AppUser.class, (String) k);

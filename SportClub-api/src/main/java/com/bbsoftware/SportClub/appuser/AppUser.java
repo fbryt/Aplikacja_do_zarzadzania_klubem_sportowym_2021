@@ -15,6 +15,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -25,6 +26,7 @@ import java.util.stream.DoubleStream;
 @EqualsAndHashCode
 @NoArgsConstructor
 @Entity
+@JsonIgnoreProperties(value={ "coach", "players" }, allowSetters= true)
 public class AppUser implements UserDetails {
 
     @Id
@@ -40,11 +42,12 @@ public class AppUser implements UserDetails {
     @Enumerated(EnumType.STRING)
     private AppUserRole appUserRole;
 
+
     @ManyToOne
     private AppUser coach;
-    @OneToMany(mappedBy = "coach")
+    @OneToMany(mappedBy="coach")
+    private Collection<AppUser> players = new ArrayList<>();
 
-    private List<AppUser> players;
 
     private Boolean locked = false;
     private Boolean enabled = true;
@@ -62,6 +65,7 @@ public class AppUser implements UserDetails {
     public void setResetToken(String resetToken) {
         this.resetToken = resetToken;
     }
+
 
     public AppUser(String firstName, String lastName, String email, String password, AppUserRole appUserRole) {
         this.firstName = firstName;
@@ -97,15 +101,24 @@ public class AppUser implements UserDetails {
         return lastName;
     }
 
-    public void addToList(AppUser user) {
 
-        players.add(user);
+    public void setPlayers(AppUser user){
+
+        this.players.add(user);
     }
 
-    public void addCoach(AppUser user) {
+    public void setCoach(AppUser user){
 
-        coach = user;
+        this.coach = user;
     }
+
+    /*public void setCoachId(int user_id){
+
+        this.coach_id = user_id;
+    }*/
+
+
+
 
     @Override
     public boolean isAccountNonExpired() {
@@ -126,5 +139,6 @@ public class AppUser implements UserDetails {
     public boolean isEnabled() {
         return enabled;
     }
+
 
 }
