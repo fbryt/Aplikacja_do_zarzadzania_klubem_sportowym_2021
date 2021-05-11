@@ -1,6 +1,8 @@
 package com.bbsoftware.SportClub.appuser;
 
 import com.bbsoftware.SportClub.exceptions.AppUserNotFoundException;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,6 +13,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -21,6 +24,7 @@ import java.util.stream.DoubleStream;
 @EqualsAndHashCode
 @NoArgsConstructor
 @Entity
+@JsonIgnoreProperties(value={ "coach", "players" }, allowSetters= true)
 public class AppUser implements UserDetails {
 
     @Id
@@ -35,14 +39,18 @@ public class AppUser implements UserDetails {
     private AppUserRole appUserRole;
 
 
+    //private Integer coach_id;
+
     @ManyToOne
     private AppUser coach;
     @OneToMany(mappedBy="coach")
-    private List<AppUser> players;
+    private Collection<AppUser> players = new ArrayList<>();
+
 
     private Boolean locked = false;
     private Boolean enabled = true;
-    private String token;
+
+
 
 
     public String getResetToken() {
@@ -61,6 +69,7 @@ public class AppUser implements UserDetails {
         this.password = password;
         this.appUserRole = appUserRole;
         this.resetToken = "";
+        //this.coach_id = 0;
     }
 
     @Override
@@ -89,10 +98,20 @@ public class AppUser implements UserDetails {
     }
 
 
-    public void addToList(AppUser user){
+    public void setPlayers(AppUser user){
 
-        players.add(user);
+        this.players.add(user);
     }
+
+    public void setCoach(AppUser user){
+
+        this.coach = user;
+    }
+
+    /*public void setCoachId(int user_id){
+
+        this.coach_id = user_id;
+    }*/
 
 
 

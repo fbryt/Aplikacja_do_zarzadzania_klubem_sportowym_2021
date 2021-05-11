@@ -1,199 +1,92 @@
-import React, { useEffect, useState } from "react";
+import React, {Component} from "react";
+import {Form, Col,  Button} from "react-bootstrap"
+import axios from 'axios';
 
-import Menu from "../menu/Menu";
+import AuthService from '../../services/AuthService';
 import Footer from "../menu/Footer";
-import axios from "axios";
-import { Container } from "react-bootstrap";
-import BootstrapTable from 'react-bootstrap-table-next';
-import cellEditFactory, { Type } from 'react-bootstrap-table2-editor';
-import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
-import paginationFactory from 'react-bootstrap-table2-paginator';
-
-const url = "http://localhost:8080/appUsers/";
-
-export const CoachPlayerPage = () => {
-
-    const [dataPlayer, setDataPlayer] = useState([]);
-    useEffect(async () => {
-        await axios.get(url).then(response => {
-          const players = response.data._embedded.appUserList.filter(user => user.appUserRole == "PLAYER");
-          setDataPlayer(players);
-        }).catch(error => {
-            console.log(error);
-        });
-
-    }, []);
-
-    const [data, setData] = useState([]);
-    useEffect(async () => {
-        await axios.get(url).then(response => {
-            const coaches = response.data._embedded.appUserList.filter(user => user.appUserRole == "COACH");
-            setData(coaches);
-        }).catch(error => {
-            console.log(error);
-        });
-
-    }, []);
-
-    const columns = [{
-            dataField: 'id',
-            text: 'User ID',
-            sort: true,
-            editable: false,
-        },
-        {
-        dataField: 'firstName',
-        text: 'First Name',
-        sort: true,
-        editable: false,
-        filter: textFilter()
-    }, {
-        dataField: 'lastName',
-        text: 'Last Name',
-        sort: true,
-        editable: false,
-        filter: textFilter()
-    }, {
-        dataField: 'email',
-        text: 'Email',
-        sort: true,
-        editable: false,
-        filter: textFilter()
-    }, {
-        dataField: 'appUserRole',
-        text: 'Role',
-        sort: true,
-        editor: {
-            type: Type.SELECT,
-            options: [{
-                value: 'COACH',
-                label: 'Coach'
-            }, {
-                value: 'PLAYER',
-                label: 'Player'
-            }, {
-                value: 'ADMIN',
-                label: 'Admin'
-            }]
-        }
-    },{
-            dataField: 'coach',
-            text: 'Coach Id'
-        }];
-
-    const columnsCoach = [{
-        dataField: 'id',
-        text: 'User ID',
-        sort: true,
-        editable: false,
-    },
-        {
-            dataField: 'firstName',
-            text: 'First Name',
-            sort: true,
-            editable: false,
-            filter: textFilter()
-        }, {
-            dataField: 'lastName',
-            text: 'Last Name',
-            sort: true,
-            editable: false,
-            filter: textFilter()
-        }, {
-            dataField: 'email',
-            text: 'Email',
-            sort: true,
-            editable: false,
-            filter: textFilter()
-        }, {
-            dataField: 'appUserRole',
-            text: 'Role',
-            sort: true,
-            editor: {
-                type: Type.SELECT,
-                options: [{
-                    value: 'COACH',
-                    label: 'Coach'
-                }, {
-                    value: 'PLAYER',
-                    label: 'Player'
-                }, {
-                    value: 'ADMIN',
-                    label: 'Admin'
-                }]
-            }
-        }];
+import {BrowserRouter, Link, Router} from "react-router-dom";
 
 
-    const defaultSorted = [{
-        dataField: 'id',
-        order: 'asc'
-    }]
+export default class LoginPage extends Component{
 
-    const hiddenRowKeys = ['COACH', 'ADMIN'];
-    const hideRowKeys = ['PLAYER', 'ADMIN'];
 
-    const onCellSave = async (oldValue, newValue, row, column) => {
+    constructor(props) {
+        super(props);
+        this.state = this.initialState;
+        this.dataChange = this.dataChange.bind(this);
+        this.submitLogin = this.submitLogin.bind(this);
+
+    }
+
+    initialState = {
+        id:'',
+       coach:''
+    }
+
+    submitLogin = event =>{
+
+        event.preventDefault();
         const update = {
-            coach: row.coach
+
+            coach: this.state.coach,
         }
+
         try {
-            const url = "http://localhost:8080/appUsers/" + row.id;
-            await axios.patch(url, update);
+            const url = "http://localhost:8080/appUsers/" + this.state.id;
+             axios.patch(url, update);
         } catch (e) {
             console.log(`😱 Axios request failed: ${e}`);
         }
+
+    }
+    dataChange = event =>
+    {
+        this.setState({
+            [event.target.name]:event.target.value
+        });
     }
 
-    return (
-        <div>
-            <Menu />
-            <Container text style={{ marginTop: '7em' }}>
-                <div id="mainInscript">
-                    <h1 data-testid="required-h1">Players</h1>
-                </div>
-                <BootstrapTable
-                    bootstrap4
-                    keyField="id"
-                    data={dataPlayer}
-                    columns={columns}
-                    defaultSorted={defaultSorted}
-                    noDataIndication="Table is Empty"
-                    filter={filterFactory()}
-                    hiddenRows={ hiddenRowKeys }
-                    pagination={paginationFactory()}
-                    cellEdit={cellEditFactory({
-                        mode: 'click',
-                        blurToSave: true,
-                        afterSaveCell: onCellSave
-                    })}
-                />
-            </Container>
 
-            <Container text style={{ marginTop: '7em' }}>
+
+    render() {
+        const {id, coach} = this.state;
+
+        return (
+            <div  id="logform">
                 <div id="mainInscript">
-                    <h1 data-testid="required-h1">Coaches</h1>
+                    <h1>Connect player with coach</h1>
                 </div>
-                <BootstrapTable
-                    bootstrap4
-                    keyField="id"
-                    data={data}
-                    columns={columnsCoach}
-                    defaultSorted={defaultSorted}
-                    noDataIndication="Table is Empty"
-                    filter={filterFactory()}
-                    hiddenRows={ hideRowKeys }
-                    pagination={paginationFactory()}
-                    cellEdit={cellEditFactory({
-                        mode: 'click',
-                        blurToSave: true,
-                        afterSaveCell: onCellSave
-                    })}
-                />
-            </Container>
-            <Footer />
-        </div >
-    )
+
+
+                <Form onSubmit={this.submitLogin} id="LoginForm">
+
+                    <Form.Group as={Col} controlId="formUsername">
+                        <div className="row">
+                            <Form.Label>Player id</Form.Label>
+                            <Form.Control required autoComplete="off" type="id" name="id"  onChange={this.dataChange} />
+                        </div>
+
+                    </Form.Group>
+                    <Form.Group as={Col} controlId="formPassword">
+                        <div className="row">
+                            <Form.Label>Coach id</Form.Label>
+                            <Form.Control required autoComplete="off" type="coach" name="coach" onChange={this.dataChange} />
+                        </div>
+
+
+                    </Form.Group>
+
+
+                    <div id="button" className="row">
+                        <button>Log in</button>
+                    </div>
+
+                </Form>
+
+
+                <Footer />
+            </div>
+        );
+    }
+
 }
-
-export default CoachPlayerPage;

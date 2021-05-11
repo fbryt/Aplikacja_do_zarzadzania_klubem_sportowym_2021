@@ -72,7 +72,7 @@ public class AppUserService implements UserDetailsService {
         }
     }
 
-    public void setCoachId(long coachid,  long id ){
+    public void setCoachId(Long coachid,  Long id ){
 
 
         AppUser coach =  appUserRepository.findById(coachid) //
@@ -81,7 +81,12 @@ public class AppUserService implements UserDetailsService {
         AppUser player =  appUserRepository.findById(id) //
                 .orElseThrow(() -> new AppUserNotFoundException(id));
 
-        player.addToList(coach);
+        player.setCoach(coach);
+        coach.setPlayers(player);
+        //player.setCoachId(coachid.intValue());
+        appUserRepository.save(player);
+        appUserRepository.save(coach);
+
 
     }
     public AppUser get(String resetToken)
