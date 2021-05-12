@@ -7,11 +7,11 @@ on:
   push:
     paths:
       - 'SportClub-api/**'
-      - '.github/**'
+      - '.github/workflows/maven.yml'
   pull_request:
     paths:
       - 'SportClub-api/**'
-      - '.github/**'
+      - '.github/workflows/maven.yml'
 
 defaults:
   run:
