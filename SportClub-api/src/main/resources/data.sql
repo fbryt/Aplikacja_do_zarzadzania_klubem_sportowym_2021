@@ -20,5 +20,5 @@ INSERT INTO CONTRACT (END_DATE, MONEY, START_DATE, USER_ID) VALUES
 
 
 
-INSERT INTO Announcement (TEXT,USER_ID) VALUES
-    ('11.05.2021 Na Sohan odbedzie sie event gorniczy',2);
+INSERT INTO Announcement (DATE,TEXT,USER_ID) VALUES
+    ('2020-04-04 12:00:00','11.05.2021 Na Sohan odbedzie sie event gorniczy',2);

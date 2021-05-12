@@ -2,6 +2,8 @@ package com.bbsoftware.SportClub.announcement;
 
 import lombok.*;
 
+import java.util.Date;
+
 @Getter
 @ToString
 @EqualsAndHashCode
@@ -10,4 +12,5 @@ import lombok.*;
 public class AnnouncementRequest {
     private String text;
     private Long userId;
+    private Date date;
 }
