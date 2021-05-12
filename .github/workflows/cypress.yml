@@ -19,5 +19,6 @@ jobs:
       - name: Cypress tests
         uses: cypress-io/github-action@v2
         with:
+          project: ./SportClub-ui/
           start: SportClub-ui/npm start, SportClub-api/mvn spring-boot:run
           wait-on: 'http://localhost:3000, http://localhost:8080'
