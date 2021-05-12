@@ -12,6 +12,7 @@ import ResetPasswordToken from "./components/pages/ResetPasswordTokenPage";
 import CoachPlayerPage from "./components/pages/CoachPlayerPage";
 import ChangePassword from "./components/pages/ChangePasswordPage";
 import NotFound from "./components/pages/NotFound";
+import AnnouncementPage from "./components/pages/AnnouncementPage";
 
 class App extends React.Component {
 
@@ -33,6 +34,7 @@ class App extends React.Component {
                     <AuthRoute exact path="/dashboard" exact component={DashboardPage} />
                     <AuthRoute exact path="/appUsers" exact component={AppUsersPage} />
                     <AuthRoute exact path="/playersWithCoach" exact component={CoachPlayerPage} />
+                    <AuthRoute exact path="/announcement" exact component={AnnouncementPage} />
                     <Route component={NotFound}/>
                 </Switch>
             </BrowserRouter>
