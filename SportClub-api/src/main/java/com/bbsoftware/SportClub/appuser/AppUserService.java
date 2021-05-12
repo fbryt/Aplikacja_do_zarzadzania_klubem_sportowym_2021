@@ -3,13 +3,14 @@ package com.bbsoftware.SportClub.appuser;
 import com.bbsoftware.SportClub.exceptions.AppUserEmailNotFoundException;
 import com.bbsoftware.SportClub.exceptions.AppUserNotFoundException;
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javassist.NotFoundException;
+
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -94,9 +95,9 @@ public class AppUserService implements UserDetailsService {
 
 
     }
-        public AppUser get(String resetToken)
-        {
-            return appUserRepository.findByResetToken(resetToken);
-        }
+    public Optional<AppUser> get(String resetToken)
+    {
+        return appUserRepository.findByResetToken(resetToken);
+    }
 
 }

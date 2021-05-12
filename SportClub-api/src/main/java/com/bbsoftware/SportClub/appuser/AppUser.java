@@ -4,6 +4,7 @@ import com.bbsoftware.SportClub.contract.Contract;
 import com.bbsoftware.SportClub.announcement.Announcement;
 import com.bbsoftware.SportClub.exceptions.AppUserNotFoundException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,7 +27,8 @@ import java.util.stream.DoubleStream;
 @EqualsAndHashCode
 @NoArgsConstructor
 @Entity
-@JsonIgnoreProperties(value={ "coach", "players" }, allowSetters= true)
+@JsonIgnoreProperties(value={ "coach", "players" })
+//sprawdzić tego settera
 public class AppUser implements UserDetails {
 
     @Id
@@ -46,7 +48,7 @@ public class AppUser implements UserDetails {
     @ManyToOne
     private AppUser coach;
     @OneToMany(mappedBy="coach")
-    private Collection<AppUser> players = new ArrayList<>();
+    private List<AppUser> players;
 
 
     private Boolean locked = false;
@@ -56,6 +58,7 @@ public class AppUser implements UserDetails {
     private List<Announcement> announcements;
 
     @OneToOne(mappedBy = "user")
+    @JsonIgnore
     private Contract contract;
 
     public String getResetToken() {
@@ -111,13 +114,6 @@ public class AppUser implements UserDetails {
 
         this.coach = user;
     }
-
-    /*public void setCoachId(int user_id){
-
-        this.coach_id = user_id;
-    }*/
-
-
 
 
     @Override

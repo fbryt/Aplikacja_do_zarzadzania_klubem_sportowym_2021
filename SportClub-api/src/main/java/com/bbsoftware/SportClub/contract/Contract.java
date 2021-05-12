@@ -22,7 +22,7 @@ public class Contract {
     private Long money;
 
     @OneToOne
-    AppUser user;
+    private AppUser user;
 
 
 
