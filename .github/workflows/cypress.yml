@@ -28,6 +28,7 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           working-directory: ./SportClub-ui/
+          browser: chrome
           record: false
           spec: cypress/integration/*
           start: npm start, mvn -f ../SportClub-api/ -B -D org.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn spring-boot:run
