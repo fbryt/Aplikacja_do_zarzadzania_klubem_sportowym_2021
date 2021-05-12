@@ -28,5 +28,5 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           working-directory: ./SportClub-ui/
-          start: npm start, mvn -f /SportClub-api/ spring-boot:run
+          start: npm start, mvn -f ../SportClub-api/ spring-boot:run
           wait-on: 'http://localhost:3000, http://localhost:8080'
