@@ -198,3 +198,16 @@ a:link {
   left: 0;
   width: 100%;
 }
+.date{
+  float:right;
+  font-size:10px;
+  color:#2E8BC0;
+}
+.author{
+  float:left;
+}
+.text{
+  max-width: 500px;
+  text-align: justify;
+  overflow-wrap: break-word;
+}
