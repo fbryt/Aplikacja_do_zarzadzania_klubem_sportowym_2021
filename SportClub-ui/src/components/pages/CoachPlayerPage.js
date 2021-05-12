@@ -7,7 +7,7 @@ import Footer from "../menu/Footer";
 import {BrowserRouter, Link, Router} from "react-router-dom";
 
 
-export default class LoginPage extends Component{
+export default class CoachPlayerPage extends Component{
 
 
     constructor(props) {
