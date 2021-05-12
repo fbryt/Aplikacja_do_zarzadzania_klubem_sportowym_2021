@@ -1,6 +1,6 @@
 import React from 'react';
-import { render, unmountComponentAtNode, ReactDOM  }  from 'react-dom';
-import { Router ,BrowserRouter } from "react-router-dom";
+import { render, unmountComponentAtNode, ReactDOM } from 'react-dom';
+import { Router, BrowserRouter } from "react-router-dom";
 import { cleanup } from "@testing-library/react";
 import { act } from "react-dom/test-utils";
 
@@ -16,10 +16,10 @@ describe('Testing menu coach', () => {
     let wrapper = null
     const spyNavigate = jest.fn()
 
-    var CryptoJS=require("crypto-js");
-    encrypted=CryptoJS.AES.encrypt("COACH","Secret");
+    var CryptoJS = require("crypto-js");
+    encrypted = CryptoJS.AES.encrypt("COACH", "Secret");
 
-    document.cookie=`role=${encrypted}`;
+    document.cookie = `role=${encrypted}`;
 
     it('renders without crashing', async () => {
 
@@ -27,10 +27,10 @@ describe('Testing menu coach', () => {
         document.body.appendChild(root);
         render(
             <BrowserRouter>
-                <Dashboard  required={true} location={{hash:"",pathname:"/dashboard",search:"",state:undefined}} match={{isExact: true, path: "/dashboard", url: "/dashboard"}}/>
-            </BrowserRouter>,root
+                <Dashboard required={true} location={{ hash: "", pathname: "/dashboard", search: "", state: undefined }} match={{ isExact: true, path: "/dashboard", url: "/dashboard" }} />
+            </BrowserRouter>, root
         );
-        expect(document.body.textContent).toContain('B&B SportHomeScheduleContractCoach toolsAccount');
+        expect(document.body.textContent).toContain('HomeScheduleContractCoach toolsAccount');
     })
 
 })
