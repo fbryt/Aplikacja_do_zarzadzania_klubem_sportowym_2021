@@ -2,6 +2,7 @@ import React, {Component} from "react";
 
 import Menu from "../menu/Menu";
 import Footer from "../menu/Footer";
+import Announcements from "../Announcements";
 
 export default class DashboardPage extends Component{
 
@@ -13,6 +14,7 @@ export default class DashboardPage extends Component{
         return(
             <div>
                <Menu />
+                <Announcements />
                <Footer />
             </div>
         )
