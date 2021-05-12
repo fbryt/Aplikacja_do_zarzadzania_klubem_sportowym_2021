@@ -58,6 +58,7 @@ public class AppUser implements UserDetails {
     private List<Announcement> announcements;
 
     @OneToOne(mappedBy = "user")
+    @JsonIgnore
     private Contract contract;
 
     public String getResetToken() {
