@@ -7,11 +7,11 @@ on:
   push:
     paths:
       - 'SportClub-ui/**'
-      - '.github/**'
+      - '.github/workflows/node.js.yml'
   pull_request:
     paths:
       - 'SportClub-ui/**'
-      - '.github/**'
+      - '.github/workflows/node.js.yml'
     
 defaults:
   run:
