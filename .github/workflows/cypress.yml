@@ -19,6 +19,5 @@ jobs:
       - name: Cypress tests
         uses: actions/checkout@v2
         with:
-          working-directory: ./
           start: SportClub-ui/npm start, SportClub-api/mvn spring-boot:run
           wait-on: 'http://localhost:3000, http://localhost:8080'
