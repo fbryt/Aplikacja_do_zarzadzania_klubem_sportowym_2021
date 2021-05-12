@@ -3,11 +3,13 @@ package com.bbsoftware.SportClub.contract;
 import com.bbsoftware.SportClub.announcement.*;
 import com.bbsoftware.SportClub.appuser.AppUser;
 import com.bbsoftware.SportClub.appuser.AppUserRepository;
+import com.bbsoftware.SportClub.controllers.OrderController;
 import com.bbsoftware.SportClub.exceptions.AnnouncementNotFoundException;
 import com.bbsoftware.SportClub.exceptions.AppUserNotFoundException;
 
 import com.bbsoftware.SportClub.exceptions.ContractNotFoundException;
 import lombok.AllArgsConstructor;
+import org.springframework.hateoas.IanaLinkRelations;
 import org.springframework.web.bind.annotation.RestController;
 
 import org.springframework.hateoas.CollectionModel;
@@ -50,6 +52,26 @@ public class ContractController {
         return ResponseEntity //
                 .created(linkTo(methodOn(ContractController.class).one(contract.getId())).toUri()) //
                 .body(assembler.toModel(contract));
+    }
+    @PutMapping("/contract/{id}")
+    ResponseEntity<?> updateContract(@RequestBody Contract newContract, @PathVariable Long id) {
+
+        Contract updatedEmployee = contractRepository.findById(id) //
+                .map(contract -> {
+                    contract.setMoney(newContract.getMoney());
+                    contract.setEnd_date(newContract.getEnd_date());
+                    contract.setStart_date(newContract.getStart_date());
+                    return contractRepository.save(contract);
+                }) //
+                .orElseGet(() -> {
+                    newContract.setId(id);
+                    return contractRepository.save(newContract);
+                });
+
+        EntityModel<Contract> entityModel = assembler.toModel(updatedEmployee);
+        return ResponseEntity //
+                .created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri()) //
+                .body(entityModel);
     }
 }
 //ADZKS-122
