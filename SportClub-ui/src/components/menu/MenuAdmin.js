@@ -26,6 +26,7 @@ const MenuAdmin = () => {
                   <Dropdown.Item href="/appUsers">Check all users</Dropdown.Item>
                   <Dropdown.Item href="/playersWithCoach">Connect players with Coach</Dropdown.Item>
                   <Dropdown.Item href="/announcement">Create announcement</Dropdown.Item>
+                  <Dropdown.Item href="/register">Register user</Dropdown.Item>
                 </DropdownButton>
               </Nav>
 

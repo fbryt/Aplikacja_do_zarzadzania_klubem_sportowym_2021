@@ -2,7 +2,6 @@ import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import HomePage from "./components/pages/HomePage";
 import LoginPage from "./components/pages/LoginPage"
-import Register from "./components/Register"
 import DashboardPage from "./components/pages/DashboardPage";
 import AuthRoute from "./components/AuthComponent";
 import AuthService from './services/AuthService';
@@ -13,6 +12,8 @@ import CoachPlayerPage from "./components/pages/CoachPlayerPage";
 import ChangePassword from "./components/pages/ChangePasswordPage";
 import NotFound from "./components/pages/NotFound";
 import AnnouncementPage from "./components/pages/AnnouncementPage";
+import Register from "./components/Register";
+
 
 class App extends React.Component {
 
