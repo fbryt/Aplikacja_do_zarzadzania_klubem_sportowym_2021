@@ -7,11 +7,11 @@ on:
   push:
     paths:
       - 'SportClub-ui/**'
-      - '.github/**'
+      - '.github/workflows/node.js.yml'
   pull_request:
     paths:
       - 'SportClub-ui/**'
-      - '.github/**'
+      - '.github/workflows/node.js.yml'
     
 defaults:
   run:
@@ -27,7 +27,6 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: 14.x
-    - run: npm ci --no-optional
     - run: npm install --no-optional
     - run: npm test
 
