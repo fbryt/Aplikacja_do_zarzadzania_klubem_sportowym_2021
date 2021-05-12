@@ -44,7 +44,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // true);
 
         http.csrf().disable().authorizeRequests().antMatchers("/appUsers/**", "/register").hasAuthority("ADMIN")
-                .antMatchers("/authenticate", "/forgotpassword/**", "/h2-console/**").permitAll().anyRequest()
+                .antMatchers("/authenticate", "/forgotpassword/**", "/h2-console/**", "/").permitAll().anyRequest()
                 .authenticated().and().exceptionHandling().and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
