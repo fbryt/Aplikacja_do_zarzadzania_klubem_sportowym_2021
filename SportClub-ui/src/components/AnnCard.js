@@ -1,67 +1,84 @@
 import React, {useState} from "react";
 import { Button,Modal,Form} from "react-bootstrap"
 import axios from "axios";
-export const AnnCard =({announcement})=>{
+class AnnCard extends React.Component{
 
-    const [show,setShow]=useState(false);
+    constructor(props) {
+        super(props);
+        this.state={
+            firstName:this.props.announcement.user.firstName,
+            lastName:this.props.announcement.user.lastName,
+            date:this.props.announcement.date,
+            text:this.props.announcement.text,
+            update:
+                {
+                  text:this.props.announcement.text,
+                },
+            show:false,
+        }
+    }
 
-    const handleClose=()=>setShow(false);
-    const handleShow=()=>setShow(true);
-    let update={
-        text:announcement.text,
+    handleClose=()=>{
+        this.setState({show:false})
+    };
+    handleShow=()=> {
+        this.setState({show:true})
     };
 
-    function edit(){
+    edit=async event => {
+        event.preventDefault();
         try {
-            const url = "http://localhost:8080/announcements/" + announcement.id;
-            const response = axios.patch(url, update );
-            console.log('👉 Returned data:', response);
-            handleClose();
+
+            const url = "http://localhost:8080/announcements/" + this.props.announcement.id;
+            const response = await axios.patch(url, this.state.update);
 
         } catch (e) {
             console.log(`😱 Axios request failed: ${e}`);
         }
 
+        this.setState({show:false});
+
     }
-    function remove(){
-        console.log("Remove")
-    }
-    function dataChange(t)
+
+    dataChange = event =>
     {
-        update.text=t.target.value;
+        this.setState({update:{text:event.target.value}});
+        this.setState({text:event.target.value});
+       // this.state.update.text=event.target.value;
     }
 
-
+render() {
     return (
         <div id="logform">
-            <div class="row">
-                <div><h5>{announcement.user.firstName} {announcement.user.lastName}</h5></div>
-                <div class="date">{announcement.date.substring(0,10)+" "+announcement.date.substring( 11,16)}</div>
+            <div className="row">
+                <div><h5>{this.state.firstName} {this.state.lastName}</h5></div>
+                <div className="date">{this.state.date.substring(0, 10) + " " + this.state.date.substring(11, 16)}</div>
             </div>
             <div>
-            <span class="text">{announcement.text}</span>
+                <span className="text">{this.state.text}</span>
             </div>
-        <Button variant="primary" size="sm" onClick={handleShow}>
-            Edit
-        </Button>{" "}
-            <Button variant="primary" size="sm" onClick={remove}>
+            <Button variant="primary" size="sm" onClick={this.handleShow}>
+                Edit
+            </Button>{" "}
+            <Button variant="primary" size="sm">
                 Delete
             </Button>
-            <Modal show={show} onHide={handleClose}>
+            <Modal show={this.state.show} onHide={this.handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Edit announcement</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form onSubmit={edit}>
+                    <Form>
                         <Form.Group controlId="modalEdit">
                             <Form.Label>Edit text</Form.Label>
-                            <Form.Control as="textarea" rows={3} readOnly={false} defaultValue={announcement.text} onChange={dataChange}/>
+                            <Form.Control as="textarea" rows={3} readOnly={false} defaultValue={this.state.text}
+                                          onChange={this.dataChange}/>
                         </Form.Group>
-                        <Button onClick={edit}>Save Changes</Button>
+                        <Button onClick={this.edit}>Save Changes</Button>
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
+                    <Button variant="secondary" onClick={this.handleClose}>
                         Close
                     </Button>
 
@@ -70,6 +87,5 @@ export const AnnCard =({announcement})=>{
         </div>
 
     );
-
-};
-export default AnnCard;
+}
+}export default AnnCard;
