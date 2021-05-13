@@ -51,6 +51,7 @@ public class AnnouncementController {
 
         Announcement announcement=new Announcement();
         announcement.setText(announcementRequest.getText());
+        announcement.setDate(announcementRequest.getDate());
         AppUser appUser=appUserRepository.findById(announcementRequest.getUserId()).orElseThrow(()->new AppUserNotFoundException(announcementRequest.getUserId()));
         announcement.setUser(appUser);
 
@@ -77,14 +78,14 @@ public class AnnouncementController {
 
         updates.forEach((k, v) -> {
             // use reflection to get field k on manager and set it to value v
-            Field field = ReflectionUtils.findField(Order.class, (String) k);
+            Field field = ReflectionUtils.findField(Announcement.class, (String) k);
             field.setAccessible(true);
             ReflectionUtils.setField(field, announcement, v);
         });
 
         Announcement updatedAnnouncement = announcementRepository.save(announcement);
         return ResponseEntity //
-                .created(linkTo(methodOn(OrderController.class).one(updatedAnnouncement.getId())).toUri()) //
+                .created(linkTo(methodOn(AnnouncementController.class).one(updatedAnnouncement.getId())).toUri()) //
                 .body(assembler.toModel(updatedAnnouncement));
     }
 
