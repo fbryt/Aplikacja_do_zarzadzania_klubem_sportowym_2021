@@ -7,13 +7,14 @@ import {Cookies} from 'react-cookie';
 class AuthService {
 
 
-    registerSuccessfulLoginForJwt(username, token) {
+    registerSuccessfulLoginForJwt(username, token, id) {
         const cookie=new Cookies();
         var CryptoJS=require("crypto-js");
 
         const encrypted=CryptoJS.AES.encrypt(jwt_decode(token).UserRole,"Secret");
         sessionStorage.setItem('jwt', token);
         sessionStorage.setItem('username', username);
+        sessionStorage.setItem('id', id);
         cookie.set("role",encrypted.toString(),{path:'/',secure: true});
         //this.setupAxiosInterceptors(this.createJWTToken(token));
     }
@@ -32,6 +33,7 @@ class AuthService {
     logout() {
         sessionStorage.removeItem('jwt');
         sessionStorage.removeItem('username');
+        sessionStorage.removeItem('id');
     }
 
     isUserLoggedIn() {
@@ -42,6 +44,12 @@ class AuthService {
 
     getLoggedInUserName() {
         let user = sessionStorage.getItem('username');
+        if (user === null) return ''
+        return user
+    }
+
+    getLoggedInId() {
+        let user = sessionStorage.getItem('id');
         if (user === null) return ''
         return user
     }

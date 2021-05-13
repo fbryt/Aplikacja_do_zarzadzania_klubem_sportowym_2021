@@ -4,9 +4,10 @@ import React, {Component} from "react";
 import Footer from "../menu/Footer";
 import axios from "axios";
 import {Col, Form} from "react-bootstrap";
-import DatePicker from 'react-date-picker';
+import DatePicker from "react-datepicker";
 import EdiText from 'react-editext'
-
+import AuthService from '../../services/AuthService';
+import "react-datepicker/dist/react-datepicker.css";
 
 
 export default class AnnouncementPagePage extends Component{
@@ -15,15 +16,15 @@ export default class AnnouncementPagePage extends Component{
         super(props);
         this.state = {
             text: '',
-            date: new Date()
+            date: new Date(),
+            userId : AuthService.getLoggedInId()
 
         };
         this.handleChange = this.handleChange.bind(this);
         this.OnSave = this.OnSave.bind(this);
-        this. submitText = this. submitText.bind(this);
+        this.submitText = this.submitText.bind(this);
 
     }
-
 
     submitText = event =>{
 
@@ -31,14 +32,16 @@ export default class AnnouncementPagePage extends Component{
         const announ = {
             text: this.state.text,
             date: this.state.date,
+            userId: this.state.userId
         }
 
         try {
             const url = "http://localhost:8080/announcements"
-            axios.patch(url, announ);
+            axios.post(url, announ);
         } catch (e) {
             console.log(`😱 Axios request failed: ${e}`);
         }
+
 
     }
 
@@ -56,8 +59,10 @@ export default class AnnouncementPagePage extends Component{
 
 
 
+
     render() {
         const {text, date} = this.state;
+
 
         return (
             <div  id="logform">
@@ -69,8 +74,11 @@ export default class AnnouncementPagePage extends Component{
 
                     <div id="mainInscript">
                         <DatePicker
+
+                            selected={this.state.date}
                             onChange={this.handleChange}
-                            value={this.state.date}
+                            showTimeInput
+
                         />
 
                     </div>

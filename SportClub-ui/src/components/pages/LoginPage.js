@@ -34,7 +34,7 @@ export default class LoginPage extends Component{
 
         axios.post("http://localhost:8080/authenticate",user)
              .then((response) => {
-                 AuthService.registerSuccessfulLoginForJwt(this.state.username, response.data.jwt);
+                 AuthService.registerSuccessfulLoginForJwt(this.state.username, response.data.jwt, response.data.id);
                  this.props.history.push(`/dashboard`)
              }).catch(err => { if(err.request){ console.log(err.request) } if(err.response){ console.log(err.response) }
             this.setState({err:true});
