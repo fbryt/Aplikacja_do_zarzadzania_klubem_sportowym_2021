@@ -7,10 +7,15 @@ const url = "http://localhost:8080/announcements/";
 
 export default class Announcements extends React.Component {
 
-    state={
-        announcements:[]
+    constructor() {
+        super();
+
+        this. state={
+            announcements:[],
+        }
     }
-    componentDidMount() {
+
+    componentWillMount() {
         axios.get(url)
             .then(response=> {
                 const announcements=response.data._embedded.announcementList;
@@ -21,12 +26,12 @@ export default class Announcements extends React.Component {
         })
     }
 
+
     render(){
         return(
             <ul>
                 {
-                    this.state.announcements.map(ann=><AnnCard announcement={ann} />)
-
+                    this.state.announcements.map((ann)=> {return <AnnCard key={ann.id} announcement={ann} />})
                 }
 
             </ul>
