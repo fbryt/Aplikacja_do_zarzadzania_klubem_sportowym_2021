@@ -11,11 +11,7 @@ import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ReflectionUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
@@ -48,6 +44,7 @@ public class AppUserController {
 
         return appUserModelAssembler.toModel(appUser);
     }
+
 
     @PatchMapping("/appUsers/{id}")
     public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Map<Object, Object> updates) {

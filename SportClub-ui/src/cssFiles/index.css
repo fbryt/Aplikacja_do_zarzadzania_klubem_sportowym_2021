@@ -211,3 +211,19 @@ a:link {
   text-align: justify;
   overflow-wrap: break-word;
 }
+
+
+.my-custom-view-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.my-custom-view-wrapper div:last-child {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5px;
+
+}
