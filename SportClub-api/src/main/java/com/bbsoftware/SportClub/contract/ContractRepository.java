@@ -10,4 +10,5 @@ import java.util.Optional;
 @Repository
 public interface ContractRepository extends JpaRepository<Contract, Long>{
 
+    public Optional <Contract> findByUser_id(Long id);
 }
