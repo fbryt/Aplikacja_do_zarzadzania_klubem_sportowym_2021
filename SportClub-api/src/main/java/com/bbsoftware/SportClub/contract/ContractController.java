@@ -3,7 +3,6 @@ package com.bbsoftware.SportClub.contract;
 import com.bbsoftware.SportClub.announcement.*;
 import com.bbsoftware.SportClub.appuser.AppUser;
 import com.bbsoftware.SportClub.appuser.AppUserRepository;
-import com.bbsoftware.SportClub.controllers.OrderController;
 import com.bbsoftware.SportClub.exceptions.AnnouncementNotFoundException;
 import com.bbsoftware.SportClub.exceptions.AppUserNotFoundException;
 
@@ -37,6 +36,13 @@ public class ContractController {
     public EntityModel<Contract> one(@PathVariable Long id)
     {
         Contract contract=contractRepository.findById(id).orElseThrow(()->new ContractNotFoundException(id));
+        return assembler.toModel(contract);
+    }
+    @GetMapping("/contract/user/{id}")
+    public EntityModel<Contract> getContract(@PathVariable Long id)
+    {
+        AppUser appUser = appUserRepository.findById(id).orElseThrow(()->new AppUserNotFoundException(id));
+        Contract contract=contractRepository.findByUser_id(appUser.getId()).orElseThrow(()-> new ContractNotFoundException(appUser.getId()));
         return assembler.toModel(contract);
     }
     @PostMapping("/contract")
