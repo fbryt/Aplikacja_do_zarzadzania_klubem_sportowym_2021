@@ -15,7 +15,7 @@ class AuthService {
         sessionStorage.setItem('jwt', token);
         sessionStorage.setItem('username', username);
         sessionStorage.setItem('id', id);
-        cookie.set("role", encrypted.toString(), { path: '/', httpOnly: false /*, secure:true*/ });   //TODO: required to test on firefox, look into this more
+        cookie.set("role", encrypted.toString(), { path: '/', httpOnly: false , secure:true });   //TODO: required to test on firefox, look into this more
         //this.setupAxiosInterceptors(this.createJWTToken(token));
     }
 
