@@ -3,6 +3,7 @@ package com.bbsoftware.SportClub.announcement;
 import com.bbsoftware.SportClub.appuser.AppUser;
 import com.bbsoftware.SportClub.appuser.AppUserRepository;
 import com.bbsoftware.SportClub.controllers.OrderController;
+import com.bbsoftware.SportClub.email.EmailService;
 import com.bbsoftware.SportClub.exceptions.AnnouncementNotFoundException;
 import com.bbsoftware.SportClub.exceptions.AppUserNotFoundException;
 import com.bbsoftware.SportClub.exceptions.OrderNotFoundException;
@@ -29,6 +30,7 @@ public class AnnouncementController {
     private final AnnouncementRepository announcementRepository;
     private final AnnouncementModelAssembler assembler;
     private final AppUserRepository appUserRepository;
+    private final EmailService emailService;
 
     @GetMapping("/announcements")
     public CollectionModel<EntityModel<Announcement>> all() {
@@ -57,6 +59,10 @@ public class AnnouncementController {
 
         if (announcementRequest.getSendEmail()) {
             System.out.println("Sending emails...");
+            List<AppUser> appUsers = appUserRepository.findAll();
+            for (AppUser user : appUsers) {
+                emailService.send(user.getEmail(), "There's been an announcment!", "[ADZKS] Important announcement!");
+            }
         }
 
         announcementRepository.save(announcement);
