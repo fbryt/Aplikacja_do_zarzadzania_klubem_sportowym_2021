@@ -30,7 +30,7 @@ const MenuPlayer = () => {
               <Nav.Link href="#">Contract</Nav.Link>
             </Nav>
             <DropdownButton id="dropdown-basic-button" drop="left" title="Account">
-              <Dropdown.Item href="#">Info</Dropdown.Item>
+              <Dropdown.Item href="/settings">Info</Dropdown.Item>
               <Dropdown.Item href="/settings/password">Change password</Dropdown.Item>
               <Dropdown.Item href="#" onClick={Logout}> Logout </Dropdown.Item>
             </DropdownButton>

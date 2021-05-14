@@ -4,6 +4,7 @@ import com.bbsoftware.SportClub.appuser.AppUser;
 import com.bbsoftware.SportClub.appuser.AppUserModelAssembler;
 import com.bbsoftware.SportClub.appuser.AppUserRepository;
 import com.bbsoftware.SportClub.appuser.AppUserService;
+import com.bbsoftware.SportClub.exceptions.AppUserNotFoundException;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,15 @@ public class SettingsController {
     private final AppUserModelAssembler appUserModelAssembler;
 
 
+
+    @GetMapping("/settings")
+    public EntityModel<AppUser> getUser(){
+        AppUser user = appUserService.loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+
+        return appUserModelAssembler.toModel(user);
+    }
+
+
     @PostMapping("/settings/password")
     public EntityModel<AppUser> changePassword(@RequestBody Params passwords){
 
@@ -63,4 +73,5 @@ public class SettingsController {
         return appUserModelAssembler.toModel(user);
 
     }
+
 }
