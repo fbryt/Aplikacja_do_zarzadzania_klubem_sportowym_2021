@@ -13,6 +13,7 @@ import ChangePassword from "./components/pages/ChangePasswordPage";
 import NotFound from "./components/pages/NotFound";
 import AnnouncementPage from "./components/pages/AnnouncementPage";
 import Register from "./components/Register";
+import ContractPage from "./components/pages/ContractPage";
 
 
 class App extends React.Component {
@@ -36,6 +37,7 @@ class App extends React.Component {
                     <AuthRoute exact path="/appUsers" exact component={AppUsersPage} />
                     <AuthRoute exact path="/playersWithCoach" exact component={CoachPlayerPage} />
                     <AuthRoute exact path="/announcement" exact component={AnnouncementPage} />
+                    <AuthRoute exact path="/mycontract" exact component={ContractPage} />
                     <Route component={NotFound}/>
                 </Switch>
             </BrowserRouter>

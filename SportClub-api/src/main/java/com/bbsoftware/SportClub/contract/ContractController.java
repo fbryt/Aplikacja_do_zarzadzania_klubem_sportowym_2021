@@ -9,6 +9,8 @@ import com.bbsoftware.SportClub.exceptions.AppUserNotFoundException;
 import com.bbsoftware.SportClub.exceptions.ContractNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.hateoas.IanaLinkRelations;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RestController;
 
 import org.springframework.hateoas.CollectionModel;
@@ -16,6 +18,7 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.lang.reflect.Field;
 import java.util.List;
@@ -31,13 +34,26 @@ public class ContractController {
     private final ContractRepository contractRepository;
     private final ContractModelAssembler assembler;
     private final AppUserRepository appUserRepository;
-
     @GetMapping("/contract/{id}")
     public EntityModel<Contract> one(@PathVariable Long id)
     {
         Contract contract=contractRepository.findById(id).orElseThrow(()->new ContractNotFoundException(id));
         return assembler.toModel(contract);
     }
+    @GetMapping("/mycontract")
+    public EntityModel<Contract> getMyContract()
+    {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof AppUser) {
+            Long id = ((AppUser)principal).getId();
+            Contract contract=contractRepository.findByUser_id(id).orElseThrow(()-> new ContractNotFoundException(id));
+            return assembler.toModel(contract);
+        } else {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "Contract not found");
+        }
+    }
+
     @GetMapping("/contract/user/{id}")
     public EntityModel<Contract> getContract(@PathVariable Long id)
     {
