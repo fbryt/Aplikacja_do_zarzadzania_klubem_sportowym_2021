@@ -213,17 +213,26 @@ a:link {
 }
 
 
-.my-custom-view-wrapper {
+.textPlaceholder {
   display: flex;
   flex-direction: column;
+
 }
 
 
-.my-custom-view-wrapper div:last-child {
+.textPlaceholder div:last-child {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin-top: 5px;
+  margin: 10px;
+
 
 }
+
+.calendar{
+  outline: none;
+  border-radius: 3px;
+  border: 1px solid blue;
+}
+

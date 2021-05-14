@@ -71,9 +71,9 @@ export default class AnnouncementPagePage extends Component{
 
                 <Form onSubmit={this. submitText} id="LoginForm">
 
-                    <div id="mainInscript">
+                    <div id="mainInscript" >
                         <DatePicker
-
+                            className="calendar"
                             selected={this.state.date}
                             onChange={this.handleChange}
                             showTimeInput
@@ -82,18 +82,32 @@ export default class AnnouncementPagePage extends Component{
 
                     </div>
 
-                    <div id="mainInscript">
+                    <div id="mainInscript" >
                     <EdiText
-                        viewContainerClassName='my-custom-view-wrapper'
+                        viewContainerClassName='textPlaceholder'
                         type='textarea'
                         inputProps={{
                             className: 'textarea',
                             placeholder: 'Type your content here',
                             style: {
                                 outline: 'none',
-                                minWidth: 'auto'
+                                minWidth: 'auto',
+                                borderRadius: 5,
+                                backgroundColor: '#F5F5F5',
                             },
                             rows: 5
+                        }}
+                        viewProps={{
+                            className: 'textarea',
+                            placeholder: 'Type your content here',
+                            style: {
+                                outline: 'none',
+                                minWidth: 'auto',
+                                backgroundColor: '#F5F5F5',
+                                borderRadius: 5,
+                                height: '150px',
+                            },
+
                         }}
                         value="Type your content here"
                         onSave={this.OnSave}
