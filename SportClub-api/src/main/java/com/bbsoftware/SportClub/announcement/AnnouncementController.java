@@ -1,6 +1,5 @@
 package com.bbsoftware.SportClub.announcement;
 
-
 import com.bbsoftware.SportClub.appuser.AppUser;
 import com.bbsoftware.SportClub.appuser.AppUserRepository;
 import com.bbsoftware.SportClub.controllers.OrderController;
@@ -32,28 +31,33 @@ public class AnnouncementController {
     private final AppUserRepository appUserRepository;
 
     @GetMapping("/announcements")
-    public CollectionModel<EntityModel<Announcement>> all()
-    {
-        List<EntityModel<Announcement>> announcements=announcementRepository.findAll().stream().
-                map(assembler::toModel).collect(Collectors.toList());
+    public CollectionModel<EntityModel<Announcement>> all() {
+        List<EntityModel<Announcement>> announcements = announcementRepository.findAll().stream()
+                .map(assembler::toModel).collect(Collectors.toList());
 
-        return CollectionModel.of(announcements,linkTo(methodOn(AnnouncementController.class).all()).withSelfRel());
+        return CollectionModel.of(announcements, linkTo(methodOn(AnnouncementController.class).all()).withSelfRel());
     }
 
     @GetMapping("/announcements/{id}")
-    public EntityModel<Announcement> one(@PathVariable Long id)
-    {
-        Announcement announcement=announcementRepository.findById(id).orElseThrow(()->new AnnouncementNotFoundException(id));
+    public EntityModel<Announcement> one(@PathVariable Long id) {
+        Announcement announcement = announcementRepository.findById(id)
+                .orElseThrow(() -> new AnnouncementNotFoundException(id));
         return assembler.toModel(announcement);
     }
+
     @PostMapping("/announcements")
     ResponseEntity<EntityModel<Announcement>> newAnnouncement(@RequestBody AnnouncementRequest announcementRequest) {
 
-        Announcement announcement=new Announcement();
+        Announcement announcement = new Announcement();
         announcement.setText(announcementRequest.getText());
         announcement.setDate(announcementRequest.getDate());
-        AppUser appUser=appUserRepository.findById(announcementRequest.getUserId()).orElseThrow(()->new AppUserNotFoundException(announcementRequest.getUserId()));
+        AppUser appUser = appUserRepository.findById(announcementRequest.getUserId())
+                .orElseThrow(() -> new AppUserNotFoundException(announcementRequest.getUserId()));
         announcement.setUser(appUser);
+
+        if (announcementRequest.getSendEmail()) {
+            System.out.println("Sending emails...");
+        }
 
         announcementRepository.save(announcement);
 
@@ -61,9 +65,9 @@ public class AnnouncementController {
                 .created(linkTo(methodOn(AnnouncementController.class).one(announcement.getId())).toUri()) //
                 .body(assembler.toModel(announcement));
     }
+
     @DeleteMapping("/announcements/{id}/delete")
-    public void delete(@PathVariable Long id)
-    {
+    public void delete(@PathVariable Long id) {
         Announcement announcement = announcementRepository.findById(id) //
                 .orElseThrow(() -> new AnnouncementNotFoundException(id));
 
@@ -89,5 +93,4 @@ public class AnnouncementController {
                 .body(assembler.toModel(updatedAnnouncement));
     }
 
-    }
-
+}
