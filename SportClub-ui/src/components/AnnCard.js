@@ -15,6 +15,7 @@ class AnnCard extends React.Component{
                   text:this.props.announcement.text,
                 },
             show:false,
+            role:this.props.role,
         }
     }
 
@@ -40,6 +41,17 @@ class AnnCard extends React.Component{
 
     }
 
+    delete=async event => {
+        try {
+            const url = "http://localhost:8080/announcements/" + this.props.announcement.id + "/delete";
+            const response = await axios.delete(url);
+        } catch (e) {
+            console.log(`😱 Axios request failed: ${e}`);
+        }
+        this.props.action();
+
+    }
+
     dataChange = event =>
     {
         this.setState({update:{text:event.target.value}});
@@ -57,10 +69,11 @@ render() {
             <div>
                 <span className="text">{this.state.text}</span>
             </div>
-            <Button variant="primary" size="sm" onClick={this.handleShow}>
+
+            <Button variant="primary" size="sm" onClick={this.handleShow} hidden={!(this.state.role==="ADMIN")}>
                 Edit
             </Button>{" "}
-            <Button variant="primary" size="sm">
+            <Button onClick={this.delete} variant="primary" size="sm" hidden={!(this.state.role==="ADMIN")}>
                 Delete
             </Button>
             <Modal show={this.state.show} onHide={this.handleClose}>

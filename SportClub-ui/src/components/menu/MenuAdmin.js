@@ -36,7 +36,7 @@ const MenuAdmin = () => {
                 </DropdownButton>
               </Nav>
 
-              <DropdownButton id="dropdown-basic-button" drop="left" title="Account">
+              <DropdownButton id="dropdown-basic-button" drop="down" title="Account">
                 <Dropdown.Item href="#">Info</Dropdown.Item>
                 <Dropdown.Item href="/settings/password">Change password</Dropdown.Item>
                 <Dropdown.Item href="#" onClick={Logout}> Logout </Dropdown.Item>
