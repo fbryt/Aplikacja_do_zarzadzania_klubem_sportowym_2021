@@ -11,9 +11,12 @@ import com.bbsoftware.SportClub.models.Order;
 import lombok.AllArgsConstructor;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.lang.reflect.Field;
 import java.util.List;
@@ -50,26 +53,36 @@ public class AnnouncementController {
     @PostMapping("/announcements")
     ResponseEntity<EntityModel<Announcement>> newAnnouncement(@RequestBody AnnouncementRequest announcementRequest) {
 
-        Announcement announcement = new Announcement();
-        announcement.setText(announcementRequest.getText());
-        announcement.setDate(announcementRequest.getDate());
-        AppUser appUser = appUserRepository.findById(announcementRequest.getUserId())
-                .orElseThrow(() -> new AppUserNotFoundException(announcementRequest.getUserId()));
-        announcement.setUser(appUser);
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof AppUser) {
 
-        if (announcementRequest.getSendEmail()) {
-            System.out.println("Sending emails...");
-            List<AppUser> appUsers = appUserRepository.findAll();
-            for (AppUser user : appUsers) {
-                emailService.send(user.getEmail(), "There's been an announcment!", "[ADZKS] Important announcement!");
+            Long id = ((AppUser)principal).getId();
+            Announcement announcement = new Announcement();
+            announcement.setText(announcementRequest.getText());
+            announcement.setDate(announcementRequest.getDate());
+            AppUser appUser = appUserRepository.findById(id)
+                    .orElseThrow(() -> new AppUserNotFoundException(id));
+            announcement.setUser(appUser);
+
+            if (announcementRequest.getSendEmail()) {
+                System.out.println("Sending emails...");
+                List<AppUser> appUsers = appUserRepository.findAll();
+                for (AppUser user : appUsers) {
+                    emailService.send(user.getEmail(), "There's been an announcment!", "[ADZKS] Important announcement!");
+                }
             }
+
+            announcementRepository.save(announcement);
+
+            return ResponseEntity //
+                    .created(linkTo(methodOn(AnnouncementController.class).one(announcement.getId())).toUri()) //
+                    .body(assembler.toModel(announcement));
+
+        } else {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "User not found");
         }
 
-        announcementRepository.save(announcement);
-
-        return ResponseEntity //
-                .created(linkTo(methodOn(AnnouncementController.class).one(announcement.getId())).toUri()) //
-                .body(assembler.toModel(announcement));
     }
 
     @DeleteMapping("/announcements/{id}/delete")

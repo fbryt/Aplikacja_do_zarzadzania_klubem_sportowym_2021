@@ -17,7 +17,6 @@ export default class AnnouncementPagePage extends Component {
         this.state = {
             text: '',
             date: new Date(),
-            userId: AuthService.getLoggedInId(),
             sendEmail: false
         };
         this.handleChange = this.handleChange.bind(this);
@@ -33,7 +32,6 @@ export default class AnnouncementPagePage extends Component {
         const announ = {
             text: this.state.text,
             date: this.state.date,
-            userId: this.state.userId,
             sendEmail: this.state.sendEmail
         }
 
