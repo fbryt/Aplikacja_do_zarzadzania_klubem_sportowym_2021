@@ -4,7 +4,6 @@ import { useHistory, useParams } from 'react-router-dom';
 import { withRouter } from "react-router";
 import axios from 'axios';
 
-
 import Menu from "../menu/Menu";
 import Footer from "../menu/Footer";
 class PasswordField extends Component
@@ -33,7 +32,7 @@ class PasswordField extends Component
                     <Form.Label>{label}</Form.Label>
                     <InputGroup>
                         <Form.Control className={inClass} required autoComplete="off" type={this.state.type} name={name} onChange={this.onDataChange} />
-                        <span className="passwordShow" onClick={this.toggleShow}>{this.state.type === 'password' ? 'Show' : 'Hide'}</span>
+                        <img alt={this.state.type === 'password' ? 'Show' : 'Hide'} title={this.state.type === 'password' ? 'Show Password': 'Hide Password'} src={this.state.type === 'password' ? '/show_password.png' :'/hide_password.png'} className="passwordShow" onClick={this.toggleShow}/>
                     </InputGroup>
                 </div>
             </Form.Group>
