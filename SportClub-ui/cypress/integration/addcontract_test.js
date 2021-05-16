@@ -40,6 +40,9 @@ const nextUser =
                 })
             })
             cy.get('form').within(() =>{
+                cy.get(".react-date-picker__inputGroup").eq(1).within(()=>{
+                    cy.get('input[name="year"]').invoke('val').should('eq','2022');
+                })
                 cy.get('input[name="money"]').invoke('val').should('eq','6000');
             })
 
