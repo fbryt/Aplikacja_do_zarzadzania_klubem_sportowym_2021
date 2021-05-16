@@ -8,6 +8,7 @@ import DatePicker from "react-datepicker";
 import EdiText from 'react-editext'
 import AuthService from '../../services/AuthService';
 import "react-datepicker/dist/react-datepicker.css";
+import Menu from "../menu/Menu";
 
 
 export default class AnnouncementPagePage extends Component {
@@ -63,6 +64,7 @@ export default class AnnouncementPagePage extends Component {
 
         return (
             <div id="logform">
+                <Menu />
                 <div id="mainInscript">
                     <h1>Create Announcement</h1>
                 </div>

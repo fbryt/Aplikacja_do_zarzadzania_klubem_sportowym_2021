@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import axios from 'axios';
 import CoachPlayerCard from './CoachPlayerCard';
 import Footer from "../menu/Footer";
+import Menu from "../menu/Menu";
 
 
 const url = "http://localhost:8080/appUsers";
@@ -47,6 +48,7 @@ export default class CoachPlayerPage extends Component{
     render() {
         return(
             <div>
+                <Menu />
                 <ul>
                     {
                         this.state.players.map((player)=> {return <CoachPlayerCard key={player.id} player={player}  coaches={this.state.coaches} action={this.stateChange} />  })
