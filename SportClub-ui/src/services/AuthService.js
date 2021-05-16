@@ -14,8 +14,8 @@ class AuthService {
         const encrypted = CryptoJS.AES.encrypt(jwt_decode(token).UserRole, "Secret");
         sessionStorage.setItem('jwt', token);
         sessionStorage.setItem('username', username);
-        cookie.set("role", encrypted.toString(), { path: '/', httpOnly: false , secure:true });   //TODO: required to test on firefox, look into this more
-        //this.setupAxiosInterceptors(this.createJWTToken(token));
+        cookie.set("role", encrypted.toString(), { path: '/', httpOnly: false, secure: true });   //TODO: required to test on firefox, look into this more
+        this.setupAxiosInterceptors(this.createJWTToken(token));
     }
 
     refreshAxiosInterceptors() {
