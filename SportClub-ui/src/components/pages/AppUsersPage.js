@@ -8,6 +8,7 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import cellEditFactory, { Type } from 'react-bootstrap-table2-editor';
 import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
 import paginationFactory from 'react-bootstrap-table2-paginator';
+import { DetailsModal } from "../DetailsModal";
 
 const url = "http://localhost:8080/appUsers/";
 
@@ -26,7 +27,7 @@ export const AppUserPage = () => {
     const columns = [{
         dataField: 'id',
         text: 'User ID',
-        sort: true
+        sort: true,
     }, {
         dataField: 'firstName',
         text: 'First Name',
@@ -58,6 +59,14 @@ export const AppUserPage = () => {
                 value: 'ADMIN',
                 label: 'Admin'
             }]
+        }
+    }, {
+        dataField: 'detailsModal',
+        text: 'Details',
+        isDummyField: true,
+        editable: false,
+        formatter: (cell, row, rowIndex) => {
+            return <DetailsModal appUser={data[row.id - 1]} />;
         }
     }];
 

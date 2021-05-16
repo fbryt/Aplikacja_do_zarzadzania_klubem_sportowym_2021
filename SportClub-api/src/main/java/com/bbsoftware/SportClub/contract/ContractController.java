@@ -23,6 +23,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
@@ -34,47 +35,55 @@ public class ContractController {
     private final ContractRepository contractRepository;
     private final ContractModelAssembler assembler;
     private final AppUserRepository appUserRepository;
+
     @GetMapping("/contract/{id}")
-    public EntityModel<Contract> one(@PathVariable Long id)
-    {
-        Contract contract=contractRepository.findById(id).orElseThrow(()->new ContractNotFoundException(id));
+    public EntityModel<Contract> one(@PathVariable Long id) {
+        Contract contract = contractRepository.findById(id).orElseThrow(() -> new ContractNotFoundException(id));
         return assembler.toModel(contract);
     }
+
     @GetMapping("/mycontract")
-    public EntityModel<Contract> getMyContract()
-    {
+    public EntityModel<Contract> getMyContract() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (principal instanceof AppUser) {
-            Long id = ((AppUser)principal).getId();
-            Contract contract=contractRepository.findByUser_id(id).orElseThrow(()-> new ContractNotFoundException(id));
+            Long id = ((AppUser) principal).getId();
+            Contract contract = contractRepository.findByUser_id(id)
+                    .orElseThrow(() -> new ContractNotFoundException(id));
             return assembler.toModel(contract);
         } else {
-            throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND, "Contract not found");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Contract not found");
         }
     }
 
     @GetMapping("/contract/user/{id}")
-    public EntityModel<Contract> getContract(@PathVariable Long id)
-    {
-        AppUser appUser = appUserRepository.findById(id).orElseThrow(()->new AppUserNotFoundException(id));
-        Contract contract=contractRepository.findByUser_id(appUser.getId()).orElseThrow(()-> new ContractNotFoundException(appUser.getId()));
-        return assembler.toModel(contract);
+    public ResponseEntity<EntityModel<Contract>> getContract(@PathVariable Long id) {
+        AppUser appUser = appUserRepository.findById(id).orElseThrow(() -> new AppUserNotFoundException(id));
+        Optional<Contract> contract = contractRepository.findByUser_id(appUser.getId());
+        if (!contract.isPresent()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        // Contract contract = contractRepository.findByUser_id(appUser.getId()).orElse
+        return new ResponseEntity<>(assembler.toModel(contract.get()), HttpStatus.OK);
+
     }
+
     @PostMapping("/contract")
     ResponseEntity<EntityModel<Contract>> newContract(@RequestBody ContractRequest contractRequest) {
 
-        Contract contract=new Contract();
+        Contract contract = new Contract();
         contract.setMoney(contractRequest.getMoney());
         contract.setStart_date(contractRequest.getStart_date());
         contract.setEnd_date(contractRequest.getEnd_date());
-        AppUser appUser=appUserRepository.findById(contractRequest.getUser_id()).orElseThrow(()->new AppUserNotFoundException(contractRequest.getUser_id()));
+        AppUser appUser = appUserRepository.findById(contractRequest.getUser_id())
+                .orElseThrow(() -> new AppUserNotFoundException(contractRequest.getUser_id()));
         contract.setUser(appUser);
         contractRepository.save(contract);
         return ResponseEntity //
                 .created(linkTo(methodOn(ContractController.class).one(contract.getId())).toUri()) //
                 .body(assembler.toModel(contract));
     }
+
     @PutMapping("/contract/{id}")
     ResponseEntity<?> updateContract(@RequestBody Contract newContract, @PathVariable Long id) {
 
@@ -95,5 +104,27 @@ public class ContractController {
                 .created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri()) //
                 .body(entityModel);
     }
+
+    @PatchMapping("/contract/user/{id}")
+    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Map<Object, Object> updates) {
+
+        AppUser appUser = appUserRepository.findById(id).orElseThrow(() -> new AppUserNotFoundException(id));
+        Contract contract = appUser.getContract();
+        if (contract == null)
+            throw new ContractNotFoundException(id);
+        updates.forEach((k, v) -> {
+            // use reflection to get field k on manager and set it to value v
+            Field field = ReflectionUtils.findField(Contract.class, (String) k);
+            field.setAccessible(true);
+
+            ReflectionUtils.setField(field, contract, v);
+        });
+
+        // AppUser updatedAppUser = appUserRepository.save(appUser);
+        Contract updatedContract = contractRepository.save(contract);
+        return ResponseEntity //
+                .created(linkTo(methodOn(ContractController.class).one(updatedContract.getId())).toUri()) //
+                .body(assembler.toModel(updatedContract));
+    }
 }
-//ADZKS-122
+// ADZKS-122

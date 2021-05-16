@@ -19,11 +19,9 @@ public class Contract {
     private Long id;
     private Date start_date;
     private Date end_date;
-    private Long money;
+    private long money;
 
     @OneToOne
     private AppUser user;
-
-
 
 }
