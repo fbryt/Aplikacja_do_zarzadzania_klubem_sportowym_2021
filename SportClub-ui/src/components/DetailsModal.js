@@ -53,7 +53,7 @@ export const DetailsModal = ({ appUser }) => {
         }
     }
     const handleNew = () => {
-
+        setContractData({ money: 0, start_date: new Date(), end_date: new Date() });
     }
 
     const contractGroup = (contractData) ?

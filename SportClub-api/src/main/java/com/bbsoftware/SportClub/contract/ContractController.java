@@ -110,9 +110,14 @@ public class ContractController {
 
         AppUser appUser = appUserRepository.findById(id).orElseThrow(() -> new AppUserNotFoundException(id));
         Contract contract = appUser.getContract();
+
+        if (contract == null)
+            contract = new Contract();
+
         contract.setMoney(contractRequest.getMoney());
         contract.setStart_date(contractRequest.getStart_date());
         contract.setEnd_date(contractRequest.getEnd_date());
+        contract.setUser(appUser);
 
         contractRepository.save(contract);
         return ResponseEntity //
