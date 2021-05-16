@@ -14,7 +14,7 @@ import NotFound from "./components/pages/NotFound";
 import AnnouncementPage from "./components/pages/AnnouncementPage";
 import Register from "./components/Register";
 import ContractPage from "./components/pages/ContractPage";
-
+import SettingsPage from "./components/pages/SettingsPage";
 
 class App extends React.Component {
 
@@ -32,6 +32,7 @@ class App extends React.Component {
                     <Route exact path="/forgotpassword" exact component={ResetPassword} />
                     <Route exact path="/resetpassword/:token" exact component={ResetPasswordToken} ></Route>
 
+                    <AuthRoute exact path="/settings" exact component={SettingsPage}/>
                     <AuthRoute exact path="/settings/password" exact component={ChangePassword}/>
                     <AuthRoute exact path="/dashboard" exact component={DashboardPage} />
                     <AuthRoute exact path="/appUsers" exact component={AppUsersPage} />
