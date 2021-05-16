@@ -9,6 +9,9 @@ import com.bbsoftware.SportClub.exceptions.AppUserNotFoundException;
 import com.bbsoftware.SportClub.exceptions.OrderNotFoundException;
 import com.bbsoftware.SportClub.models.Order;
 import lombok.AllArgsConstructor;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
@@ -18,6 +21,9 @@ import org.springframework.util.ReflectionUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import io.jsonwebtoken.io.IOException;
+
+import java.io.File;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
@@ -51,36 +57,45 @@ public class AnnouncementController {
     }
 
     @PostMapping("/announcements")
-    ResponseEntity<EntityModel<Announcement>> newAnnouncement(@RequestBody AnnouncementRequest announcementRequest) {
+    ResponseEntity<EntityModel<Announcement>> newAnnouncement(@RequestBody AnnouncementRequest announcementRequest)
+            throws java.io.IOException {
 
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (principal instanceof AppUser) {
 
-            Long id = ((AppUser)principal).getId();
+            Long id = ((AppUser) principal).getId();
             Announcement announcement = new Announcement();
             announcement.setText(announcementRequest.getText());
             announcement.setDate(announcementRequest.getDate());
-            AppUser appUser = appUserRepository.findById(id)
-                    .orElseThrow(() -> new AppUserNotFoundException(id));
+            AppUser appUser = appUserRepository.findById(id).orElseThrow(() -> new AppUserNotFoundException(id));
             announcement.setUser(appUser);
 
-            if (announcementRequest.getSendEmail()) {
-                System.out.println("Sending emails...");
-                List<AppUser> appUsers = appUserRepository.findAll();
-                for (AppUser user : appUsers) {
-                    emailService.send(user.getEmail(), "There's been an announcment!", "[ADZKS] Important announcement!");
-                }
-            }
-
             announcementRepository.save(announcement);
+
+            if (announcementRequest.getSendEmail()) {
+                File input = new File("src/main/resources/templates/alertMail.html");
+                Document doc;
+                try {
+                    doc = Jsoup.parse(input, null);
+                    String mail = doc.toString();
+                    System.out.println("Sending emails...");
+                    List<AppUser> appUsers = appUserRepository.findAll();
+                    for (AppUser user : appUsers) {
+                        emailService.send(user.getEmail(), mail, "[ADZKS] Important announcement!");
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return new ResponseEntity(HttpStatus.FORBIDDEN);
+                }
+
+            }
 
             return ResponseEntity //
                     .created(linkTo(methodOn(AnnouncementController.class).one(announcement.getId())).toUri()) //
                     .body(assembler.toModel(announcement));
 
         } else {
-            throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND, "User not found");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
         }
 
     }
