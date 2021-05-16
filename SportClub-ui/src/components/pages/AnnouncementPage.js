@@ -36,12 +36,8 @@ export default class AnnouncementPagePage extends Component {
         }
 
         const url = "http://localhost:8080/announcements"
-        axios.post(url, announ).then((response) => {
-            this.props.history.push(`/dashboard`);
-        }).catch(err => {
-            if (err.request) { console.log(err.request) } if (err.response) { console.log(err.response) }
-
-        });
+        axios.post(url, announ);    //TODO: fix
+        this.props.history.push(`/dashboard`);
     }
 
     handleChange(date) {
