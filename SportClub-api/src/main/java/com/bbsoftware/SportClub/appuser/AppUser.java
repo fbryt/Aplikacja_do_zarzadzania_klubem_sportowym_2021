@@ -27,8 +27,7 @@ import java.util.stream.DoubleStream;
 @EqualsAndHashCode
 @NoArgsConstructor
 @Entity
-@JsonIgnoreProperties(value={ "coach", "players" })
-//sprawdzić tego settera
+
 public class AppUser implements UserDetails {
 
     @Id
@@ -48,6 +47,7 @@ public class AppUser implements UserDetails {
     @ManyToOne
     private AppUser coach;
     @OneToMany(mappedBy="coach")
+    @JsonIgnore
     private List<AppUser> players;
 
 

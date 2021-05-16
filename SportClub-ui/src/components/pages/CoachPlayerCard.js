@@ -13,6 +13,10 @@ export default class CoachPlayerCard extends React.Component{
              coach: '',
              option: ''
         }
+
+        if(this.props.player.coach !== null){
+            this.state.option = this.props.player.coach.firstName+ " " +this.props.player.coach.lastName;
+        }
         this.handleChange = this.handleChange.bind(this);
         this.submitData = this.submitData.bind(this);
     }
@@ -43,19 +47,27 @@ export default class CoachPlayerCard extends React.Component{
 
     handleChange(selectedOption) {
         this.setState({coach : selectedOption.value});
-        this.setState({option : selectedOption});
     }
+
+
 
     render() {
 
+
+        let coachName;
+        if (this.state.option !== '') {
+            coachName = <h5>Coach: {this.state.option}</h5>;
+        } else {
+            coachName = <h5>Coach not found</h5>;
+        }
         return (
             <div id="logform">
                 <div className="row">
-                    <div><h5>{this.state.firstName} {this.state.lastName}</h5></div>
-
+                    <div><h5>Player: {this.state.firstName} {this.state.lastName}</h5></div>
+                    <div>{coachName}</div>
                     <div style={{width: '300px'}}>
                         <Select
-                            value={this.state.option}
+
                             onChange={this.handleChange}
                             options={this.renderList()}
                         />
