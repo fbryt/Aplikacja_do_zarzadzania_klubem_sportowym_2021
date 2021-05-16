@@ -9,10 +9,8 @@ import java.util.Date;
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
-public class ContractRequest {
-    private Long id;
+public class ContractUpdateRequest {
     private Date start_date;
     private Date end_date;
     private Long money;
-    private Long user_id;
 }

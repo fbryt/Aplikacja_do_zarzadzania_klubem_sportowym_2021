@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button, Modal, Form } from "react-bootstrap"
 import axios from "axios";
+import DatePicker from "react-date-picker";
 
 const url = "http://localhost:8080/contract/user/";
 
@@ -15,13 +16,12 @@ export const DetailsModal = ({ appUser }) => {
         if (appUser === undefined) return;
 
         await axios.get(url + appUser.id).then(response => {
-            setContractData(response.data);
+            setContractData({ ...response.data, start_date: new Date(response.data.start_date), end_date: new Date(response.data.end_date) });
         }).catch(error => {
             setContractData(null);
-            //console.log(error);
         });
 
-    }, []);
+    }, [show]);
 
     if (appUser === undefined) return null;
 
@@ -33,19 +33,53 @@ export const DetailsModal = ({ appUser }) => {
     const handleClose = () => {
         setShow(false);
     }
-    const handleChange = () => {
-
+    const handleChange = (event) => {
+        setContractData({
+            ...contractData, [event.target.name]: event.target.value
+        });
     }
-    const handleSave = () => {
+    const handleSave = async () => {
+        const update = {
+            start_date: contractData.start_date,
+            end_date: contractData.end_date,
+            money: contractData.money
+        }
 
+        try {
+            await axios.patch(url + appUser.id, update);
+            console.log("Success!");
+        } catch (e) {
+            console.log(`😱 Axios request failed: ${e}`);
+        }
     }
     const handleNew = () => {
 
     }
 
     const contractGroup = (contractData) ?
-        <Form.Control as="textarea" rows={3} readOnly={false} defaultValue={appUser.firstName + " " + appUser.lastName}
-            onChange={handleChange} /> :
+        <div>
+
+            <Form.Label>Start Date</Form.Label>
+            <DatePicker
+                className="calendar"
+                value={contractData.start_date}
+                selected={contractData.start_date}
+                onChange={date => setContractData({ ...contractData, start_date: date })}
+                showTimeInput
+            />
+
+            <Form.Label>End Date</Form.Label>
+            <DatePicker
+                className="calendar"
+                value={contractData.end_date}
+                selected={contractData.end_date}
+                onChange={date => setContractData({ ...contractData, end_date: date })}
+                showTimeInput
+            />
+            <Form.Control required as="input" defaultValue={contractData.money}
+                name="money" onChange={handleChange} />
+        </div >
+        :
         <div>
             <h1>This user has no contract.</h1>
             < Button variant="primary" size="sm" onClick={handleNew} >
@@ -66,11 +100,13 @@ export const DetailsModal = ({ appUser }) => {
 
                 <Modal.Body>
                     <Form>
-                        <Form.Group controlId="testEdit">
-                            <Form.Label>Contract Info</Form.Label>
-                            {contractGroup}
+                        <Form.Row>
+                            <Form.Group controlId="testEdit">
+                                <Form.Label>Contract Info</Form.Label>
+                                {contractGroup}
 
-                        </Form.Group>
+                            </Form.Group>
+                        </Form.Row>
                         {contractData ?
                             <Button onClick={handleSave}>Save Changes</Button>
                             : ""}

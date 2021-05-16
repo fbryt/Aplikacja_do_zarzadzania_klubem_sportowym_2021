@@ -106,25 +106,18 @@ public class ContractController {
     }
 
     @PatchMapping("/contract/user/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Map<Object, Object> updates) {
+    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody ContractUpdateRequest contractRequest) {
 
         AppUser appUser = appUserRepository.findById(id).orElseThrow(() -> new AppUserNotFoundException(id));
         Contract contract = appUser.getContract();
-        if (contract == null)
-            throw new ContractNotFoundException(id);
-        updates.forEach((k, v) -> {
-            // use reflection to get field k on manager and set it to value v
-            Field field = ReflectionUtils.findField(Contract.class, (String) k);
-            field.setAccessible(true);
+        contract.setMoney(contractRequest.getMoney());
+        contract.setStart_date(contractRequest.getStart_date());
+        contract.setEnd_date(contractRequest.getEnd_date());
 
-            ReflectionUtils.setField(field, contract, v);
-        });
-
-        // AppUser updatedAppUser = appUserRepository.save(appUser);
-        Contract updatedContract = contractRepository.save(contract);
+        contractRepository.save(contract);
         return ResponseEntity //
-                .created(linkTo(methodOn(ContractController.class).one(updatedContract.getId())).toUri()) //
-                .body(assembler.toModel(updatedContract));
+                .created(linkTo(methodOn(ContractController.class).one(contract.getId())).toUri()) //
+                .body(assembler.toModel(contract));
     }
 }
 // ADZKS-122
