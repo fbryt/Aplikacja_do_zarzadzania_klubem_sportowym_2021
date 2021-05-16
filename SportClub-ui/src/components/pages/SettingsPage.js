@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import {Form, Button, Col, ListGroup, ListGroupItem, Container,Row} from 'react-bootstrap';
 import axios from 'axios';
-import 'bootstrap/dist/css/bootstrap.css'
 
 import Menu from "../menu/Menu";
 import Footer from "../menu/Footer";
@@ -39,26 +38,24 @@ export default class SettingsPage extends Component{
                         <div id="mainInscript">
                             <h1>User Info</h1>
                         </div>
-                        <ListGroup horizontal>
-                            <Row>
-                                <Col>
-
-                                    <ListGroupItem className="listItem">First Name</ListGroupItem>
-                                    <ListGroupItem className="listItem">Last Name</ListGroupItem>
-                                    <ListGroupItem className="listItem">Email</ListGroupItem>
-                                    <ListGroupItem className="listItem">Role</ListGroupItem>
-
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col>
-                                    <ListGroupItem className="listItemText"><strong>{this.state.data.firstName}</strong></ListGroupItem>
-                                    <ListGroupItem className="listItemText"><strong>{this.state.data.lastName}</strong></ListGroupItem>
-                                    <ListGroupItem className="listItemText"><strong>{this.state.data.email}</strong></ListGroupItem>
-                                    <ListGroupItem className="listItemText"><strong>{this.state.data.appUserRole}</strong></ListGroupItem>
-                                </Col>
-                            </Row>
-                        </ListGroup>
+                        <table className="listItemTable">
+                            <tr>
+                                <th className="listItem">First Name</th>
+                                <td className="listItemText"><strong>{this.state.data.firstName}</strong></td>
+                            </tr>
+                            <tr>
+                                <th className="listItem">Last Name</th>
+                                <td className="listItemText"><strong>{this.state.data.lastName}</strong></td>
+                            </tr>
+                            <tr>
+                                <th className="listItem">Email</th>
+                                <td className="listItemText"><strong>{this.state.data.email}</strong></td>
+                            </tr>
+                            <tr>
+                                <th className="listItem">Role</th>
+                                <td className="listItemText"><strong>{this.state.data.appUserRole}</strong></td>
+                            </tr>
+                        </table>
                     </Container>
                 </div>
 

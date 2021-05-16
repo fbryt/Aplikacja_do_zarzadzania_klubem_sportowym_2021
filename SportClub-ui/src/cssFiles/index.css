@@ -27,7 +27,7 @@ code {
 #settingsPage{
   min-width: 300px;
   max-width: 500px;
-  min-height: 290px;
+  min-height: 325px;
   max-height: 500px;
   margin: 50px auto;
   background-color: #FFFFFF;
@@ -78,6 +78,7 @@ code {
   padding-top: 2rem;
   max-width: 100%;
 }
+
 .invalid{
   border:1px solid #ff0000;
 }
@@ -216,17 +217,29 @@ a:link {
 }
 
 
+.listItemTable{
+  width:100%;
+}
+
 .listItem{
-  justify-content: space-evenly;
   padding-top: 20px;
   text-align: left;
-  border: none !important;
   flex:1;
+  position: relative;
+  display: block;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  padding: 0.75rem 1.25rem;
+
 }
 
 .listItemText{
-  border:none !important;
   width:100%;
+  line-height: 1.5;
+  color: #212529;
+  text-align: left;
+  font-size: 1rem;
 }
 .date{
   float:right;
