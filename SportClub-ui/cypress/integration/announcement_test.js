@@ -2,6 +2,8 @@ const currentUser = {
     username: "pablo@white.com",
     password: "pablowhite"
 }
+const message = "Hello Cypress!";
+const editMessage = "Bye Cypress!";
 
 describe('Create announcement', () => {
     it('Is able to create announcement', () => {
@@ -10,11 +12,18 @@ describe('Create announcement', () => {
 
         cy.visit('http://localhost:3000/announcement');
 
-        cy.get('button').click({multiple : true});
+        cy.get('button[editext="edit-button"]').click();
 
-        cy.url().should('include', '/dashboard');
 
-        cy.contains('11.05.2021 Na Sohan odbedzie sie event gorniczy');
+        cy.get('textarea').clear().type(message);
+
+        cy.get('button[editext="save-button"]').click();
+
+        cy.get('button').contains('Submit').click();
+
+        cy.url().should('include', 'dashboard');
+        cy.reload();
+        cy.contains(message);
     })
 })
 describe('Edit and delete announcement', () => {
@@ -24,18 +33,16 @@ describe('Edit and delete announcement', () => {
 
         cy.visit('http://localhost:3000/dashboard');
 
-        cy.get('ul button:first').click({multiple : true});
+        const card = cy.contains('div[id=logform]', message);
+        card.find('button').contains('Edit').click();
 
-        cy.url().should('include', '/dashboard');
+        cy.get('textarea').clear().type(editMessage);
+        cy.get('button').contains('Save').click();
 
-        cy.contains('11.05.2021 Na Sohan odbedzie sie event gorniczy');
-        cy.get('textarea').type("siema");
-        cy.get('button').contains("Save Changes").click({multiple:true});
-        cy.url().should('include', '/dashboard');
-        cy.contains('11.05.2021 Na Sohan odbedzie sie event gorniczysiema');
-        cy.get('button').contains("Delete").click({multiple : true});
-        cy.url().should('include', '/dashboard');
-        cy.contains('11.05.2021 Na Sohan odbedzie sie event gorniczy').should('not.exist');
+        const editedCard = cy.contains('div[id=logform]', editMessage);
+        editedCard.find('button').contains('Delete').click();
+
+        editedCard.should('not.exist');
     })
 })
 
