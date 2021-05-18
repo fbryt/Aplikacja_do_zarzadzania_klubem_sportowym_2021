@@ -24,6 +24,9 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 14.x
+      - name: Install Node dependencies
+        working-directory: ./SportClub-ui/
+        run: npm ci
       - name: Cypress tests
         uses: cypress-io/github-action@v2
         with:
