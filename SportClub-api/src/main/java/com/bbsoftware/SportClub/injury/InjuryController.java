@@ -1,14 +1,10 @@
 package com.bbsoftware.SportClub.injury;
 
-import com.bbsoftware.SportClub.announcement.*;
 import com.bbsoftware.SportClub.appuser.AppUser;
 import com.bbsoftware.SportClub.appuser.AppUserRepository;
-import com.bbsoftware.SportClub.exceptions.AnnouncementNotFoundException;
 import com.bbsoftware.SportClub.exceptions.AppUserNotFoundException;
-import io.jsonwebtoken.io.IOException;
+import com.bbsoftware.SportClub.exceptions.InjuryNotFoundException;
 import lombok.AllArgsConstructor;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
@@ -18,7 +14,6 @@ import org.springframework.util.ReflectionUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.io.File;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
@@ -44,21 +39,21 @@ public class InjuryController {
     }
 
     @GetMapping("/injuries/{id}")
-    public EntityModel<Announcement> one(@PathVariable Long id) {
+    public EntityModel<Injury> one(@PathVariable Long id) {
         Injury injury = injuryRepository.findById(id)
                 .orElseThrow(() -> new InjuryNotFoundException(id));
         return assembler.toModel(injury);
     }
 
     @PostMapping("/injuries")
-    ResponseEntity<EntityModel<Announcement>> newAnnouncement(@RequestBody InjuryRequest injuryRequest) {
+    ResponseEntity<EntityModel<Injury>> newInjury(@RequestBody InjuryRequest injuryRequest) {
 
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (principal instanceof AppUser) {
 
             Long id = ((AppUser) principal).getId();
             Injury injury = new Injury();
-            injury.setDescription(injuryRequest.getText());
+            injury.setDescription(injuryRequest.getDescription());
             injury.setStart_date(injuryRequest.getStart_date());
             injury.setEnd_date(injuryRequest.getEnd_date());
             AppUser appUser = appUserRepository.findById(id).orElseThrow(() -> new AppUserNotFoundException(id));
@@ -82,7 +77,7 @@ public class InjuryController {
         Injury injury = injuryRepository.findById(id) //
                 .orElseThrow(() -> new InjuryNotFoundException(id));
 
-        injury.delete(injury);
+        injuryRepository.delete(injury);
     }
 
     @PatchMapping("/injuries/{id}")
