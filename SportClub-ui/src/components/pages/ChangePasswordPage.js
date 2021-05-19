@@ -94,7 +94,6 @@ export default class ChangePassword extends Component{
                             <h1>Change Password</h1>
                         </div>
                         <Form onSubmit={this.changePassword} id="changePasswordForm">
-
                             <PasswordField label="Current Password" name="oldpassword" inClass={errors.oldpassword ? 'invalid' : ''} parentCallback={this.handleCallback}/>
                             <div>
                                 <h6 style={{color:"red"}} >{errors.oldpassword}</h6>
@@ -105,9 +104,14 @@ export default class ChangePassword extends Component{
                                 <h6 style={{color:"red"}} >{errors.confirmpassword}</h6>
                             </div>
                             <div id="button" className="row">
-                                <button>Change Password</button>
+                                <div className="col-sm">
+                                </div>
+                                <div className="col-sm">
+                                    <button className="btn btn-dark justify-content-center">Change Password</button>
+                                </div>
+                                <div className="col-sm">
+                                </div>
                             </div>
-
                         </Form>
                     </div>
                 </Container>

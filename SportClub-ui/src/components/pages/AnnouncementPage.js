@@ -118,7 +118,7 @@ export default class AnnouncementPagePage extends Component {
                     </div>
 
                     <div id="button" className="row">
-                        <button>Submit</button>
+                        <button className="btn btn-dark btn-lg btn-block">Submit</button>
                     </div>
 
 

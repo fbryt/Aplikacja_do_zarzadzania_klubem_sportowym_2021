@@ -63,18 +63,24 @@ export default class CoachPlayerCard extends React.Component{
         return (
             <div id="logform">
                 <div className="row">
-                    <div><h5>Player: {this.state.firstName} {this.state.lastName}</h5></div>
-                    <div>{coachName}</div>
-                    <div style={{width: '300px'}}>
+                    <div className="col-sm">
+                        <h5>Player: {this.state.firstName} {this.state.lastName}</h5>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-sm">
+                        {coachName}
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-sm">
                         <Select
-
                             onChange={this.handleChange}
                             options={this.renderList()}
                         />
                     </div>
                 </div>
-
-                <Button onClick={this.submitData}>Submit</Button>
+                <Button className="btn btn-dark btn-block btn-lg mt-1" onClick={this.submitData}>Submit</Button>
 
 
             </div>

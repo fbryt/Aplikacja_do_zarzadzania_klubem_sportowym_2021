@@ -74,7 +74,13 @@ export const ResetPasswordTokenPage = () => {
 
 
                         <div id="button" className="row">
-                            <button>Reset</button>
+                            <div className="col-sm">
+                            </div>
+                            <div className="col-sm">
+                                <button className="btn btn-dark btn-block btn-lg">Reset</button>
+                            </div>
+                            <div className="col-sm">
+                            </div>
                         </div>
 
                     </Form>

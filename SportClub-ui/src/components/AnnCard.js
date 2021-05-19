@@ -63,17 +63,22 @@ render() {
     return (
         <div id="logform">
             <div className="row">
-                <div><h5>{this.state.firstName} {this.state.lastName}</h5></div>
-                <div className="date">{this.state.date.substring(0, 10) + " " + this.state.date.substring(11, 16)}</div>
+                <div className="col-sm"></div>
+                <div className="col-sm"><h5>{this.state.firstName} {this.state.lastName}</h5></div>
+                <div className="col-sm"></div>
             </div>
-            <div>
-                <span className="text">{this.state.text}</span>
+            <div className="row">
+                <div className="col-sm"></div>
+                <div className="date col-sm">{this.state.date.substring(0, 10) + " " + this.state.date.substring(11, 16)}</div>
+                <div className="col-sm"></div>
             </div>
-
-            <Button variant="primary" size="sm" onClick={this.handleShow} hidden={!(this.state.role==="ADMIN")}>
+            <div className="row bg-light">
+            <span className="text">{this.state.text}</span>
+            </div>
+            <Button variant="dark" size="sm" onClick={this.handleShow} hidden={!(this.state.role==="ADMIN")}>
                 Edit
             </Button>{" "}
-            <Button onClick={this.delete} variant="primary" size="sm" hidden={!(this.state.role==="ADMIN")}>
+            <Button onClick={this.delete} variant="danger" size="sm" hidden={!(this.state.role==="ADMIN")}>
                 Delete
             </Button>
             <Modal show={this.state.show} onHide={this.handleClose}>

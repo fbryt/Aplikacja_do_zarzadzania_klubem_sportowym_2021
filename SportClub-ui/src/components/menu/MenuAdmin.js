@@ -28,7 +28,7 @@ const MenuAdmin = () => {
               <Nav.Link href="/dashboard">Home</Nav.Link>
               <Nav.Link href="#">Schedule</Nav.Link>
               <Nav.Link href="/mycontract">Contract</Nav.Link>
-              <DropdownButton id="dropdown-basic-button" title="Admin tools">
+              <DropdownButton id="dropdown-basic-button" variant="secondary" title="Admin tools">
                 <Dropdown.Item href="/appUsers">Check all users</Dropdown.Item>
                 <Dropdown.Item href="/playersWithCoach">Connect players with Coach</Dropdown.Item>
                 <Dropdown.Item href="/announcement">Create announcement</Dropdown.Item>
@@ -36,7 +36,7 @@ const MenuAdmin = () => {
               </DropdownButton>
             </Nav>
 
-            <DropdownButton id="dropdown-basic-button" drop="down" title="Account">
+            <DropdownButton id="dropdown-basic-button" variant="secondary" drop="down" title="Account">
               <Dropdown.Item href="/settings">Info</Dropdown.Item>
               <Dropdown.Item href="/settings/password">Change password</Dropdown.Item>
               <Dropdown.Item href="#" onClick={Logout}> Logout </Dropdown.Item>

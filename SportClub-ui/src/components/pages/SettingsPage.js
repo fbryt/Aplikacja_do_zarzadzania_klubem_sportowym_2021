@@ -17,6 +17,10 @@ export default class SettingsPage extends Component{
         this.state = {
             data:[]
         }
+        this.state.data.firstName='';
+        this.state.data.lastName='';
+        this.state.data.email='';
+        this.state.data.appUserRole='';
     }
 
     async componentWillMount(){
@@ -38,27 +42,36 @@ export default class SettingsPage extends Component{
                         <div id="mainInscript">
                             <h1>User Info</h1>
                         </div>
-                        <table className="listItemTable">
-                            <tr>
-                                <th className="listItem">First Name</th>
-                                <td className="listItemText"><strong>{this.state.data.firstName}</strong></td>
-                            </tr>
-                            <tr>
-                                <th className="listItem">Last Name</th>
-                                <td className="listItemText"><strong>{this.state.data.lastName}</strong></td>
-                            </tr>
-                            <tr>
-                                <th className="listItem">Email</th>
-                                <td className="listItemText"><strong>{this.state.data.email}</strong></td>
-                            </tr>
-                            <tr>
-                                <th className="listItem">Role</th>
-                                <td className="listItemText"><strong>{this.state.data.appUserRole}</strong></td>
-                            </tr>
-                        </table>
+                        <div className="form-group row">
+                            <label htmlFor="name" className="col-sm-2 col-form-label">First Name</label>
+                            <div className="col-sm-10">
+                                <input type="text" readOnly className="form-control-plaintext" id="name"
+                                       value={this.state.data.firstName}/>
+                            </div>
+                        </div>
+                        <div className="form-group row">
+                            <label htmlFor="surname" className="col-sm-2 col-form-label">Surname</label>
+                            <div className="col-sm-10">
+                                <input type="text" readOnly className="form-control-plaintext" id="surname"
+                                       placeholder="surname" value={this.state.data.lastName}/>
+                            </div>
+                        </div>
+                        <div className="form-group row">
+                            <label htmlFor="email" className="col-sm-2 col-form-label">Email</label>
+                            <div className="col-sm-10">
+                                <input type="text" readOnly className="form-control-plaintext" id="email"
+                                       placeholder="email" value={this.state.data.email}/>
+                            </div>
+                        </div>
+                        <div className="form-group row">
+                            <label htmlFor="role" className="col-sm-2 col-form-label">Role</label>
+                            <div className="col-sm-10">
+                                <input type="text" readOnly className="form-control-plaintext" id="role"
+                                       placeholder="role" value={this.state.data.appUserRole}/>
+                            </div>
+                        </div>
                     </Container>
                 </div>
-
                 <Footer></Footer>
             </div>
         )

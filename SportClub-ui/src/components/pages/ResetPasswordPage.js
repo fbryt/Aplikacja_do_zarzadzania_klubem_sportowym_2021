@@ -61,7 +61,13 @@ export default class ResetPassword extends Component {
                             </div>
                         </Form.Group>
                         <div id="button" className="row">
-                            <button class="btn btn-dark">Submit</button>
+                            <div className="col-sm">
+                            </div>
+                            <div className="col-sm">
+                                <button className="btn btn-dark">Submit</button>
+                            </div>
+                            <div className="col-sm">
+                            </div>
                         </div>
                     </Form>
                 </div>

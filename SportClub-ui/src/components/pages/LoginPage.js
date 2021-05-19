@@ -79,21 +79,29 @@ export default class LoginPage extends Component{
                             <div>
                                 {message}
                             </div>
-
                         </Form.Group>
-
-
                         <div id="button" className="row">
-                            <button>Log in</button>
+                            <div className="col-sm">
+                            </div>
+                            <div className="col-sm">
+                                <button className="btn btn-dark btn-block btn-lg">Log in</button>
+                            </div>
+                            <div className="col-sm">
+                            </div>
                         </div>
-
                 </Form>
-
                 <div id="button" className="row">
-                    <a href="/forgotpassword" className="btn-mine">
-                        Forgot password
-                    </a>
+                    <div className="col-sm">
+                    </div>
+                    <div className="col-sm">
+                        <a href="/forgotpassword" className="btn btn-dark btn-block btn-lg">
+                            Forgot password
+                        </a>
+                    </div>
+                    <div className="col-sm">
+                    </div>
                 </div>
+
 
                 <Footer />
             </div>

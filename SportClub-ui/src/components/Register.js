@@ -2,6 +2,8 @@ import React, {Component} from "react";
 import {Form,Button, Col} from 'react-bootstrap';
 import axios from 'axios';
 import NotFound from "./pages/NotFound";
+import Menu from "./menu/Menu";
+import Footer from "./menu/Footer";
 export default class Register extends Component {
     constructor(props) {
         super(props);
@@ -57,7 +59,10 @@ export default class Register extends Component {
 
         if(!this.state.err)
         {
-            content= <div id="regform">
+            content=
+                <div>
+                <Menu/>
+                <div id="regform">
                 <div id="mainInscript">
                     <h1>Register</h1>
                 </div>
@@ -93,8 +98,6 @@ export default class Register extends Component {
                             <Form.Control required autoComplete="off" type="text" name="lastName"  onChange={this.dataChange} />
                         </div>
                     </Form.Group>
-
-
                     <Form.Group as={Col} controlId="formRole">
                         <div className="row">
                             <Form.Label>Role</Form.Label>
@@ -106,14 +109,18 @@ export default class Register extends Component {
                             <option value="ADMIN">Admin</option>
                         </Form.Control>
                     </Form.Group>
-
-
                     <div id="button" className="row">
-                        <button>Submit</button>
+                        <div className="col-sm">
+                        </div>
+                        <div className="col-sm">
+                            <button className="btn btn-dark btn-lg">Submit</button>
+                        </div>
+                        <div className="col-sm">
+                        </div>
                     </div>
-
                 </Form>
-            </div>;
+            </div>
+            <Footer/></div>;
         } else{ content=<div></div>;}
         return (
            <div>{content}</div>
