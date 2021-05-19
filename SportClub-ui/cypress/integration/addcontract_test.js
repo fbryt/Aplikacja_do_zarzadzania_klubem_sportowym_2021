@@ -2,7 +2,6 @@ const currentUser = {
     username: "pablo@white.com",
     password: "pablowhite"
 }
-const nextUser =
 
     describe('Check contractPage', () => {
         it('Is able to edit contract data', () => {
@@ -22,6 +21,7 @@ const nextUser =
             })
             cy.get('form').within(() =>{
                 cy.contains("Create New Contract").click();
+                cy.contains('Save Changes');
                 cy.get('input[name="money"]').clear().type(6000);
                 cy.get(".react-date-picker__inputGroup").eq(1).within(()=>{
                     cy.get('input[name="year"]').type(2022);
