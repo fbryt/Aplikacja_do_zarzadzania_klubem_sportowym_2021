@@ -61,29 +61,36 @@ export default class InjuryPage extends Component {
                     <h1>Claim injured</h1>
                 </div>
                 <Form onSubmit={this.submitInjury} id="LoginForm">
-
-                    <div id="mainInscript" >
-                        <FormLabel>From:  </FormLabel>
-                        <DatePicker
-                            className="calendar"
-                            selected={this.state.dateFrom}
-                            onChange={this.handleChangeFrom}
-                            showTimeInput
-                        />
-
+                    <div className="row" >
+                        <div className="col-sm">
+                        </div>
+                        <div className="col-sm">
+                            <FormLabel>From:  </FormLabel>
+                            <DatePicker
+                                className="calendar"
+                                selected={this.state.dateFrom}
+                                onChange={this.handleChangeFrom}
+                                showTimeInput
+                            />
+                        </div>
+                        <div className="col-sm">
+                        </div>
                     </div>
-                    <div id="mainInscript" >
-                        <FormLabel>To:  </FormLabel>
-                        <DatePicker
-                            className="calendar"
-                            selected={this.state.dateTo}
-                            onChange={this.handleChangeTo}
-                            showTimeInput
-                        />
-
+                    <div className="row" >
+                        <div className="col-sm">
+                        </div>
+                        <div className="col-sm">
+                            <FormLabel>To:  </FormLabel>
+                            <DatePicker
+                                className="calendar"
+                                selected={this.state.dateTo}
+                                onChange={this.handleChangeTo}
+                                showTimeInput
+                            />
+                        </div>
+                        <div className="col-sm">
+                        </div>
                     </div>
-
-
                     <div id="mainInscript" >
                         <EdiText
                             viewContainerClassName='textPlaceholder'
@@ -115,9 +122,8 @@ export default class InjuryPage extends Component {
                             onSave={this.OnSave}
                         />
                     </div>
-
                     <div id="button" className="row">
-                        <button>Submit</button>
+                            <button className="btn btn-dark btn-lg btn-block">Submit</button>
                     </div>
                 </Form>
                 <Footer/>
