@@ -28,7 +28,7 @@ const MenuPlayer = () => {
               <Nav.Link href="/dashboard">Home</Nav.Link>
               <Nav.Link href="#">Schedule</Nav.Link>
               <Nav.Link href="/mycontract">Contract</Nav.Link>
-              <Nav.Link href="declareInjury">Declare Injury</Nav.Link>
+              <Nav.Link href="/declareInjury">Declare Injury</Nav.Link>
             </Nav>
             <DropdownButton id="dropdown-basic-button" drop="down" variant="secondary"title="Account">
               <Dropdown.Item href="/settings">Info</Dropdown.Item>
