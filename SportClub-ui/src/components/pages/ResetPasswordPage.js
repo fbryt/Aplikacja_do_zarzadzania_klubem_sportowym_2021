@@ -64,7 +64,7 @@ export default class ResetPassword extends Component {
                             <div className="col-sm">
                             </div>
                             <div className="col-sm">
-                                <button className="btn btn-dark">Submit</button>
+                                <button className="btn btn-dark btn-block btn-lg">Submit</button>
                             </div>
                             <div className="col-sm">
                             </div>
