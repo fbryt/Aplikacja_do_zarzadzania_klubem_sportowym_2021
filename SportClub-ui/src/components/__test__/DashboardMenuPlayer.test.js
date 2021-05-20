@@ -29,7 +29,7 @@ describe('Testing menu player', () => {
                 <Dashboard required={true} location={{ hash: "", pathname: "/dashboard", search: "", state: undefined }} match={{ isExact: true, path: "/dashboard", url: "/dashboard" }} />
             </BrowserRouter>, root
         );
-        expect(document.body.textContent).toContain('HomeScheduleContractAccount');
+        expect(document.body.textContent).toContain('HomeScheduleContractDeclare InjuryAccount');
     })
 
 })
