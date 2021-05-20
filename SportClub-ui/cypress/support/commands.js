@@ -36,4 +36,8 @@ Cypress.Commands.add('login', ({ username, password }) => {
 
     cy.url().should('include', '/dashboard')
 
-})
+});
+
+Cypress.Commands.add('resetDB', () => {
+    cy.request('http://localhost:8080/db/reset');
+});
