@@ -9,13 +9,16 @@ import com.bbsoftware.SportClub.exceptions.AppUserNotFoundException;
 
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
 import lombok.AllArgsConstructor;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @AllArgsConstructor
@@ -43,6 +46,31 @@ public class AppUserController {
                 .orElseThrow(() -> new AppUserNotFoundException(id));
 
         return appUserModelAssembler.toModel(appUser);
+    }
+
+    @GetMapping("/appUsers/players")
+    public CollectionModel<EntityModel<AppUser>> players() {
+
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof AppUser) {
+
+            Long id = ((AppUser) principal).getId();
+
+            AppUser appUser = appUserRepository.findById(id) //
+                    .orElseThrow(() -> new AppUserNotFoundException(id));
+
+            List<EntityModel<AppUser>> players = appUser.getPlayers().stream()
+                    .map(appUserModelAssembler::toModel)
+                    .collect(Collectors.toList());
+
+            return CollectionModel.of(players, //
+                    linkTo(methodOn(AppUserController.class).all()).withSelfRel());
+        }else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
+        }
+
+
+
     }
 
     @PatchMapping("/appUsers/{id}")

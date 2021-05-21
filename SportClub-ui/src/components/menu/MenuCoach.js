@@ -28,7 +28,7 @@ const MenuCoach = () => {
               <Nav.Link href="/dashboard">Home</Nav.Link>
               <Nav.Link href="#">Schedule</Nav.Link>
               <Nav.Link href="/mycontract">Contract</Nav.Link>
-              <Nav.Link href="#">Coach tools</Nav.Link>
+              <Nav.Link href="/coachpanel">Coach tools</Nav.Link>
             </Nav>
             <DropdownButton id="dropdown-basic-button" variant="secondary" drop="down" title="Account">
               <Dropdown.Item href="/settings">Info</Dropdown.Item>

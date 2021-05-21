@@ -116,6 +116,10 @@ public class AppUser implements UserDetails {
         this.coach = user;
     }
 
+    public List<AppUser> getPlayers(){
+        return players;
+    }
+
 
     @Override
     public boolean isAccountNonExpired() {
