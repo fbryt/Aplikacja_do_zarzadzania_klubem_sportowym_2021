@@ -73,6 +73,12 @@ code {
   padding-top: 2rem;
   max-width: 100%;
 }
+.bad{
+  color:red;
+}
+.bad:hover{
+  cursor: pointer;
+}
 
 .invalid{
   border:1px solid #ff0000;
