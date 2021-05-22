@@ -16,7 +16,6 @@ import Register from "./components/Register";
 import ContractPage from "./components/pages/ContractPage";
 import SettingsPage from "./components/pages/SettingsPage";
 import InjuryPage from "./components/pages/InjuryPage";
-import CoachPanel from "./components/pages/CoachPanel";
 import MyPlayersPage from "./components/pages/MyPlayersPage";
 
 class App extends React.Component {
@@ -43,7 +42,6 @@ class App extends React.Component {
                     <AuthRoute exact path="/announcement" exact component={AnnouncementPage} />
                     <AuthRoute exact path="/mycontract" exact component={ContractPage} />
                     <AuthRoute exact path="/declareInjury" exact component={InjuryPage}/>
-                    <AuthRoute exact path="/coachpanel" exact component={CoachPanel}/>
                     <AuthRoute exact path="/myPlayers" exact component={MyPlayersPage} />
                     <Route component={NotFound}/>
                 </Switch>

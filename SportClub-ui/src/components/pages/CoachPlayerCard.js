@@ -74,10 +74,13 @@ export default class CoachPlayerCard extends React.Component{
                 </div>
                 <div className="row">
                     <div className="col-sm">
-                        <Select
-                            onChange={this.handleChange}
-                            options={this.renderList()}
-                        />
+
+                            <Select
+                                onChange={this.handleChange}
+                                options={this.renderList()}
+                            />
+
+
                     </div>
                 </div>
                 <Button className="btn btn-dark btn-block btn-lg mt-1" onClick={this.submitData}>Submit</Button>

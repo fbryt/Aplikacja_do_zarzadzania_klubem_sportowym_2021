@@ -10,11 +10,10 @@ describe('Create announcement', () => {
 
         cy.visit('http://localhost:3000/announcement');
 
-        cy.get('button').click({multiple : true});
+        cy.get('button').contains("Submit").click({multiple : true});
 
         cy.url().should('include', '/dashboard');
 
-        cy.contains('11.05.2021 Na Sohan odbedzie sie event gorniczy');
     })
 })
 describe('Edit and delete announcement', () => {
