@@ -237,4 +237,7 @@ a:link {
   border-radius: 3px;
   border: 1px solid blue;
 }
-
+.photo {
+  height: 75%;
+  width: 100%;
+}
