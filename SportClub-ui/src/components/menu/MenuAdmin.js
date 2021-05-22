@@ -20,8 +20,8 @@ const MenuAdmin = () => {
             <Navbar.Brand href="/dashboard" className="px-m-0 px-p">
               <img
                 src="/B&B-Logo.png"
-                width="423"
-                height="470"
+                width="100"
+                height="45"
               />
             </Navbar.Brand>
             <Nav className="mr-auto">
