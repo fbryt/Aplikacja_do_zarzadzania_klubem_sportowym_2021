@@ -13,7 +13,7 @@ const MenuAdmin = () => {
 
   return (
     <>
-      <Navbar collapseOnSelect fixed='top' expand='sm' bg="dark" variant="dark">
+      <Navbar collapseOnSelect fixed='top' expand='xl' bg="dark" variant="dark">
         <Container>
           <Navbar.Toggle aria-controls='reponsive-navbar-nav' />
           <Navbar.Collapse id='responsive-navbar-nav'>
