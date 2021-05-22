@@ -60,21 +60,17 @@ export default class Register extends Component {
         if(!this.state.err)
         {
             content=
-                <div>
+                <div id="logform">
                 <Menu/>
-                <div id="regform">
                 <div id="mainInscript">
                     <h1>Register</h1>
                 </div>
                 <Form onSubmit={this.submitRegister} id="registerForm">
-
                     <Form.Group as={Col} controlId="formEmail">
                         <div className="row">
                             <Form.Label>Email address</Form.Label>
                             <Form.Control required autoComplete="off" type="email" name="email"  onChange={this.dataChange} />
-
                         </div>
-
                     </Form.Group>
                     <Form.Group as={Col} controlId="formPassword">
                         <div className="row">
@@ -83,8 +79,6 @@ export default class Register extends Component {
                         </div>
 
                     </Form.Group>
-
-
                     <Form.Group as={Col} controlId="formName">
                         <div className="row">
                             <Form.Label>Name</Form.Label>
@@ -119,8 +113,7 @@ export default class Register extends Component {
                         </div>
                     </div>
                 </Form>
-            </div>
-            <Footer/></div>;
+            <Footer/></div>
         } else{ content=<div></div>;}
         return (
            <div>{content}</div>
