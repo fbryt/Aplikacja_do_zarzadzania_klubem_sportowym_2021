@@ -23,6 +23,8 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+import "cypress-mailslurp";
+
 
 Cypress.Commands.add('login', ({ username, password }) => {
 

@@ -1,9 +1,8 @@
 package com.bbsoftware.SportClub.controllers;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,6 +10,7 @@ import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -55,8 +55,9 @@ public class DatabaseController {
 
     @GetMapping("db/seed")
     public ResponseEntity<?> seedDB() throws SQLException, IOException {
-
-        BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/data.sql"));
+        URL url = getClass().getResource("/data.sql");
+        String path = url.getPath();
+        BufferedReader reader = new BufferedReader(new FileReader(path));
         StringBuilder stringBuilder = new StringBuilder();
         char[] buffer = new char[256];
         while (reader.read(buffer) != -1) {
@@ -68,7 +69,7 @@ public class DatabaseController {
         String content = stringBuilder.toString();
 
         try (Connection connection = dataSource.getConnection();) {
-            FileReader file = new FileReader("src/main/resources/data.sql");
+            FileReader file = new FileReader(path);
             PreparedStatement seedQuery = connection.prepareStatement(content);
             seedQuery.executeUpdate();
             file.close();
