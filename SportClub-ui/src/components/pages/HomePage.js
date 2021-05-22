@@ -6,12 +6,26 @@ import Footer from "../menu/Footer";
 
 
 const HomePage = () => (
-    <div id="homeform" className="row">
-        <h1>Sport club management application</h1>
-        <div id="buttonHome" className="row">
-                <Link  to="/login">
-                <button>Login form</button>
-                </Link>
+    <div>
+        <div className="row bg-light">
+            <div className="col-sm">
+            </div>
+            <div className="col-sm">
+                <h1 className="">Sport club app</h1>
+            </div>
+            <div className="col-sm">
+            </div>
+        </div>
+        <div className="row bg-light mt-8 pb-4">
+            <div className="col-sm">
+            </div>
+            <div id="buttonHome" className="col-sm">
+                    <Link  to="/login">
+                    <button className="btn btn-dark btn-lg btn-block">Login form</button>
+                    </Link>
+            </div>
+            <div className="col-sm">
+            </div>
         </div>
             <Footer />
     </div>

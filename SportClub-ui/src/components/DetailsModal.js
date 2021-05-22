@@ -89,7 +89,7 @@ export const DetailsModal = ({ appUser }) => {
 
     return (
         <div>
-            < Button variant="primary" size="sm" onClick={handleShow} >
+            < Button variant="dark" size="sm" onClick={handleShow} >
                 Details
             </Button >
 

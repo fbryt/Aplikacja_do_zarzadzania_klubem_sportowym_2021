@@ -14,9 +14,9 @@ code {
 }
 
 .my-gradient {
-  background: #48c6ef;
-  background: -webkit-linear-gradient(to right, rgba(72, 198, 239, 0.5), rgba(111, 134, 214, 0.5));
-  background: linear-gradient(to right, rgba(72, 198, 239, 0.5), rgba(111, 134, 214, 0.5))
+  background: #6a85b6;
+  background: -webkit-linear-gradient(to right, rgba(106, 133, 182, 0.5), rgba(186, 200, 224, 0.5));
+  background: linear-gradient(to right, rgba(106, 133, 182, 0.5), rgba(186, 200, 224, 0.5))
 }
 
 .my-gradient2 {
@@ -31,7 +31,6 @@ code {
   max-height: 500px;
   margin: 50px auto;
   background-color: #FFFFFF;
-  border-radius: 25px;
 }
 
 #homeform{
@@ -40,14 +39,12 @@ code {
   height: 250px;
   margin: 50px auto;
   background-color: #FFFFFF;
-  border-radius: 25px;
 }
 
 #logform{
   padding: 2rem;
   margin: 50px auto;
   background-color: #FFFFFF;
-  border-radius: 25px;
   max-width: 500px;
 }
 .br-25
@@ -60,7 +57,6 @@ code {
   height: 850px;
   margin: 50px auto;
   background-color: #FFFFFF;
-  border-radius: 25px;
 }
 
 #changepasswordform{
@@ -69,7 +65,6 @@ code {
   height: 550px;
   margin: 50px auto;
   background-color: #FFFFFF;
-  border-radius: 25px;
 }
 .password{
   display: block;
@@ -78,22 +73,15 @@ code {
   padding-top: 2rem;
   max-width: 100%;
 }
+.bad{
+  color:red;
+}
+.bad:hover{
+  cursor: pointer;
+}
 
 .invalid{
   border:1px solid #ff0000;
-}
-.password input{
-  width: 80%;
-  box-sizing: border-box;
-  font-size: 1.3rem;
-  padding-left: 1.5rem;
-  padding-bottom: 1rem;
-  background-color: #E9E9E9;
-  box-shadow: inset 0px -3px 0px 0px rgba(187,187,187,0.2);
-  transition: box-shadow 0.2s ease-in;
-}
-.password label{
-  color: rgba(187,187,187,0.9);
 }
 
 .passwordShow{
@@ -113,15 +101,6 @@ code {
   font-size: 1.3rem;
 
 }
-
-.row{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 1rem;
-  max-width: 100%;
-}
-
 .form-group{
   width: 100%;
   align-items: flex-start;
@@ -154,26 +133,6 @@ code {
 .row input:focus::-webkit-input-placeholder{
   background-color: #E9E9E9;
   opacity: 0;
-}
-
-.row label{
-  align-self: flex-start;
-  color: rgba(187,187,187,0.9);
-}
-
-.row button{
-
-  border-radius: 25px;
-  width: 220px;
-
-  height: 40px;
-  font-size: 1.3rem;
-  color: white;
-  font-weight: 700;
-  background: linear-gradient(to right, rgba(72, 198, 239, 0.5), rgba(111, 134, 214, 0.5));
-  border: 0px;
-  cursor: pointer;
-  transition: opacity 0.25s ease-out;
 }
 a:link {
   text-decoration: none;

@@ -3,7 +3,9 @@ package com.bbsoftware.SportClub.appuser;
 import com.bbsoftware.SportClub.injury.Injury;
 import com.bbsoftware.SportClub.contract.Contract;
 import com.bbsoftware.SportClub.announcement.Announcement;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -59,7 +61,6 @@ public class AppUser implements UserDetails {
     private Contract contract;
 
     @OneToOne(mappedBy = "user")
-    @JsonIgnore
     private Injury injury;
 
     public String getResetToken() {
@@ -114,6 +115,10 @@ public class AppUser implements UserDetails {
     public void setCoach(AppUser user){
 
         this.coach = user;
+    }
+
+    public List<AppUser> getPlayers(){
+        return players;
     }
 
 

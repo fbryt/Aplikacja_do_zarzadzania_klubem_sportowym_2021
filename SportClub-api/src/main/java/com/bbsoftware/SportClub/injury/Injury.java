@@ -2,6 +2,7 @@ package com.bbsoftware.SportClub.injury;
 
 
 import com.bbsoftware.SportClub.appuser.AppUser;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +16,7 @@ import java.util.Date;
 @EqualsAndHashCode
 @NoArgsConstructor
 @Entity
-
+@JsonIgnoreProperties("user")
 public class Injury {
 
     @Id

@@ -28,9 +28,11 @@ const MenuCoach = () => {
               <Nav.Link href="/dashboard">Home</Nav.Link>
               <Nav.Link href="#">Schedule</Nav.Link>
               <Nav.Link href="/mycontract">Contract</Nav.Link>
-              <Nav.Link href="#">Coach tools</Nav.Link>
+              <DropdownButton id="dropdown-basic-button" variant="secondary" title="Coach tools">
+                <Dropdown.Item href="/myPlayers">My players</Dropdown.Item>
+              </DropdownButton>
             </Nav>
-            <DropdownButton id="dropdown-basic-button" drop="down" title="Account">
+            <DropdownButton id="dropdown-basic-button" variant="secondary" drop="down" title="Account">
               <Dropdown.Item href="/settings">Info</Dropdown.Item>
               <Dropdown.Item href="/settings/password">Change password</Dropdown.Item>
               <Dropdown.Item href="#" onClick={Logout}> Logout </Dropdown.Item>
