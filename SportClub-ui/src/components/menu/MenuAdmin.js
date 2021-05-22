@@ -13,15 +13,15 @@ const MenuAdmin = () => {
 
   return (
     <>
-      <Navbar collapseOnSelect fixed='top' expand='sm' bg="dark" variant="dark">
+      <Navbar collapseOnSelect fixed='top' expand='xl' bg="dark" variant="dark">
         <Container>
           <Navbar.Toggle aria-controls='reponsive-navbar-nav' />
           <Navbar.Collapse id='responsive-navbar-nav'>
             <Navbar.Brand href="/dashboard" className="px-m-0 px-p">
               <img
                 src="/B&B-Logo.png"
-                width="100"
-                height="45"
+                width="423"
+                height="470"
               />
             </Navbar.Brand>
             <Nav className="mr-auto">
