@@ -2,5 +2,9 @@
   "baseUrl": "http://localhost:3000",
   "env": {
     "MAILSLURP_API_KEY": "a98f8b4cf72c48c3e078a65a7669f46ac3619289ecff4ac45ef3d0735b7f3889"
+  },
+  "retries": {
+    "runMode": 2,
+    "openMode": 0
   }
 }

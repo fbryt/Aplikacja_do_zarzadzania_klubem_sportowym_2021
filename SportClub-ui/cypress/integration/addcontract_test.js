@@ -3,7 +3,7 @@ const currentUser = {
     password: "pablowhite"
 }
 
-    describe('Check contractPage', () => {
+    describe('Check contractPage',{scrollBehavior: false} ,() => {
         beforeEach(function () {
             cy.resetDB();
         });
@@ -25,9 +25,9 @@ const currentUser = {
             cy.get('form').within(() =>{
                 cy.contains("Create New Contract").click();
                 cy.contains('Save Changes');
-                cy.get('input[name="money"]').clear().type(6000);
+                cy.get('input[name="money"]').clear().type('6000');
                 cy.get(".react-date-picker__inputGroup").eq(1).within(()=>{
-                    cy.get('input[name="year"]').type(2022);
+                    cy.get('input[name="year"]').type('2022');
                 })
                 cy.get("button").contains("Save Changes").click();
             })
