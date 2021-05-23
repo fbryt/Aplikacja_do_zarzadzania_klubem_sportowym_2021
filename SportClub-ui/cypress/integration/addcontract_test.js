@@ -1,3 +1,4 @@
+/*
 const currentUser = {
     username: "pablo@white.com",
     password: "pablowhite"
@@ -49,4 +50,4 @@ const currentUser = {
             })
 
         })
-    })
+    })*/
