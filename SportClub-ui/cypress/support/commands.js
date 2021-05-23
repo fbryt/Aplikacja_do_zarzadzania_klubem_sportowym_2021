@@ -55,9 +55,9 @@ Cypress.Commands.add('getLastEmail', () => {
                     "Content-Type": "application/json"
                 },
             })
-            .then((response) => {
+            .then(({body}) => {
 
-               const msgId = response.body.id;
+               const msgId = body[0].id;
                     cy.request({
                         method: 'GET',
                         url: `${inboxUrl}/messages/${msgId}/body.html`,

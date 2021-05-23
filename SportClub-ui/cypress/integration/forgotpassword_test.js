@@ -1,6 +1,8 @@
+const currentUser = {
+    username: "pablo@black.com",
+    password: "pablochanged"
+}
 
-
-/*
 describe('Is able to retrieve password',()=>{
     it('reminds password', ()=>{
         cy.cleanInbox();
@@ -15,12 +17,22 @@ describe('Is able to retrieve password',()=>{
         cy.get('#logform > :nth-child(3) > :nth-child(2) > .btn').contains('Forgot password').click();
 
         cy.url().should('include','/forgotpassword');
-        cy.get('#formEmail').clear().type('pablo@black.com');
+        cy.get('#formEmail').clear().type(currentUser.username);
         cy.get("button").contains("Submit").click();
 
+        cy.wait(30000);
         cy.getLastEmail().then(html => {
-            cy.get('a').contains("Reset Password!").click();
+            const link = html.match(/href="([^"]*)/)[1]
+            cy.expect(link).to.contains('/resetpassword/')
+            cy.visit(link);
         })
+        cy.get('#password').clear().type(currentUser.password);
+        cy.get("#confirm_password").clear().type(currentUser.password);
+        cy.get("button").contains("Reset").click();
+
+        cy.url().should('include','/login');
+        cy.login(currentUser);
+        cy.resetDB();
 
     })
-})*/
+})
