@@ -4,7 +4,10 @@ const currentUser = {
 }
 
     describe('Check contractPage', () => {
-        it('Is able to edit contract data', () => {
+        beforeEach(function () {
+            cy.resetDB();
+        });
+        it('Is able to add contract data', () => {
 
             cy.login(currentUser);
 
@@ -15,7 +18,7 @@ const currentUser = {
             cy.get('tbody').within(($list) => {
                 cy.get('tr').eq(4).within(() =>{
                     cy.get('td').eq(5).within(()=>{
-                        cy.get('button').click();
+                        cy.get('button').contains('Details').click();
                     })
                 })
             })
@@ -26,7 +29,7 @@ const currentUser = {
                 cy.get(".react-date-picker__inputGroup").eq(1).within(()=>{
                     cy.get('input[name="year"]').type(2022);
                 })
-                cy.contains("Save Changes").click();
+                cy.get("button").contains("Save Changes").click();
             })
 
             cy.visit('http://localhost:3000/appUsers');
@@ -35,7 +38,7 @@ const currentUser = {
             cy.get('tbody').within(($list) => {
                 cy.get('tr').eq(4).within(() =>{
                     cy.get('td').eq(5).within(()=>{
-                        cy.get('button').click();
+                        cy.get('button').contains("Details").click();
                     })
                 })
             })
