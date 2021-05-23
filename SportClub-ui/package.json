@@ -68,7 +68,6 @@
     ]
   },
   "devDependencies": {
-    "cypress-mailslurp": "^1.1.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-17-updated": "^1.0.2"
   },

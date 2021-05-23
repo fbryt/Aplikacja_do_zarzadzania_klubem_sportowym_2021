@@ -22,6 +22,7 @@ import net.bytebuddy.utility.RandomString;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 @RestController
 @AllArgsConstructor
@@ -41,7 +42,9 @@ public class ResetPasswordController {
         } catch (AppUserEmailNotFoundException e) {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
-        File input = new File("src/main/resources/templates/mail.html");
+        URL url = getClass().getResource("/templates/mail.html");
+        String path = url.getPath();
+        File input = new File(path);
         Document doc;
         if (input.exists()) {
             try {

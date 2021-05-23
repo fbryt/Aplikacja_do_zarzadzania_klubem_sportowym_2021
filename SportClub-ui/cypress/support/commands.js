@@ -23,8 +23,6 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-import "cypress-mailslurp";
-
 
 Cypress.Commands.add('login', ({ username, password }) => {
 
@@ -42,4 +40,53 @@ Cypress.Commands.add('login', ({ username, password }) => {
 
 Cypress.Commands.add('resetDB', () => {
     cy.request('http://localhost:8080/db/reset');
+});
+
+const inboxUrl = Cypress.env('inboxUrl')
+const token  = Cypress.env('API_KEY')
+Cypress.Commands.add('getLastEmail', () => {
+    function requestEmail() {
+        return cy
+            .request({
+                method: 'GET',
+                url: `${inboxUrl}/messages`,
+                headers: {
+                    'Api-Token': token,
+                },
+                json:true
+            })
+            .then((response) => {
+
+                cy.log('dupa');
+               cy.log(JSON.stringify(response));
+               const msgId = response.body.id;
+                    cy.request({
+                        method: 'GET',
+                        url: `${inboxUrl}/messages/${msgId}/body.html`,
+                        headers: {
+                            'Api-Token': token,
+                        },
+                        json: true,
+                    }).then(({ body }) => {
+                        if (body) { return body }
+
+                        cy.wait(1000);
+                        return requestEmail();
+                    })
+            })
+
+    }
+
+    return requestEmail();
+});
+
+Cypress.Commands.add('cleanInbox', () => {
+    return cy.request({
+        method: 'PATCH',
+        url: `${inboxUrl}/clean`,
+        headers: {
+            'Api-Token': token,
+        },
+        json: true,
+    })
 });

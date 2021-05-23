@@ -1,7 +1,8 @@
 {
   "baseUrl": "http://localhost:3000",
   "env": {
-    "MAILSLURP_API_KEY": "a98f8b4cf72c48c3e078a65a7669f46ac3619289ecff4ac45ef3d0735b7f3889"
+    "API_KEY": "e4d7d6de053c9a6b0962a39ace979756",
+    "inboxUrl": "https://mailtrap.io/api/v1/inboxes/1330723"
   },
   "retries": {
     "runMode": 2,
