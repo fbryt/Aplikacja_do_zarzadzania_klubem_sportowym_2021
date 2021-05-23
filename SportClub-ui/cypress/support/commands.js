@@ -52,13 +52,11 @@ Cypress.Commands.add('getLastEmail', () => {
                 url: `${inboxUrl}/messages`,
                 headers: {
                     'Api-Token': token,
+                    "Content-Type": "application/json"
                 },
-                json:true
             })
             .then((response) => {
 
-                cy.log('dupa');
-               cy.log(JSON.stringify(response));
                const msgId = response.body.id;
                     cy.request({
                         method: 'GET',

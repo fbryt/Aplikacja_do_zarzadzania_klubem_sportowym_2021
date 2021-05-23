@@ -24,7 +24,6 @@ const currentUser = {
             })
             cy.get('form').within(() =>{
                 cy.contains("Create New Contract").click();
-                cy.get("button").contains('Save Changes',{timeout:7000});
                 cy.get('input[name="money"]').clear().type('6000');
                 cy.get(".react-date-picker__inputGroup").eq(1).within(()=>{
                     cy.get('input[name="year"]').type('2022');
