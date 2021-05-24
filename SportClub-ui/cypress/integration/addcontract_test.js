@@ -1,3 +1,4 @@
+/*
 
 const currentUser = {
     username: "pablo@white.com",
@@ -52,3 +53,4 @@ const currentUser = {
 
         })
     })
+*/
