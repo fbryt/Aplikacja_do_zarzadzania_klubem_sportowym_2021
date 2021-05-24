@@ -33,6 +33,7 @@ describe('Is able to retrieve password',()=>{
         cy.url().should('include','/login');
         cy.login(currentUser);
         cy.resetDB();
+        cy.cleanInbox();
 
     })
 })

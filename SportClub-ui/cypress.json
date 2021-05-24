@@ -1,8 +1,8 @@
 {
   "baseUrl": "http://localhost:3000",
   "env": {
-    "API_KEY": "e4d7d6de053c9a6b0962a39ace979756",
-    "inboxUrl": "https://mailtrap.io/api/v1/inboxes/1330723"
+    "API_KEY": "4cc190e0683b7f9d2480d08192bc6353",
+    "inboxUrl": "https://mailtrap.io/api/v1/inboxes/1301598"
   },
   "retries": {
     "runMode": 2,
