@@ -21,7 +21,11 @@ sudo ./Run.sh
 ```javascript
 .\Run.cmd
 ```
-
+<p> Login i hasło do serwisu mailtrap na który przychodzą emaile: </p>
+```
+pblackmt2@o2.pl
+zseRT@@3
+```
 By: 
     FB &
     KB &
