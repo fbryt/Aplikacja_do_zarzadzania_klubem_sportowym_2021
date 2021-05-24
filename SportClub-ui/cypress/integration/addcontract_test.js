@@ -1,4 +1,4 @@
-/*
+
 const currentUser = {
     username: "pablo@white.com",
     password: "pablowhite"
@@ -25,6 +25,7 @@ const currentUser = {
             })
             cy.get('form').within(() =>{
                 cy.contains("Create New Contract").click();
+                cy.wait(5000);
                 cy.get('input[name="money"]').clear().type('6000');
                 cy.get(".react-date-picker__inputGroup").eq(1).within(()=>{
                     cy.get('input[name="year"]').type('2022');
@@ -50,4 +51,4 @@ const currentUser = {
             })
 
         })
-    })*/
+    })
