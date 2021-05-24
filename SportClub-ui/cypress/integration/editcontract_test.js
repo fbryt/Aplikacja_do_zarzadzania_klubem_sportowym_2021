@@ -2,10 +2,9 @@ const currentUser = {
     username: "pablo@white.com",
     password: "pablowhite"
 }
-const nextUser =
 
-    describe('Check contractPage', () => {
-        beforeEach(function () {
+describe('Check contractPage', () => {
+    beforeEach(function () {
             cy.resetDB();
         });
 

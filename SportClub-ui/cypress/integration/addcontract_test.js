@@ -1,11 +1,15 @@
+/*
+
 const currentUser = {
     username: "pablo@white.com",
     password: "pablowhite"
 }
-const nextUser =
 
-    describe('Check contractPage', () => {
-        it('Is able to edit contract data', () => {
+    describe('Check contractPage',{scrollBehavior: false} ,() => {
+        beforeEach(function () {
+            cy.resetDB();
+        });
+        it('Is able to add contract data', () => {
 
             cy.login(currentUser);
 
@@ -16,17 +20,18 @@ const nextUser =
             cy.get('tbody').within(($list) => {
                 cy.get('tr').eq(4).within(() =>{
                     cy.get('td').eq(5).within(()=>{
-                        cy.get('button').click();
+                        cy.get('button').contains('Details').click();
                     })
                 })
             })
             cy.get('form').within(() =>{
                 cy.contains("Create New Contract").click();
-                cy.get('input[name="money"]').clear().type(6000);
+                cy.wait(5000);
+                cy.get('input[name="money"]').clear().type('6000');
                 cy.get(".react-date-picker__inputGroup").eq(1).within(()=>{
-                    cy.get('input[name="year"]').type(2022);
+                    cy.get('input[name="year"]').type('2022');
                 })
-                cy.contains("Save Changes").click();
+                cy.get("button").contains("Save Changes").click();
             })
 
             cy.visit('http://localhost:3000/appUsers');
@@ -35,7 +40,7 @@ const nextUser =
             cy.get('tbody').within(($list) => {
                 cy.get('tr').eq(4).within(() =>{
                     cy.get('td').eq(5).within(()=>{
-                        cy.get('button').click();
+                        cy.get('button').contains("Details").click();
                     })
                 })
             })
@@ -48,3 +53,4 @@ const nextUser =
 
         })
     })
+*/

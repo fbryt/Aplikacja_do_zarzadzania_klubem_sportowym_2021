@@ -10,7 +10,7 @@ describe('Check contractPage', () => {
 
         cy.visit('http://localhost:3000/mycontract');
 
-        cy.contains('2000');
+        cy.get('#money').should('have.attr','value','2000');
     })
 })
 
