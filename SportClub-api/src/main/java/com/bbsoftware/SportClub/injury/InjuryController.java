@@ -4,6 +4,7 @@ import com.bbsoftware.SportClub.appuser.AppUser;
 import com.bbsoftware.SportClub.appuser.AppUserRepository;
 import com.bbsoftware.SportClub.exceptions.AppUserNotFoundException;
 import com.bbsoftware.SportClub.exceptions.InjuryNotFoundException;
+import com.bbsoftware.SportClub.exceptions.UserHasInjuryException;
 import lombok.AllArgsConstructor;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
@@ -52,20 +53,23 @@ public class InjuryController {
         if (principal instanceof AppUser) {
 
             Long id = ((AppUser) principal).getId();
-            Injury injury = new Injury();
-            injury.setDescription(injuryRequest.getDescription());
-            injury.setStart_date(injuryRequest.getStart_date());
-            injury.setEnd_date(injuryRequest.getEnd_date());
             AppUser appUser = appUserRepository.findById(id).orElseThrow(() -> new AppUserNotFoundException(id));
-            injury.setUser(appUser);
+            if(appUser.getInjury()!=null)
+               throw new UserHasInjuryException(id);
+            else {
+                Injury injury = new Injury();
+                injury.setDescription(injuryRequest.getDescription());
+                injury.setStart_date(injuryRequest.getStart_date());
+                injury.setEnd_date(injuryRequest.getEnd_date());
+                injury.setUser(appUser);
 
-            injuryRepository.save(injury);
+                injuryRepository.save(injury);
 
 
-            return ResponseEntity //
-                    .created(linkTo(methodOn(InjuryController.class).one(injury.getId())).toUri()) //
-                    .body(assembler.toModel(injury));
-
+                return ResponseEntity //
+                        .created(linkTo(methodOn(InjuryController.class).one(injury.getId())).toUri()) //
+                        .body(assembler.toModel(injury));
+            }
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
         }
