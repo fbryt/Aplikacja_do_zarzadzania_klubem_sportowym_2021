@@ -45,13 +45,13 @@ public class ContractController {
     @GetMapping("/mycontract")
     public EntityModel<Contract> getMyContract() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (principal instanceof AppUser) {
-            Long id = ((AppUser) principal).getId();
-            Contract contract = contractRepository.findByUser_id(id)
-                    .orElseThrow(() -> new ContractNotFoundException(id));
-            return assembler.toModel(contract);
-        } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Contract not found");
+            if (principal instanceof AppUser) {
+                Long id = ((AppUser) principal).getId();
+                Contract contract = contractRepository.findByUser_id(id)
+                        .orElseThrow(() -> new ContractNotFoundException(id));
+                return assembler.toModel(contract);
+            } else {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Contract not found");
         }
     }
 
