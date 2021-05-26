@@ -1,5 +1,6 @@
 package com.bbsoftware.SportClub.appuser;
 
+import com.bbsoftware.SportClub.event.Event;
 import com.bbsoftware.SportClub.injury.Injury;
 import com.bbsoftware.SportClub.contract.Contract;
 import com.bbsoftware.SportClub.announcement.Announcement;
@@ -62,6 +63,8 @@ public class AppUser implements UserDetails {
 
     @OneToOne(mappedBy = "user")
     private Injury injury;
+    @ManyToMany
+    private List<Event> events;
 
     public String getResetToken() {
         return resetToken;

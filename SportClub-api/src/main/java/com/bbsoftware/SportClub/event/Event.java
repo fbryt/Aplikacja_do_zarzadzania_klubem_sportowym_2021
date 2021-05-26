@@ -1,5 +1,6 @@
 package com.bbsoftware.SportClub.event;
 
+import com.bbsoftware.SportClub.appuser.AppUser;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,6 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -20,6 +22,9 @@ public class Event {
     private Long id;
 
     private String message;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<AppUser> appUsers;
 
     Date dateStart;
     Date dateEnd;
