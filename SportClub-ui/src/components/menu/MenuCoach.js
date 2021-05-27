@@ -30,6 +30,7 @@ const MenuCoach = () => {
               <Nav.Link href="/mycontract">Contract</Nav.Link>
               <DropdownButton id="dropdown-basic-button" variant="secondary" title="Coach tools">
                 <Dropdown.Item href="/myPlayers">My players</Dropdown.Item>
+                <Dropdown.Item href="/event">Create Event</Dropdown.Item>
               </DropdownButton>
             </Nav>
             <DropdownButton id="dropdown-basic-button" variant="secondary" drop="down" title="Account">
