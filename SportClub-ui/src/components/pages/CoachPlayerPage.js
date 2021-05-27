@@ -4,13 +4,9 @@ import CoachPlayerCard from './CoachPlayerCard';
 import Footer from "../menu/Footer";
 import Menu from "../menu/Menu";
 
-
 const url = "http://localhost:8080/appUsers";
 
-
-
 export default class CoachPlayerPage extends Component{
-
 
     constructor(props) {
         super(props);
@@ -19,9 +15,7 @@ export default class CoachPlayerPage extends Component{
             coaches: []
         }
         this.dataChange = this.dataChange.bind(this);
-
     }
-
 
     async componentWillMount() {
 
@@ -34,16 +28,12 @@ export default class CoachPlayerPage extends Component{
             }).catch(error => {
                 console.log(error);
             })
-
-
-
     }
 
     dataChange()
     {
         this.componentWillMount();
     }
-
 
     render() {
         return(
@@ -56,9 +46,6 @@ export default class CoachPlayerPage extends Component{
                 </ul>
                 <Footer/>
             </div>
-
         )
-
     }
-
 }

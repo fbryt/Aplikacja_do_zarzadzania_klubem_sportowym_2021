@@ -3,10 +3,9 @@ import React, { Component } from "react";
 
 import Footer from "../menu/Footer";
 import axios from "axios";
-import { Col, Form } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import DatePicker from "react-datepicker";
 import EdiText from 'react-editext'
-import AuthService from '../../services/AuthService';
 import "react-datepicker/dist/react-datepicker.css";
 import Menu from "../menu/Menu";
 
@@ -61,7 +60,6 @@ export default class AnnouncementPagePage extends Component {
     render() {
         const { text, date } = this.state;
 
-
         return (
             <div id="logform">
                 <Menu />
@@ -77,7 +75,6 @@ export default class AnnouncementPagePage extends Component {
                             selected={this.state.date}
                             onChange={this.handleChange}
                             showTimeInput
-
                         />
 
                     </div>
@@ -120,7 +117,6 @@ export default class AnnouncementPagePage extends Component {
                     <div id="button" className="row">
                         <button className="btn btn-dark btn-lg btn-block">Submit</button>
                     </div>
-
 
                 </Form>
                 <Footer />

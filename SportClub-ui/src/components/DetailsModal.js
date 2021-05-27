@@ -7,8 +7,6 @@ const url = "http://localhost:8080/contract/user/";
 
 export const DetailsModal = ({ appUser }) => {
 
-
-
     const [show, setShow] = useState(false);
     const [contractData, setContractData] = useState([]);
 
@@ -25,7 +23,6 @@ export const DetailsModal = ({ appUser }) => {
 
     if (appUser === undefined) return null;
 
-    console.log(contractData);
 
     const handleShow = () => {
         setShow(true);
@@ -47,7 +44,6 @@ export const DetailsModal = ({ appUser }) => {
 
         try {
             await axios.patch(url + appUser.id, update);
-            console.log("Success!");
         } catch (e) {
             console.log(`😱 Axios request failed: ${e}`);
         }

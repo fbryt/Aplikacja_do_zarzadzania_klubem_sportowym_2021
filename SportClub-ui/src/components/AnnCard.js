@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import { Button,Modal,Form} from "react-bootstrap"
 import axios from "axios";
 class AnnCard extends React.Component{
@@ -38,7 +38,6 @@ class AnnCard extends React.Component{
         }
 
         this.setState({show:false});
-
     }
 
     delete=async event => {
@@ -49,14 +48,12 @@ class AnnCard extends React.Component{
             console.log(`😱 Axios request failed: ${e}`);
         }
         this.props.action();
-
     }
 
     dataChange = event =>
     {
         this.setState({update:{text:event.target.value}});
         this.setState({text:event.target.value});
-       // this.state.update.text=event.target.value;
     }
 
 render() {

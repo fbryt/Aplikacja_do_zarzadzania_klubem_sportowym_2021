@@ -1,14 +1,6 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 import React from "react";
 import {
     Navbar,
-    Nav,
-    Form,
-    FormControl,
-    Button,
-    Dropdown,
-    DropdownButton,
 } from "react-bootstrap";
 const Footer = () => {
     return (

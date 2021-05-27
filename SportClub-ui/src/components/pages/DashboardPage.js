@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-
 import Menu from "../menu/Menu";
 import Footer from "../menu/Footer";
 import Announcements from "../Announcements";

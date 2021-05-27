@@ -1,11 +1,8 @@
 import React, {Component} from "react";
 import {Form, Col,  Button} from "react-bootstrap"
 import axios from 'axios';
-
 import AuthService from '../../services/AuthService';
 import Footer from "../menu/Footer";
-import {BrowserRouter, Link, Router} from "react-router-dom";
-
 
 export default class LoginPage extends Component{
 
@@ -39,7 +36,6 @@ export default class LoginPage extends Component{
              }).catch(err => { if(err.request){ console.log(err.request) } if(err.response){ console.log(err.response) }
             this.setState({err:true});
              });
-
     }
     dataChange = event =>
     {
@@ -47,8 +43,6 @@ export default class LoginPage extends Component{
             [event.target.name]:event.target.value
         });
     }
-
-
 
     render() {
         const {username,password,err} = this.state;
@@ -60,7 +54,6 @@ export default class LoginPage extends Component{
                 <div id="mainInscript">
                     <h1>Login Page</h1>
                 </div>
-
 
                 <Form onSubmit={this.submitLogin} id="LoginForm">
 
@@ -101,7 +94,6 @@ export default class LoginPage extends Component{
                     <div className="col-sm">
                     </div>
                 </div>
-
 
                 <Footer />
             </div>

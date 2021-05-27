@@ -1,15 +1,11 @@
 import MenuPlayer from './MenuPlayer';
 import MenuAdmin from './MenuAdmin';
 import MenuCoach from './MenuCoach';
-import { Cookies } from 'react-cookie';
-
+import RoleService from "../../services/RoleService";
 
 const Menu = () => {
-    const cookie = new Cookies();
 
-    var CryptoJS = require("crypto-js");
-
-    const role = CryptoJS.AES.decrypt(cookie.get('role').toString(), "Secret").toString(CryptoJS.enc.Utf8);
+    const role=RoleService.getRole();
     if (role === 'COACH')
         return (
             <div>

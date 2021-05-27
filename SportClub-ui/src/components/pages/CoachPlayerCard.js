@@ -1,5 +1,5 @@
 import React from "react";
-import { Button,Modal,Form} from "react-bootstrap"
+import { Button} from "react-bootstrap"
 import axios from "axios";
 import Select from "react-select";
 
@@ -29,31 +29,23 @@ export default class CoachPlayerCard extends React.Component{
             coach: this.state.coach.toString(),
         }
 
-
         const url = "http://localhost:8080/appUsers/" + this.props.player.id;
         axios.patch(url, update).then((response) => {
 
             }).catch (e => {
             console.log(`😱 Axios request failed: ${e}`);
         });
-
-
     }
 
     renderList() {
         return (this.props.coaches.map(data =>({label:data.firstName+" "+data.lastName,value:data.id})))
     }
 
-
     handleChange(selectedOption) {
         this.setState({coach : selectedOption.value});
     }
 
-
-
     render() {
-
-
         let coachName;
         if (this.state.option !== '') {
             coachName = <h5>Coach: {this.state.option}</h5>;
@@ -79,15 +71,10 @@ export default class CoachPlayerCard extends React.Component{
                                 onChange={this.handleChange}
                                 options={this.renderList()}
                             />
-
-
                     </div>
                 </div>
                 <Button className="btn btn-dark btn-block btn-lg mt-1" onClick={this.submitData}>Submit</Button>
-
-
             </div>
-
         );
     }
 }
