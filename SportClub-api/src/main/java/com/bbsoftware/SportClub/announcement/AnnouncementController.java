@@ -25,6 +25,7 @@ import io.jsonwebtoken.io.IOException;
 
 import java.io.File;
 import java.lang.reflect.Field;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -43,7 +44,9 @@ public class AnnouncementController {
 
     @GetMapping("/announcements")
     public CollectionModel<EntityModel<Announcement>> all() {
-        List<EntityModel<Announcement>> announcements = announcementRepository.findAll().stream()
+        List<Announcement> anns=announcementRepository.findAll();
+        Collections.sort(anns,Collections.reverseOrder());
+        List<EntityModel<Announcement>> announcements = anns.stream()
                 .map(assembler::toModel).collect(Collectors.toList());
 
         return CollectionModel.of(announcements, linkTo(methodOn(AnnouncementController.class).all()).withSelfRel());
