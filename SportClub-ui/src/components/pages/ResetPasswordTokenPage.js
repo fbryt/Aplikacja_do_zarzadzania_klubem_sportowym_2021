@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 
-import Menu from "../menu/Menu";
 import Footer from "../menu/Footer";
 import axios from "axios";
 import { Col, Container, Form } from "react-bootstrap";
@@ -31,7 +30,6 @@ export const ResetPasswordTokenPage = () => {
             }
 
             await axios.post(url + token, update);
-            console.log(update);
             history.push("/login");
         } catch (e) {
             console.log(`😱 Axios request failed: ${e}`);

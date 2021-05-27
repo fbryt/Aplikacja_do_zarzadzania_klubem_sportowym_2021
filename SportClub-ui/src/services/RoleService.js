@@ -12,5 +12,4 @@ class RoleService{
         return role;
     }
 
-
 }export default new RoleService()

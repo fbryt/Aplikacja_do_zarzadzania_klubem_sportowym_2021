@@ -14,7 +14,7 @@ import java.util.Date;
 @EqualsAndHashCode
 @NoArgsConstructor
 @Entity
-public class Announcement {
+public class Announcement implements Comparable<Announcement>{
 
     @Id
     @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
@@ -27,4 +27,8 @@ public class Announcement {
 
     Date date;
 
+    @Override
+    public int compareTo(Announcement o) {
+        return this.getId().compareTo(o.getId());
+    }
 }

@@ -1,6 +1,4 @@
 import axios from "axios";
-import {useEffect, useState} from "react";
-import {forEach} from "react-bootstrap/ElementChildren";
 import AnnCard from "./AnnCard"
 import React from "react";
 import RoleService from "../services/RoleService";
@@ -25,19 +23,15 @@ export default class Announcements extends React.Component {
             .then(response => {
                 const ann = response.data._embedded.announcementList;
                 this.setState({announcements: ann});
-                console.log(ann)
             }).catch(error => {
                 console.log(error);
             })
-
     }
 
     stateChange()
     {
         this.componentWillMount();
     }
-
-
 
     render(){
         return(
@@ -48,5 +42,4 @@ export default class Announcements extends React.Component {
             </ul>
         )
     }
-
 }

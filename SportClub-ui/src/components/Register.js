@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Form,Button, Col} from 'react-bootstrap';
+import {Form, Col} from 'react-bootstrap';
 import axios from 'axios';
 import NotFound from "./pages/NotFound";
 import Menu from "./menu/Menu";
@@ -18,7 +18,6 @@ export default class Register extends Component {
 
     componentWillMount() {
         axios.get("http://localhost:8080/register").then(response=>{
-            console.log(response)
             this.setState({err:false});
         }).catch(error =>{
             this.setState({status:error.request.status})

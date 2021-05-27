@@ -1,7 +1,5 @@
 import React, {Component} from "react";
-import {Form,Button, Col} from 'react-bootstrap';
-import { useHistory, useParams } from 'react-router-dom';
-import { withRouter } from "react-router";
+import {Form, Col} from 'react-bootstrap';
 import axios from 'axios';
 
 import Menu from "../menu/Menu";
@@ -37,7 +35,6 @@ export default class ChangeRole extends Component {
         try {
             const url = "http://localhost:8080/appUsers/" + this.state.id;
             const response = await axios.patch(url, update );
-            console.log('👉 Returned data:', response);
         } catch (e) {
             console.log(`😱 Axios request failed: ${e}`);
         }

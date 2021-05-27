@@ -17,13 +17,13 @@ export const MyPlayersPage = () => {
     const handleShow = () => setShow(true);
     const [injuryData,setInjuryData]=useState(false);
     const [data, setData] = useState([]);
+
     useEffect(async () => {
         await axios.get(url).then(response => {
             setData(response.data._embedded.appUserList);
         }).catch(error => {
             console.log(error);
         });
-
 
     }, []);
 
@@ -71,8 +71,6 @@ export const MyPlayersPage = () => {
         dataField: 'id',
         order: 'asc'
     }]
-
-
 
     return (
         <div>

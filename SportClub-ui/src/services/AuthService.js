@@ -48,7 +48,6 @@ class AuthService {
 
 
     setupAxiosInterceptors(token) {
-        console.log("INTERCEPTING!");
         axios.interceptors.request.use(
             (config) => {
                 if (this.isUserLoggedIn()) {

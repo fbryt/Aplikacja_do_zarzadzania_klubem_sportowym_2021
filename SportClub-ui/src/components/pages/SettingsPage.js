@@ -1,14 +1,11 @@
 import React, {Component} from "react";
-import {Form, Button, Col, ListGroup, ListGroupItem, Container,Row} from 'react-bootstrap';
+import {Container} from 'react-bootstrap';
 import axios from 'axios';
 
 import Menu from "../menu/Menu";
 import Footer from "../menu/Footer";
 
-
-
 const url = "http://localhost:8080/settings/";
-
 
 export default class SettingsPage extends Component{
 
@@ -31,7 +28,6 @@ export default class SettingsPage extends Component{
             console.log(error);
         })
     }
-
 
     render() {
         return (
@@ -76,5 +72,4 @@ export default class SettingsPage extends Component{
             </div>
         )
     }
-
 }

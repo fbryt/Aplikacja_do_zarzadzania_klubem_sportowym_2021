@@ -1,7 +1,5 @@
 import React, {Component} from "react";
-import {Form, Button, Col, Container, Row, Badge, InputGroup} from 'react-bootstrap';
-import { useHistory, useParams } from 'react-router-dom';
-import { withRouter } from "react-router";
+import {Form, Col, Container, InputGroup} from 'react-bootstrap';
 import axios from 'axios';
 
 import Menu from "../menu/Menu";

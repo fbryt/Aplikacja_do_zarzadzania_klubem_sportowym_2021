@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import { Form, Col, Button } from "react-bootstrap";
-import style from '../../cssFiles/mystyle.module.css';
 import Footer from "../menu/Footer";
 import axios from "axios";
 

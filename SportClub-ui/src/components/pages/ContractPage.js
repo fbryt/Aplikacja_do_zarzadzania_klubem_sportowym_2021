@@ -1,9 +1,7 @@
 import React, {Component} from "react";
-
 import Menu from "../menu/Menu";
 import Footer from "../menu/Footer";
 import axios from "axios";
-import {ListGroup} from "react-bootstrap";
 import Moment from 'moment';
 
 const url = "http://localhost:8080/mycontract";
@@ -28,11 +26,9 @@ export default class ContractPage extends Component {
                     start_date: response.data.start_date,
                     end_date: response.data.end_date
                 });
-                console.log(this.state);
             }).catch(error => {
                 console.log(error);
             })
-
     }
 
     stateChange() {
@@ -79,6 +75,5 @@ export default class ContractPage extends Component {
                 <Footer/>
             </div>
         )
-
     }
 }

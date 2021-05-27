@@ -3,7 +3,6 @@ import {Link} from "react-router-dom";
 import Footer from "../menu/Footer";
 import Carousel, { slidesToShowPlugin, slidesToScrollPlugin, autoplayPlugin } from '@brainhubeu/react-carousel';
 import "@brainhubeu/react-carousel/lib/style.css";
-import Icon from 'react-fa';
 import Image1 from "../../assets/a.jpg";
 import Image2 from "../../assets/b.jpg";
 import Image3 from "../../assets/c.jpg";
