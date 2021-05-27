@@ -37,12 +37,12 @@ export default class EventPage extends Component {
             dateEnd: this.state.date_end
         }
 
-        //const url = "http://localhost:8080/announcements"
-        //axios.post(url, ev)
-        //    .then((response) => {
-        //    this.props.history.push(`/dashboard`)
-        //}).catch(err => { if(err.request){ console.log(err.request) } if(err.response){ console.log(err.response) }
-        //});
+        const url = "http://localhost:8080/event"
+        axios.post(url, ev)
+            .then((response) => {
+            this.props.history.push(`/dashboard`)
+        }).catch(err => { if(err.request){ console.log(err.request) } if(err.response){ console.log(err.response) }
+        });
 
     }
 
