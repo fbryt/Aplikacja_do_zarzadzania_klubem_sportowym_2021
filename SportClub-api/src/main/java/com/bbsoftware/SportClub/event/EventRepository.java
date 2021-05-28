@@ -16,5 +16,6 @@ import java.util.List;
 @Transactional(readOnly = true)
 public interface EventRepository extends JpaRepository<Event, Long> {
 
-    public List<Event> findByDateStartGreaterThanEqualAndDateEndLessThanEqual(Date start,Date end);
+    public List<Event> findByAppUsersIdAndDateStartGreaterThanEqualAndDateEndLessThanEqual(Long id,Date start,Date end);
+    List<Event> findAllByAppUsersId(Long id);
 }

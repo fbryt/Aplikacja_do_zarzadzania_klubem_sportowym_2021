@@ -124,8 +124,6 @@ public class AppUser implements UserDetails {
         return players;
     }
 
-    public List<Event> getEvents() { return events;}
-
     @Override
     public boolean isAccountNonExpired() {
         return true;

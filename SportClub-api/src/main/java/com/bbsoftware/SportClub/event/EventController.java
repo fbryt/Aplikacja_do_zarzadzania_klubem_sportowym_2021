@@ -92,13 +92,15 @@ public class EventController {
 
         LocalDateTime endDateTime = LocalDateTime.ofInstant(endDate.toInstant(),
                 ZoneId.systemDefault());
-
-        return eventRepository.findByDateStartGreaterThanEqualAndDateEndLessThanEqual(startDate, endDate);
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Long id = ((AppUser) principal).getId();
+        return eventRepository.findByAppUsersIdAndDateStartGreaterThanEqualAndDateEndLessThanEqual(id,startDate, endDate);
     }
     @GetMapping("/event")
     public List<Event> events() {
-
-        return eventRepository.findAll();
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Long id = ((AppUser) principal).getId();
+        return eventRepository.findAllByAppUsersId(id);
     }
 
 }
