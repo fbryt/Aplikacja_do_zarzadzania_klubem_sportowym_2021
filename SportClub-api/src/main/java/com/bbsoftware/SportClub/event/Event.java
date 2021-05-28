@@ -2,6 +2,7 @@ package com.bbsoftware.SportClub.event;
 
 import com.bbsoftware.SportClub.appuser.AppUser;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,6 +19,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @JsonIgnoreProperties ("appUsers")
+@JsonSerialize(using = EventSerializer.class)
 public class Event {
 
     @Id

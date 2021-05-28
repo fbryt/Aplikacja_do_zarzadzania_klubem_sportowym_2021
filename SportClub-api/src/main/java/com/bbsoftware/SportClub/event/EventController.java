@@ -3,10 +3,11 @@ package com.bbsoftware.SportClub.event;
 
 import com.bbsoftware.SportClub.appuser.AppUser;
 import com.bbsoftware.SportClub.appuser.AppUserRepository;
-import com.bbsoftware.SportClub.contract.*;
-import com.bbsoftware.SportClub.exceptions.AppUserNotFoundException;
-import com.bbsoftware.SportClub.exceptions.ContractNotFoundException;
+import com.bbsoftware.SportClub.exceptions.BadDateFormatException;
 import com.bbsoftware.SportClub.exceptions.EventNotFoundException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import lombok.AllArgsConstructor;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
@@ -15,10 +16,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.xml.transform.Source;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -33,6 +34,7 @@ public class EventController {
     private final EventRepository eventRepository;
     private final EventModelAssembler assembler;
     private final AppUserRepository appUserRepository;
+
 
     @GetMapping("/event/{id}")
     public EntityModel<Event> one(@PathVariable Long id) {
@@ -61,4 +63,42 @@ public class EventController {
                 .created(linkTo(methodOn(EventController.class).one(event.getId())).toUri()) //
                 .body(assembler.toModel(event));
     }
+
+    @GetMapping(value = "/event",produces = "application/json", params = {"start","end"})
+    public List<Event> getEventsInRange(@RequestParam(value = "start", required = true) String start,
+                                         @RequestParam(value = "end",required = true) String end) throws JsonProcessingException {
+
+
+        start = start.substring(0,19).replace("T", " ");
+        end = end.substring(0,19).replace("T", " ");
+        Date startDate = null;
+        Date endDate = null;
+        SimpleDateFormat inputDateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        try {
+            startDate = inputDateFormat.parse(start);
+        } catch (ParseException e) {
+            throw new BadDateFormatException("bad start date: " + start);
+        }
+
+        try {
+            endDate = inputDateFormat.parse(end);
+        } catch (ParseException e) {
+            throw new BadDateFormatException("bad end date: " + end);
+        }
+
+        LocalDateTime startDateTime = LocalDateTime.ofInstant(startDate.toInstant(),
+                ZoneId.systemDefault());
+
+        LocalDateTime endDateTime = LocalDateTime.ofInstant(endDate.toInstant(),
+                ZoneId.systemDefault());
+
+        return eventRepository.findByDateStartGreaterThanEqualAndDateEndLessThanEqual(startDate, endDate);
+    }
+    @GetMapping("/event")
+    public List<Event> events() {
+
+        return eventRepository.findAll();
+    }
+
 }
