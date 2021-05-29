@@ -26,7 +26,7 @@ const MenuCoach = () => {
             </Navbar.Brand>
             <Nav className="mr-auto">
               <Nav.Link href="/dashboard">Home</Nav.Link>
-              <Nav.Link href="#">Schedule</Nav.Link>
+              <Nav.Link href="/schedule">Schedule</Nav.Link>
               <Nav.Link href="/mycontract">Contract</Nav.Link>
               <DropdownButton id="dropdown-basic-button" variant="secondary" title="Coach tools">
                 <Dropdown.Item href="/myPlayers">My players</Dropdown.Item>

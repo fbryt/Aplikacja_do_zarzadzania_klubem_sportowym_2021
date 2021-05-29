@@ -18,6 +18,7 @@ import SettingsPage from "./components/pages/SettingsPage";
 import InjuryPage from "./components/pages/InjuryPage";
 import MyPlayersPage from "./components/pages/MyPlayersPage";
 import EventPage from "./components/pages/EventPage";
+import SchedulePage from "./components/pages/SchedulePage";
 
 class App extends React.Component {
 
@@ -45,6 +46,8 @@ class App extends React.Component {
                     <AuthRoute exact path="/declareInjury" exact component={InjuryPage}/>
                     <AuthRoute exact path="/myPlayers" exact component={MyPlayersPage} />
                     <AuthRoute exact path="/event" exact component={EventPage} />
+                    <AuthRoute exact path="/schedule" exact component={SchedulePage} />
+
                     <Route component={NotFound}/>
                 </Switch>
             </BrowserRouter>
