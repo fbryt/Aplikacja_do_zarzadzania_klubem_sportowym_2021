@@ -26,7 +26,7 @@ const MenuPlayer = () => {
             </Navbar.Brand>
             <Nav className="mr-auto">
               <Nav.Link href="/dashboard">Home</Nav.Link>
-              <Nav.Link href="#">Schedule</Nav.Link>
+              <Nav.Link href="/schedule">Schedule</Nav.Link>
               <Nav.Link href="/mycontract">Contract</Nav.Link>
               <Nav.Link href="/declareInjury">Declare Injury</Nav.Link>
             </Nav>
