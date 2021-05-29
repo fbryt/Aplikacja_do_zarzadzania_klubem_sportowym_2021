@@ -36,7 +36,7 @@ zainstaluj ręcznie
 <p>Linux:</p>
 
 ```javascript
-sudo ./run.sh
+./run.sh
 ```
 
 <p>Windows:</p>
@@ -63,8 +63,8 @@ sudo ./test.sh
 ```
 
 <h3>Testy akceptacyjne</h3>
-<p>1) Uruchom projekt (skrypt "run").</p>
-<p>2) Przejdź do katalogu SportClub-ui</p>
+<p>1) Uruchom projekt (skrypt "run") w tle.</p>
+<p>2) Po uruchomieniu projektu, przejdź do katalogu SportClub-ui</p>
 
 ```javascript
 cd SportClub-ui
