@@ -2,7 +2,13 @@
 Projekt zaliczeniowy z PPAK 2021
 
 <h1>Jak uruchomić projekt lokalnie?</h1>
-<p>(Linux) Skrypty uruchamiaj z uprawnieniami administratora.
+<p>(Linux) Skrypty uruchamiaj z uprawnieniami administratora (z wyjątkiem "run.sh" , uwaga niżej).
+<p>(Linux) Back-end jest uruchamiany w tle. Pomiędzy uruchomieniami oraz po zakończeniu pracy, należy go zamknąć:
+ 
+```javascript
+sudo pkill java
+```
+
 <p>(Linux) Upewnij się, że masz dostęp do uruchamianych skryptów.</p>
 <p>Na przykład: </p>
 
@@ -76,6 +82,12 @@ sudo ./CypressRun.sh
 
 ```javascript
 .\CypressRun.cmd
+```
+
+<p>(Linux) Uwaga! Jeśli pojawi się błąd z brakującym plikem "cypress", to oznacza, że "run.sh" został uruchomiony z uprawnieniami administratora. To sprawia, że Cypress nie jest w stanie się poprawnie zainstalować. Aby to naprawić należy uruchomić poniższą komendę w katalogu "SportClub-ui", bez uprawnień administratora.
+    
+```javascript
+npm install
 ```
 
 <h2>Serwis mailtrap</h2>
