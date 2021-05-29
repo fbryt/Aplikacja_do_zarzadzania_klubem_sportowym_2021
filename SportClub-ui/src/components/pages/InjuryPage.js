@@ -31,8 +31,11 @@ export default class InjuryPage extends Component {
         }
 
         const url = "http://localhost:8080/injuries"
-        axios.post(url, injury);    //TODO: fix
-        this.props.history.push(`/dashboard`);
+        axios.post(url, injury)
+            .then((response) => {
+                this.props.history.push(`/dashboard`)
+            }).catch(err => { if(err.request){ console.log(err.request) } if(err.response){ console.log(err.response) }
+        });
     }
 
     handleChangeFrom(date) {
