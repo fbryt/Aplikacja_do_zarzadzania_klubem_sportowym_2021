@@ -2,8 +2,7 @@
 Projekt zaliczeniowy z PPAK 2021
 
 <h1>Jak uruchomić projekt lokalnie?</h1>
-<p>(Linux) Skrypty uruchamiaj z uprawnieniami administratora (z wyjątkiem "run.sh" , uwaga niżej).
-<p>(Linux) Back-end jest uruchamiany w tle. Pomiędzy uruchomieniami oraz po zakończeniu pracy, należy go zamknąć:
+<p>(Linux) Przy "run.sh", back-end jest uruchamiany w tle. Pomiędzy uruchomieniami oraz po zakończeniu pracy, należy go zamknąć:
  
 ```javascript
 sudo pkill java
@@ -17,7 +16,7 @@ chmod 777 Run.sh
 ```
 
 <h2>Instalacja zależności</h2>
-<p>Linux:</p>
+<p>Linux (wymaga uprawnień administratora):</p>
 
 ```javascript
 sudo ./install.sh
@@ -33,7 +32,7 @@ zainstaluj ręcznie
     
 <h2>Uruchomienie projektu</h2>
 
-<p>Linux:</p>
+<p>Linux (bez sudo):</p>
 
 ```javascript
 ./run.sh
@@ -50,10 +49,10 @@ zainstaluj ręcznie
 <h2>Uruchomienie testów</h2>
 <h3>Testy jednostkowe</h3>
 
-<p>Linux:</p>
+<p>Linux (bez sudo):</p>
 
 ```javascript
-sudo ./test.sh
+./test.sh
 ```
 
 <p>Windows:</p>
@@ -84,7 +83,7 @@ sudo ./CypressRun.sh
 .\CypressRun.cmd
 ```
 
-<p>(Linux) Uwaga! Jeśli pojawi się błąd z brakującym plikem "cypress", to oznacza, że "run.sh" został uruchomiony z uprawnieniami administratora. To sprawia, że Cypress nie jest w stanie się poprawnie zainstalować. Aby to naprawić należy uruchomić poniższą komendę w katalogu "SportClub-ui", bez uprawnień administratora.
+<p>(Linux) Uwaga! Jeśli pojawi się błąd z brakującym plikem "cypress", to oznacza, że "run.sh" lub "test.sh" został uruchomiony z uprawnieniami administratora. To sprawia, że Cypress nie jest w stanie się poprawnie zainstalować. Aby to naprawić należy uruchomić poniższą komendę w katalogu "SportClub-ui", bez uprawnień administratora.
     
 ```javascript
 npm install
