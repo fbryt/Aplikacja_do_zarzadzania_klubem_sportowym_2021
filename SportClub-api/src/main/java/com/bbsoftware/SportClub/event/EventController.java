@@ -8,6 +8,7 @@ import com.bbsoftware.SportClub.exceptions.EventNotFoundException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import javassist.Loader;
 import lombok.AllArgsConstructor;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
@@ -54,6 +55,7 @@ public class EventController {
             System.out.println(coach.get());
             if(coach.isPresent()) {
                 event.setAppUsers(coach.get().getPlayers());
+                event.addAppUser(coach.get());
                 eventRepository.save(event);
             }
         } else {

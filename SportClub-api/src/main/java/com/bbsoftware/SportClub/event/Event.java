@@ -2,6 +2,8 @@ package com.bbsoftware.SportClub.event;
 
 import com.bbsoftware.SportClub.appuser.AppUser;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -19,13 +21,13 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @JsonIgnoreProperties ("appUsers")
-@JsonSerialize(using = EventSerializer.class)
 public class Event {
 
     @Id
     @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
     private Long id;
 
+    @JsonProperty("title")
     private String message;
 
     public void setAppUsers(List<AppUser> appUsers) {
@@ -33,10 +35,16 @@ public class Event {
         this.appUsers.addAll(appUsers);
     }
 
+    public void addAppUser(AppUser user){
+        this.appUsers.add(user);
+    }
+
     @ManyToMany(fetch = FetchType.EAGER)
     public List<AppUser> appUsers;
 
+    @JsonProperty("start")
     Date dateStart;
+    @JsonProperty("end")
     Date dateEnd;
 }
 
