@@ -89,6 +89,15 @@ sudo ./CypressRun.sh
 npm install
 ```
 
+<h2>Dane do logowania</h2>
+<p>Domyślne dane do konta administratora to:</p>
+<p>Login: pablo@white.com</p>
+<p>Hasło: pablowhite</p>
+
+<p>Reszta danych początkowych, w tym dane użytkowników znajdują się pod ścieżką:</p>
+<p>./SportClub-api/src/main/resources/data.sql</p>
+
+ 
 <h2>Serwis mailtrap</h2>
 <p> Login i hasło do serwisu mailtrap na który przychodzą emaile: </p>
 
