@@ -26,7 +26,19 @@ class App extends React.Component {
     render() {
         AuthService.refreshAxiosInterceptors();
         let role = RoleService.getRole();
-        if (role=='ADMIN')
+        if(role=='ANON')
+        return (
+            <BrowserRouter>
+                <Switch>
+                    <Route exact path="/" exact component={HomePage} />
+                    <Route exact path="/login" exact component={LoginPage} />
+                    <Route exact path="/register" exact component={Register} />
+                    <Route exact path="/forgotpassword" exact component={ResetPassword} />
+                    <Route exact path="/resetpassword/:token" exact component={ResetPasswordToken} ></Route>
+                </Switch>
+            </BrowserRouter>
+        );
+        else if (role=='ADMIN')
         return (
 
             <BrowserRouter>
@@ -90,18 +102,6 @@ class App extends React.Component {
                         <AuthRoute exact path="/event" exact component={EventPage} />
                         <AuthRoute exact path="/schedule" exact component={SchedulePage} />
                         <Route component={NotFound}/>
-                    </Switch>
-                </BrowserRouter>
-            );
-        else
-            return (
-                <BrowserRouter>
-                    <Switch>
-                        <Route exact path="/" exact component={HomePage} />
-                        <Route exact path="/login" exact component={LoginPage} />
-                        <Route exact path="/register" exact component={Register} />
-                        <Route exact path="/forgotpassword" exact component={ResetPassword} />
-                        <Route exact path="/resetpassword/:token" exact component={ResetPasswordToken} ></Route>
                     </Switch>
                 </BrowserRouter>
             );
