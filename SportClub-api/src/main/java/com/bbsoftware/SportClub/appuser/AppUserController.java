@@ -70,7 +70,6 @@ public class AppUserController {
         }
 
 
-
     }
 
     @PatchMapping("/appUsers/{id}")

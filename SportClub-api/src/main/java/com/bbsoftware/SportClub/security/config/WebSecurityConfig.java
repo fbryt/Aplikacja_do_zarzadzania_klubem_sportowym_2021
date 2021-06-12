@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -46,6 +47,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable().authorizeRequests()
                 .antMatchers("/appUsers/players").hasAuthority( "COACH")
                 .antMatchers("/appUsers/**", "/register").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.POST,"/injury").hasAuthority("PLAYER")
+                .antMatchers(HttpMethod.DELETE,"/injury/**").hasAuthority("PLAYER")
+                .antMatchers(HttpMethod.PATCH,"/injury/**").hasAuthority("PLAYER")
+                .antMatchers(HttpMethod.GET,"/injury/**").hasAuthority("COACH").antMatchers(HttpMethod.POST,"/injury").hasAuthority("PLAYER")
+                .antMatchers(HttpMethod.DELETE,"/contract/**").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.PATCH,"/contract/**").hasAuthority("ADMIN")
+                .antMatchers("/myPlayers").hasAuthority("COACH")
+                .antMatchers(HttpMethod.POST,"/event").hasAuthority("COACH")
+                .antMatchers(HttpMethod.POST,"/announcements").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.DELETE,"announcements/**").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.PATCH,"announcements/**").hasAuthority("ADMIN")
+                .antMatchers("/playersWithCoach").hasAuthority("ADMIN")
                 .antMatchers("/authenticate", "/forgotpassword/**", "/h2-console/**", "/", "/db/**").permitAll()
                 .anyRequest().authenticated().and().exceptionHandling().and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
