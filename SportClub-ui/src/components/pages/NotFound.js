@@ -9,7 +9,6 @@ export default class NotFound extends React.Component{
     render(){
         return(
         <div>
-            <Menu />
             <h1 style={{padding:"40px"}}>Oops - Something went wrong!</h1>
             <Footer />
         </div>

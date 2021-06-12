@@ -19,13 +19,14 @@ import InjuryPage from "./components/pages/InjuryPage";
 import MyPlayersPage from "./components/pages/MyPlayersPage";
 import EventPage from "./components/pages/EventPage";
 import SchedulePage from "./components/pages/SchedulePage";
+import RoleService from "./services/RoleService";
 
 class App extends React.Component {
 
-
     render() {
         AuthService.refreshAxiosInterceptors();
-
+        let role = RoleService.getRole();
+        if (role=='ADMIN')
         return (
 
             <BrowserRouter>
@@ -52,7 +53,58 @@ class App extends React.Component {
                 </Switch>
             </BrowserRouter>
         );
-
+        else if (role=='COACH')
+            return (
+                <BrowserRouter>
+                    <Switch>
+                        <Route exact path="/" exact component={HomePage} />
+                        <Route exact path="/login" exact component={LoginPage} />
+                        <Route exact path="/register" exact component={Register} />
+                        <Route exact path="/forgotpassword" exact component={ResetPassword} />
+                        <Route exact path="/resetpassword/:token" exact component={ResetPasswordToken} ></Route>
+                        <AuthRoute exact path="/settings" exact component={SettingsPage}/>
+                        <AuthRoute exact path="/settings/password" exact component={ChangePassword}/>
+                        <AuthRoute exact path="/dashboard" exact component={DashboardPage} />
+                        <AuthRoute exact path="/mycontract" exact component={ContractPage} />
+                        <AuthRoute exact path="/myPlayers" exact component={MyPlayersPage} />
+                        <AuthRoute exact path="/event" exact component={EventPage} />
+                        <AuthRoute exact path="/schedule" exact component={SchedulePage} />
+                        <Route component={NotFound}/>
+                    </Switch>
+                </BrowserRouter>
+            );
+        else if (role=='PLAYER')
+            return (
+                <BrowserRouter>
+                    <Switch>
+                        <Route exact path="/" exact component={HomePage} />
+                        <Route exact path="/login" exact component={LoginPage} />
+                        <Route exact path="/register" exact component={Register} />
+                        <Route exact path="/forgotpassword" exact component={ResetPassword} />
+                        <Route exact path="/resetpassword/:token" exact component={ResetPasswordToken} ></Route>
+                        <AuthRoute exact path="/settings" exact component={SettingsPage}/>
+                        <AuthRoute exact path="/settings/password" exact component={ChangePassword}/>
+                        <AuthRoute exact path="/dashboard" exact component={DashboardPage} />
+                        <AuthRoute exact path="/mycontract" exact component={ContractPage} />
+                        <AuthRoute exact path="/declareInjury" exact component={InjuryPage}/>
+                        <AuthRoute exact path="/event" exact component={EventPage} />
+                        <AuthRoute exact path="/schedule" exact component={SchedulePage} />
+                        <Route component={NotFound}/>
+                    </Switch>
+                </BrowserRouter>
+            );
+        else
+            return (
+                <BrowserRouter>
+                    <Switch>
+                        <Route exact path="/" exact component={HomePage} />
+                        <Route exact path="/login" exact component={LoginPage} />
+                        <Route exact path="/register" exact component={Register} />
+                        <Route exact path="/forgotpassword" exact component={ResetPassword} />
+                        <Route exact path="/resetpassword/:token" exact component={ResetPasswordToken} ></Route>
+                    </Switch>
+                </BrowserRouter>
+            );
     }
 
 
