@@ -27,14 +27,14 @@ describe('Edit and delete announcement', () => {
 
         cy.url().should('include', '/dashboard');
 
-        cy.contains('11.05.2021 Na Sohan odbedzie sie event gorniczy');
-        cy.get('textarea').type("siema");
+        cy.contains('siema');
+        cy.get('textarea').type("test");
         cy.get('button').contains("Save Changes").click({multiple:true});
         cy.url().should('include', '/dashboard');
-        cy.contains('11.05.2021 Na Sohan odbedzie sie event gorniczysiema');
+        cy.contains('test');
         cy.get('button').contains("Delete").click({multiple : true});
         cy.url().should('include', '/dashboard');
-        cy.contains('11.05.2021 Na Sohan odbedzie sie event gorniczy').should('not.exist');
+        cy.contains('test').should('not.exist');
     })
 })
 

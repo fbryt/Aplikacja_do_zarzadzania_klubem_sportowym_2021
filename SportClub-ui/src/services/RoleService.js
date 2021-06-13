@@ -7,11 +7,8 @@ class RoleService{
     {
         const cookie=new Cookies();
         let CryptoJS=require("crypto-js");
-        let role = "ANON";
-        if (cookie.get('role')) {
-            const cookieEncrypted = cookie.get('role').toString();
-            role = CryptoJS.AES.decrypt(cookieEncrypted, "Secret").toString(CryptoJS.enc.Utf8);
-        }
+        const cookieEncrypted=cookie.get('role').toString();
+        const role=CryptoJS.AES.decrypt(cookieEncrypted,"Secret").toString(CryptoJS.enc.Utf8);
         return role;
     }
 
