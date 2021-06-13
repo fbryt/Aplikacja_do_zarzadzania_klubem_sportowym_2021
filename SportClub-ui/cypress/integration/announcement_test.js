@@ -18,7 +18,7 @@ describe('Create announcement', () => {
 })
 describe('Edit and delete announcement', () => {
     it('Is able to edit and delete announcement', () => {
-
+        cy.resetDB();
         cy.login(currentUser);
 
         cy.visit('http://localhost:3000/dashboard');
@@ -27,14 +27,14 @@ describe('Edit and delete announcement', () => {
 
         cy.url().should('include', '/dashboard');
 
-        cy.contains('11.05.2021 Na Sohan odbedzie sie event gorniczy');
+        cy.contains('HEHE');
         cy.get('textarea').type("siema");
         cy.get('button').contains("Save Changes").click({multiple:true});
         cy.url().should('include', '/dashboard');
-        cy.contains('11.05.2021 Na Sohan odbedzie sie event gorniczysiema');
+        cy.contains('HEHEsiema');
         cy.get('button').contains("Delete").click({multiple : true});
         cy.url().should('include', '/dashboard');
-        cy.contains('11.05.2021 Na Sohan odbedzie sie event gorniczy').should('not.exist');
+        cy.contains('HEHEsiema').should('not.exist');
     })
 })
 
